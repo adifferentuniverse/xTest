@@ -1,41 +1,18 @@
 package com.bitresolution.xtest.events;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class BlockingPublisher<L extends Subscriber> implements Publisher<L> {
+public class BlockingPublisher<L extends Subscriber> extends BasePublisher<L> {
 
-    private final Set<L> subscribers;
-
-    public BlockingPublisher(){
-        this.subscribers = new CopyOnWriteArraySet<L>();
-    }
-
-    @Override
-    public boolean subscribe(L subscriber) {
-        return subscribers.add(subscriber);
-    }
-
-    @Override
-    public boolean subscribe(Collection<L> subscribers) {
-        return subscribers.addAll(subscribers);
-    }
-
-    @Override
-    public boolean unsubscribe(L subscriber) {
-        return subscribers.remove(subscriber);
-    }
-
-    @Override
-    public boolean unsubscribe(Collection<L> subscribers) {
-        return subscribers.removeAll(subscribers);
-    }
+    private static final Logger log = LoggerFactory.getLogger(BlockingPublisher.class);
 
     @Override
     public void publish(XEvent event) {
+        log.debug("Publishing {} to subscribers", new Object[]{event});
         for(L subscriber : subscribers) {
             subscriber.process(event);
         }
+        log.debug("Published {} to {} subscribers", new Object[]{event, subscribers.size()});
     }
 }

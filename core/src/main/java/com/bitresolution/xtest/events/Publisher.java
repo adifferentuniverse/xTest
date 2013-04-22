@@ -1,38 +1,18 @@
 package com.bitresolution.xtest.events;
 
-import com.bitresolution.xtest.core.XTestEvent;
-
 import java.util.Collection;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
-public class Publisher<L extends Subscriber> {
+public interface Publisher<L extends Subscriber> {
+    boolean subscribe(L subscriber);
 
-    private final Set<L> subscribers;
+    boolean subscribe(Collection<L> subscribers);
 
-    public Publisher(){
-        this.subscribers = new CopyOnWriteArraySet<L>();
-    }
+    boolean unsubscribe(L subscriber);
 
-    public boolean subscribe(L subscriber) {
-        return subscribers.add(subscriber);
-    }
+    boolean unsubscribe(Collection<L> subscribers);
 
-    public boolean subscribe(Collection<L> subscribers) {
-        return subscribers.addAll(subscribers);
-    }
+    void publish(XEvent event);
 
-    public boolean unsubscribe(L subscriber) {
-        return subscribers.remove(subscriber);
-    }
-
-    public boolean unsubscribe(Collection<L> subscribers) {
-        return subscribers.removeAll(subscribers);
-    }
-
-    public void publish(XTestEvent event) {
-        for(L subscriber : subscribers) {
-            subscriber.process(event);
-        }
-    }
+    Set<L> getSubscribers();
 }

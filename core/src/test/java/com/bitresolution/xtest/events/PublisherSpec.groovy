@@ -4,15 +4,11 @@ import org.junit.experimental.categories.Category
 import spock.lang.Shared
 import spock.lang.Specification
 
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-
 import static com.bitresolution.TestCategories.Unit
 import static java.util.Collections.emptySet
 
 @Category(Unit)
-class PublisherSpec extends Specification {
+abstract class PublisherSpec extends Specification {
 
     @Shared
     Subscriber subscriberA = Mock()
@@ -20,12 +16,6 @@ class PublisherSpec extends Specification {
     Subscriber subscriberB = Mock()
 
     Publisher<Subscriber> publisher
-    ExecutorService executor
-
-    def setup() {
-        executor = Executors.newFixedThreadPool(10);
-        publisher = new NonBlockingPublisher<Subscriber>(executor)
-    }
 
     def "should have no subscribers when instantiated"() {
         expect: assert publisher.subscribers == emptySet()
@@ -80,17 +70,7 @@ class PublisherSpec extends Specification {
     }
 
     def "should publish events to all subscribera"() {
-        given:
-        Subscriber a = Mock()
-        Subscriber b = Mock()
-        publisher.subscribe([a, b])
-        XEvent event = Mock(XEvent)
-        when:
-        publisher.publish(event)
-        executor.shutdown()
-        executor.awaitTermination(2, TimeUnit.SECONDS)
-        then:
-        1 * a.process(event)
-        1 * b.process(event)
+        // can't make abstract due to groovy bug, check when 2.2.1 is out
+        throw new UnsupportedOperationException("Must implement in subclass")
     }
 }

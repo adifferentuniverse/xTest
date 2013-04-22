@@ -3,25 +3,25 @@ package com.bitresolution.commons;
 import com.google.common.collect.Lists;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public class ListBuilder<T> {
 
-    private final Set<T> backingSet;
+    private final List<T> list;
 
-    public ListBuilder(Set<T> backingSet) {
-        this.backingSet = backingSet;
+    public ListBuilder(List<T> list) {
+        this.list = list;
     }
 
-    public static <T> ListBuilder<T> using(Set<T> backingSet) {
-        return new ListBuilder<T>(backingSet);
+    public static <T> ListBuilder<T> using(List<T> backingList) {
+        return new ListBuilder<T>(backingList);
     }
 
     public ListBuilder<T> insert(int count, Factory<T> elementFactory) {
         for(int i = 0; i < count; i++) {
-            backingSet.add(elementFactory.create());
+            list.add(elementFactory.create());
         }
         return this;
     }
@@ -35,11 +35,11 @@ public class ListBuilder<T> {
     }
 
     public ListBuilder<T> insert(Collection<T> elements) {
-        backingSet.addAll(elements);
+        list.addAll(elements);
         return this;
     }
 
-    public Set<T> build() {
-        return backingSet;
+    public List<T> build() {
+        return list;
     }
 }

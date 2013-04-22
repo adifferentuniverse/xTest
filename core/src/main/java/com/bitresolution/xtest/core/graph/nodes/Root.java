@@ -5,14 +5,25 @@ import com.bitresolution.xtest.core.graph.TestGraph;
 import java.util.List;
 import java.util.Set;
 
-public class Root extends BaseNode<Set<Node<?>>> implements Node<Set<Node<?>> {
+public class Root {
 
-    public Root(TestGraph testGraph) {
-        super(null, testGraph);
+    public static Root ROOT = new Root();
+
+    private Root() {
     }
 
     @Override
-    public Set<Node<?>> getValue() {
-        return getTestGraph().;
+    public int hashCode() {
+        return 42; //singleton and should only be one instance per graph
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this;
+    }
+
+    @Override
+    public String toString() {
+        return "Root Node";
     }
 }

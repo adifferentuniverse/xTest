@@ -3,52 +3,60 @@ package com.bitresolution.xtest.events;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class NonBlockingPublisher<L extends Subscriber> implements Publisher<L> {
+public class NonBlockingPublisher<L extends Subscriber> extends BasePublisher<L> {
 
     private static final Logger log = LoggerFactory.getLogger(NonBlockingPublisher.class);
 
-    private final Set<L> subscribers;
+    private final ExecutorService executor;
 
-    public NonBlockingPublisher(){
-        this.subscribers = new CopyOnWriteArraySet<L>();
+    public NonBlockingPublisher(ExecutorService executor) {
+        this.executor = executor;
     }
 
     @Override
-    public boolean subscribe(L subscriber) {
-        return subscribers.add(subscriber);
-    }
-
-    @Override
-    public boolean subscribe(Collection<L> subscribers) {
-        return this.subscribers.addAll(subscribers);
-    }
-
-    @Override
-    public boolean unsubscribe(L subscriber) {
-        return this.subscribers.remove(subscriber);
-    }
-
-    @Override
-    public boolean unsubscribe(Collection<L> subscribers) {
-        return this.subscribers.removeAll(subscribers);
-    }
-
-    @Override
-    public Set<L> getSubscribers() {
-        return Collections.unmodifiableSet(subscribers);
-    }
-
-    @Override
-    public void publish(XEvent event) {
+    public void publish(final XEvent event) {
         log.debug("Publishing {} to subscribers", new Object[]{event});
-        for(L subscriber : subscribers) {
-            subscriber.process(event);
+        executor.submit(new Dispatcher(event, subscribers, executor));
+    }
+
+    private static class Dispatcher<L extends Subscriber> implements Runnable {
+        private final XEvent event;
+        private final Iterable<Subscriber> subscribers;
+        private final ExecutorService executor;
+        private final AtomicInteger count;
+
+        public Dispatcher(XEvent event, Iterable<Subscriber> subscribers, ExecutorService executor) {
+            this.event = event;
+            this.subscribers = subscribers;
+            this.executor = executor;
+            count = new AtomicInteger(0);
         }
-        log.debug("Published {} to {} subscribers", new Object[]{event, subscribers.size()});
+
+        @Override
+        public void run() {
+            for(final Subscriber subscriber : subscribers) {
+                executor.submit(new DispatchTask(subscriber, event));
+                count.incrementAndGet();
+            }
+            log.debug("Published {} to {} subscribers", new Object[]{event, count.get()});
+        }
+
+        private static class DispatchTask implements Runnable {
+            private final Subscriber subscriber;
+            private final XEvent event;
+
+            public DispatchTask(Subscriber subscriber, XEvent event) {
+                this.subscriber = subscriber;
+                this.event = event;
+            }
+
+            @Override
+            public void run() {
+                subscriber.process(event);
+            }
+        }
     }
 }

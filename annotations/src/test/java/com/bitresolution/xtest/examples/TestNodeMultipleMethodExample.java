@@ -9,7 +9,17 @@ import static com.bitresolution.xtest.ResultBuilder.expect;
 public class TestNodeMultipleMethodExample {
 
     @TestNode
-    public Result shouldTestSomething() {
+    public Result shouldTestA() {
+        return expect().that().and();
+    }
+
+    @TestNode
+    public Result shouldTestB() {
+        return expect().that().and();
+    }
+
+    @TestNode
+    public Result shouldTestC() {
         return expect().that().and();
     }
 }

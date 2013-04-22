@@ -1,4 +1,7 @@
 package com.bitresolution.xtest.events;
 
-public class XEventSource {
+import com.bitresolution.xtest.core.execution.TestExectionListener;
+
+public interface XEventSource {
+    Publisher<TestExectionListener> getPublisher();
 }

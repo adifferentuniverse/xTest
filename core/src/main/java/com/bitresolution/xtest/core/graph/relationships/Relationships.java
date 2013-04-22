@@ -1,6 +1,11 @@
 package com.bitresolution.xtest.core.graph.relationships;
 
-public enum Relationships implements RelationshipType {
-    CONTAINS,
-    BELONGS_TO_GROUP
+public class Relationships {
+
+    public static ContainsRelationship contains() {
+        return new ContainsRelationship();
+    }
+
+    private static class ContainsRelationship implements Relationship {
+    }
 }

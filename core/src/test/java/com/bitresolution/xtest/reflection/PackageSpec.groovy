@@ -4,13 +4,25 @@ import spock.lang.Specification
 
 class PackageSpec extends Specification {
 
-    def "package with no name is the default package"() {
+    def "package with no arguments is the default package"() {
         given:
         def p = new Package();
         expect:
         assert p.defaultPackage
         assert p.parts == []
         assert p.parent == p
+    }
+
+    def "package with no name is the default package"() {
+        given:
+        def p = new Package(blank);
+        expect:
+        assert p.defaultPackage
+        assert p.parts == []
+        assert p.parent == p
+
+        where:
+        blank << ["", null]
     }
 
     def "should create Package from parts"() {
@@ -75,5 +87,10 @@ class PackageSpec extends Specification {
         name                | expected
         "com"               | ""
         "com.bitresolution" | "com"
+    }
+
+    def "should have meaningful toString"() {
+        expect:
+        assert new Package("com.bitresolution").toString().contains("com.bitresolution")
     }
 }

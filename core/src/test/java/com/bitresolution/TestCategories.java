@@ -1,4 +1,10 @@
 package com.bitresolution;
 
-public class TestCategories {
+public interface TestCategories {
+
+    public static class Unit {
+    }
+
+    public static class Integration {
+    }
 }

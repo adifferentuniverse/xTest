@@ -1,8 +1,6 @@
 package com.bitresolution.xtest.core.execution;
 
-import com.bitresolution.xtest.core.XTestEvent;
+import com.bitresolution.xtest.events.Subscriber;
 
-public interface TestExectionListener {
-
-    void publishEvent(XTestEvent event);
+public interface TestExectionListener extends Subscriber {
 }
