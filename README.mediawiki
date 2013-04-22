@@ -1,0 +1,9 @@
+# xTest
+
+**
+
+xTest is a graph-based test framework that is somewhere between novel idea and
+reverse-engineering of JUnit and TestNG. The goals of the project are to support
+smarter test execution, "massive parrellelisation", and a flexible but well
+defined wau to modify the test creation and execution using graph transformations
+and algorithms.
