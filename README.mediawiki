@@ -1,9 +1,34 @@
-# xTest
+= xTest =
 
-**
+'''UNDER ACTIVE DEVELOPMENT - more information and documentation soon'''
+
+== Introduction ==
 
 xTest is a graph-based test framework that is somewhere between novel idea and
 reverse-engineering of JUnit and TestNG. The goals of the project are to support
 smarter test execution, "massive parrellelisation", and a flexible but well
 defined wau to modify the test creation and execution using graph transformations
 and algorithms.
+
+== Simple Usage ==
+
+Like JUnit and TestNG, xTest is annotation driven, a simple unit test is written thus:
+
+<pre>
+@TestNode
+public class DomainNameParserSpec {
+
+    @TestNode
+    public Promises shouldParseDomainNameWithWwwSubdomainAndTldPublicSuffix() {
+        //given
+        String domain = "www.bitresolution.com";
+        DomainNameParser parser = new DomainNameParser();
+        //when
+        DomainName domainName = parser.parse(domain);
+        //then
+        return promise()
+                .that(domainName.getName(), is("www.bitresolution.com"))
+                .and(that(domainName.getPublicSuffix(), is(".com"));
+    }
+}
+</pre>
