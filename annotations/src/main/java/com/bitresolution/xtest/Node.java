@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.annotation;
+package com.bitresolution.xtest;
 
 import java.lang.annotation.*;
 
@@ -6,5 +6,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface TestNode {
+public @interface Node {
 }

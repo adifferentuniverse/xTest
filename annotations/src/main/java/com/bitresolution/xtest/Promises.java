@@ -1,4 +1,4 @@
 package com.bitresolution.xtest;
 
-public interface Result {
+public interface Promises {
 }
