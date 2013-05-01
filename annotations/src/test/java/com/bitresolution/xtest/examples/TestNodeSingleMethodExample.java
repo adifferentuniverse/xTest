@@ -1,15 +1,15 @@
 package com.bitresolution.xtest.examples;
 
-import com.bitresolution.xtest.Result;
-import com.bitresolution.xtest.annotation.TestNode;
+import com.bitresolution.xtest.Node;
+import com.bitresolution.xtest.Promises;
 
-import static com.bitresolution.xtest.ResultBuilder.expect;
+import static com.bitresolution.xtest.PromisesBuilder.promise;
 
-@TestNode
+@Node
 public class TestNodeSingleMethodExample {
 
-    @TestNode
-    public Result shouldTestSomething() {
-        return expect().that().and();
+    @Node
+    public Promises shouldTestSomething() {
+        return promise().that().and();
     }
 }

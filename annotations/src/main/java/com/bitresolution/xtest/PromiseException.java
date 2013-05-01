@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 public @interface PromiseException {
-    Class<? extends Throwable>[] value() default Exception.class;
+    Class<? extends Throwable>[] value() default Throwable.class;
 }

@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.examples;
 
-import com.bitresolution.xtest.annotation.TestNode;
+import com.bitresolution.xtest.Node;
 
-@TestNode
+@Node
 public class TestNodeEmptyClassExample {
 }
