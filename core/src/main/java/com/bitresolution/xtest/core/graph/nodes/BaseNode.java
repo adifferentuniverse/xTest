@@ -35,12 +35,12 @@ public class BaseNode<T> implements Node<T> {
 
     @Override
     public Set<Node<?>> getAdjacentNodesByRelationship(Relationship relationship) {
-        return testGraph.getAdjacentNodesByRelationship(this, relationship);
+        return testGraph.getAdjacentNodesByRelationship(this, relationship.getClass());
     }
 
     @Override
     public Set<Node<?>> getAdjacentNodes() {
-        return testGraph.getAdjacentNodesp(this);
+        return testGraph.getAdjacentNodes(this);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BaseNode<T> implements Node<T> {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("value", value)
-                .append("testGraph", testGraph)
+                .append("testGraph", testGraph.hashCode())
                 .toString();
     }
 

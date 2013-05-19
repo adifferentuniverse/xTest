@@ -9,6 +9,10 @@ public class FullyQualifiedClassName {
     private final Package packageName;
     private final String className;
 
+    public FullyQualifiedClassName(Class<?> klass) {
+        this(klass.getCanonicalName());
+    }
+
     public FullyQualifiedClassName(String fullyQualifiedClassName) {
         this(parse(fullyQualifiedClassName));
     }

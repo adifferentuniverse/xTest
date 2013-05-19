@@ -1,9 +1,8 @@
 package com.bitresolution.xtest.core.graph;
 
-import com.bitresolution.xtest.annotation.TestNode;
+import com.bitresolution.xtest.Node;
 import com.bitresolution.xtest.core.graph.nodes.ClassNode;
 import com.bitresolution.xtest.core.graph.nodes.MethodNode;
-import com.bitresolution.xtest.core.graph.nodes.Node;
 import com.bitresolution.xtest.core.graph.relationships.Relationships;
 import com.bitresolution.xtest.reflection.FullyQualifiedClassName;
 import org.reflections.Reflections;
@@ -26,7 +25,7 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
 
     @Override
     public TestGraph from(Class<?> klass) throws TestGraphException {
-        if(klass.isAnnotationPresent(TestNode.class)){
+        if(klass.isAnnotationPresent(Node.class)){
             JungTestGraph graph = new JungTestGraph();
             processClass(klass, graph);
             return graph;
@@ -35,14 +34,14 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     }
 
     private void processClass(Class<?> klass, JungTestGraph graph) throws TestGraphException {
-        Node node = buildClassNode(klass, graph);
+        com.bitresolution.xtest.core.graph.nodes.Node node = buildClassNode(klass, graph);
         graph.getRootNode().addNode(node, Relationships.contains());
     }
 
     @Override
     public TestGraph from(Package p) throws TestGraphException {
         Reflections reflections = new Reflections(p.getName());
-        Set<Class<?>> klasses = reflections.getTypesAnnotatedWith(TestNode.class);
+        Set<Class<?>> klasses = reflections.getTypesAnnotatedWith(Node.class);
         JungTestGraph graph = new JungTestGraph();
         for(Class<?> klass : klasses) {
             processClass(klass, graph);
@@ -51,10 +50,10 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     }
 
     private ClassNode buildClassNode(Class<?> klass, JungTestGraph graph) throws TestGraphException {
-        ClassNode classNode = new ClassNode(klass, graph);
+        ClassNode classNode = new ClassNode(new FullyQualifiedClassName(klass), graph);
         for(Method method : klass.getMethods()) {
-            if(method.isAnnotationPresent(TestNode.class)) {
-                Node methodNode = buildMethodNode(method, graph);
+            if(method.isAnnotationPresent(Node.class)) {
+                com.bitresolution.xtest.core.graph.nodes.Node methodNode = buildMethodNode(method, graph);
                 classNode.addNode(methodNode, Relationships.contains());
             }
         }
@@ -62,7 +61,6 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     }
 
     private MethodNode buildMethodNode(Method method, JungTestGraph graph) {
-        MethodNode methodNode = new MethodNode(method, graph);
-        return methodNode;
+        return new MethodNode(method, graph);
     }
 }

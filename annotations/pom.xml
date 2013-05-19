@@ -36,5 +36,11 @@
     </build>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 </project>

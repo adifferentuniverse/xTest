@@ -36,7 +36,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         then:
         def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
         assert nodes.size() == 1
-        assert nodes[0] == new ClassNode(TestNodeEmptyClassExample, graph)
+        assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeEmptyClassExample), graph)
         assert nodes[0].getAdjacentNodes().size() == 0
     }
 
@@ -51,7 +51,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         then:
         def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
         assert nodes.size() == 1
-        assert nodes[0] == new ClassNode(TestNodeClassWithNoTestNodeMethodsExample, graph)
+        assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeClassWithNoTestNodeMethodsExample), graph)
         assert nodes[0].getAdjacentNodes().size() == 0
     }
 
@@ -66,7 +66,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         then:
         def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
         assert nodes.size() == 1
-        assert nodes[0] == new ClassNode(TestNodeSingleMethodExample, graph)
+        assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample), graph)
 
         def methodNodes = nodes[0].getAdjacentNodes().toList()
         assert methodNodes.size() == 1
@@ -84,7 +84,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         then:
         def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
         assert nodes.size() == 1
-        assert nodes[0] == new ClassNode(TestNodeMultipleMethodExample, graph)
+        assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeMultipleMethodExample), graph)
 
         def methodNodes = nodes[0].getAdjacentNodes().toList()
         assert methodNodes.size() == 3
@@ -106,7 +106,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         then:
         def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
         assert nodes.size() == 1
-        assert nodes[0] == new ClassNode(TestNodeSingleMethodExample, graph)
+        assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample), graph)
 
         def methodNodes = nodes[0].getAdjacentNodes().toList()
         assert methodNodes.size() == 1
@@ -134,12 +134,12 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
         then:
         def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
-        assert nodes.size() == 4
+        assert nodes.size() == 5
         assert nodes.containsAll(
-                new ClassNode(TestNodeEmptyClassExample, graph),
-                new ClassNode(TestNodeClassWithNoTestNodeMethodsExample, graph),
-                new ClassNode(TestNodeSingleMethodExample, graph),
-                new ClassNode(TestNodeMultipleMethodExample, graph)
+                new ClassNode(new FullyQualifiedClassName(TestNodeEmptyClassExample), graph),
+                new ClassNode(new FullyQualifiedClassName(TestNodeClassWithNoTestNodeMethodsExample), graph),
+                new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample), graph),
+                new ClassNode(new FullyQualifiedClassName(TestNodeMultipleMethodExample), graph)
         )
     }
 }

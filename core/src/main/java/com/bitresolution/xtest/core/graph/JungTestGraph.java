@@ -4,6 +4,7 @@ import com.bitresolution.xtest.core.graph.nodes.BaseNode;
 import com.bitresolution.xtest.core.graph.nodes.Node;
 import com.bitresolution.xtest.core.graph.nodes.Root;
 import com.bitresolution.xtest.core.graph.relationships.Relationship;
+import com.google.common.collect.ImmutableSet;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;
 
@@ -28,6 +29,14 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
+    public void addNode(Node source) throws TestGraphException {
+        boolean nodeAdded = graph.addVertex(source);
+        if(!nodeAdded) {
+            throw new TestGraphException("Error adding node:" + source);
+        }
+    }
+
+    @Override
     public void addNode(Node source, Node destination, Relationship relationship) throws TestGraphException {
         boolean nodeAdded = graph.addVertex(destination);
         if(!nodeAdded) {
@@ -41,11 +50,11 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<Node<?>> getAdjacentNodesByRelationship(Node<?> node, Relationship relationship) {
+    public Set<Node<?>> getAdjacentNodesByRelationship(Node<?> node, Class<? extends Relationship> relationship) {
         Collection<Relationship> edges = graph.getOutEdges(node);
         Set<Node<?>> nodes = new HashSet<Node<?>>();
         for(Relationship edge : edges) {
-            if(edge.getClass().isInstance(relationship)) {
+            if(edge.getClass().isAssignableFrom(relationship)) {
                 nodes.add(graph.getDest(edge));
             }
         }
@@ -53,7 +62,7 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<Node<?>> getAdjacentNodesp(Node<?> node) {
+    public Set<Node<?>> getAdjacentNodes(Node<?> node) {
         Collection<Relationship> edges = graph.getOutEdges(node);
         Set<Node<?>> nodes = new HashSet<Node<?>>();
         for(Relationship edge : edges) {
@@ -68,6 +77,11 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
+    public boolean contains(Relationship relationship) {
+        return graph.containsEdge(relationship);
+    }
+
+    @Override
     public void addRelationship(Node<?> source, Node<?> destination, Relationship relationship) throws TestGraphException {
         boolean edgeAdded = graph.addEdge(relationship, source, destination);
         if(!edgeAdded) {
@@ -75,4 +89,18 @@ public class JungTestGraph implements TestGraph {
         }
     }
 
+    @Override
+    public Set<Relationship> getInboundRelationships(Node<?> node) {
+        return ImmutableSet.copyOf(graph.getInEdges(node));
+    }
+
+    @Override
+    public Set<Relationship> getOutboundRelationships(Node<?> node) {
+        return ImmutableSet.copyOf(graph.getOutEdges(node));
+    }
+
+    @Override
+    public void removeRelationship(Relationship relationship) {
+        graph.removeEdge(relationship);
+    }
 }

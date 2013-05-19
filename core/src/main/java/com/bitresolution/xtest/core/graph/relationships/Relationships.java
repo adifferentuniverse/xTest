@@ -6,6 +6,13 @@ public class Relationships {
         return new ContainsRelationship();
     }
 
-    private static class ContainsRelationship implements Relationship {
+    public static DependsOnRelationship dependsOn() {
+        return new DependsOnRelationship();
+    }
+
+    public static class ContainsRelationship implements Relationship {
+    }
+
+    public static class DependsOnRelationship implements Relationship {
     }
 }
