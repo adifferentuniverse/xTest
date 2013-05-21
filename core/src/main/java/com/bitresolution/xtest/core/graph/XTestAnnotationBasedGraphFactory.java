@@ -3,13 +3,15 @@ package com.bitresolution.xtest.core.graph;
 import com.bitresolution.xtest.Node;
 import com.bitresolution.xtest.core.graph.nodes.ClassNode;
 import com.bitresolution.xtest.core.graph.nodes.MethodNode;
-import com.bitresolution.xtest.core.graph.relationships.Relationships;
+import com.bitresolution.xtest.core.graph.nodes.XNode;
 import com.bitresolution.xtest.reflection.FullyQualifiedClassName;
-import org.reflections.Reflections;
 import com.bitresolution.xtest.reflection.Package;
+import org.reflections.Reflections;
 
 import java.lang.reflect.Method;
 import java.util.Set;
+
+import static com.bitresolution.xtest.core.graph.relationships.RelationshipBuilder.where;
 
 public class XTestAnnotationBasedGraphFactory implements GraphFactory {
 
@@ -34,8 +36,9 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     }
 
     private void processClass(Class<?> klass, JungTestGraph graph) throws TestGraphException {
-        com.bitresolution.xtest.core.graph.nodes.Node node = buildClassNode(klass, graph);
-        graph.getRootNode().addNode(node, Relationships.contains());
+        XNode node = buildClassNode(klass, graph);
+        XNode rootNode = graph.getRootNode();
+        rootNode.addNode(node, where(rootNode).contains(node));
     }
 
     @Override
@@ -53,8 +56,8 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
         ClassNode classNode = new ClassNode(new FullyQualifiedClassName(klass), graph);
         for(Method method : klass.getMethods()) {
             if(method.isAnnotationPresent(Node.class)) {
-                com.bitresolution.xtest.core.graph.nodes.Node methodNode = buildMethodNode(method, graph);
-                classNode.addNode(methodNode, Relationships.contains());
+                XNode methodNode = buildMethodNode(method, graph);
+                classNode.addNode(methodNode, where(classNode).contains(methodNode));
             }
         }
         return classNode;

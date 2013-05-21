@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.core.graph;
 
 import com.bitresolution.xtest.core.graph.nodes.BaseNode;
-import com.bitresolution.xtest.core.graph.nodes.Node;
+import com.bitresolution.xtest.core.graph.nodes.XNode;
 import com.bitresolution.xtest.core.graph.nodes.Root;
 import com.bitresolution.xtest.core.graph.relationships.Relationship;
 import com.google.common.collect.ImmutableSet;
@@ -14,22 +14,22 @@ import java.util.Set;
 
 public class JungTestGraph implements TestGraph {
 
-    private final Graph<Node, Relationship> graph;
-    private final Node<Root> root;
+    private final Graph<XNode, Relationship> graph;
+    private final XNode<Root> root;
 
     public JungTestGraph() {
-        graph = new DirectedSparseMultigraph<Node, Relationship>();
+        graph = new DirectedSparseMultigraph<XNode, Relationship>();
         root = new BaseNode<Root>(Root.ROOT, this);
         graph.addVertex(root);
     }
 
     @Override
-    public Node getRootNode() {
+    public XNode getRootNode() {
         return root;
     }
 
     @Override
-    public void addNode(Node source) throws TestGraphException {
+    public void addNode(XNode source) throws TestGraphException {
         boolean nodeAdded = graph.addVertex(source);
         if(!nodeAdded) {
             throw new TestGraphException("Error adding node:" + source);
@@ -37,9 +37,9 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public void addNode(Node source, Node destination, Relationship relationship) throws TestGraphException {
-        boolean nodeAdded = graph.addVertex(destination);
-        if(!nodeAdded) {
+    public void addNode(XNode source, XNode destination, Relationship relationship) throws TestGraphException {
+        boolean destinationAdded = graph.addVertex(destination);
+        if(!destinationAdded) {
             throw new TestGraphException("Error adding node:" + destination);
         }
         boolean edgeAdded = graph.addEdge(relationship, source, destination);
@@ -50,9 +50,9 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<Node<?>> getAdjacentNodesByRelationship(Node<?> node, Class<? extends Relationship> relationship) {
+    public Set<XNode<?>> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship) {
         Collection<Relationship> edges = graph.getOutEdges(node);
-        Set<Node<?>> nodes = new HashSet<Node<?>>();
+        Set<XNode<?>> nodes = new HashSet<XNode<?>>();
         for(Relationship edge : edges) {
             if(edge.getClass().isAssignableFrom(relationship)) {
                 nodes.add(graph.getDest(edge));
@@ -62,9 +62,9 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<Node<?>> getAdjacentNodes(Node<?> node) {
+    public Set<XNode<?>> getAdjacentNodes(XNode<?> node) {
         Collection<Relationship> edges = graph.getOutEdges(node);
-        Set<Node<?>> nodes = new HashSet<Node<?>>();
+        Set<XNode<?>> nodes = new HashSet<XNode<?>>();
         for(Relationship edge : edges) {
             nodes.add(graph.getDest(edge));
         }
@@ -72,7 +72,7 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public boolean contains(Node<?> node) {
+    public boolean contains(XNode<?> node) {
         return graph.containsVertex(node);
     }
 
@@ -82,7 +82,7 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public void addRelationship(Node<?> source, Node<?> destination, Relationship relationship) throws TestGraphException {
+    public void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws TestGraphException {
         boolean edgeAdded = graph.addEdge(relationship, source, destination);
         if(!edgeAdded) {
             throw new TestGraphException("Error relationship " + relationship + " between source:" + source + " and destination:" + destination);
@@ -90,12 +90,12 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<Relationship> getInboundRelationships(Node<?> node) {
+    public Set<Relationship> getInboundRelationships(XNode<?> node) {
         return ImmutableSet.copyOf(graph.getInEdges(node));
     }
 
     @Override
-    public Set<Relationship> getOutboundRelationships(Node<?> node) {
+    public Set<Relationship> getOutboundRelationships(XNode<?> node) {
         return ImmutableSet.copyOf(graph.getOutEdges(node));
     }
 

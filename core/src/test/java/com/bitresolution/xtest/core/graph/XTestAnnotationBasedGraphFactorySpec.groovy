@@ -2,7 +2,8 @@ package com.bitresolution.xtest.core.graph
 
 import com.bitresolution.xtest.core.graph.nodes.ClassNode
 import com.bitresolution.xtest.core.graph.nodes.MethodNode
-import com.bitresolution.xtest.core.graph.relationships.Relationships
+import com.bitresolution.xtest.core.graph.relationships.ContainsRelationship
+import com.bitresolution.xtest.core.graph.relationships.RelationshipBuilder
 import com.bitresolution.xtest.examples.TestNodeClassWithNoTestNodeMethodsExample
 import com.bitresolution.xtest.examples.TestNodeEmptyClassExample
 import com.bitresolution.xtest.examples.TestNodeMultipleMethodExample
@@ -34,7 +35,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(klass)
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 1
         assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeEmptyClassExample), graph)
         assert nodes[0].getAdjacentNodes().size() == 0
@@ -49,7 +50,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(klass)
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 1
         assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeClassWithNoTestNodeMethodsExample), graph)
         assert nodes[0].getAdjacentNodes().size() == 0
@@ -64,7 +65,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(klass)
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 1
         assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample), graph)
 
@@ -82,7 +83,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(klass)
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 1
         assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeMultipleMethodExample), graph)
 
@@ -104,7 +105,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(klass)
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 1
         assert nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample), graph)
 
@@ -121,7 +122,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(new Package("com.bitresolution.xtest.core"))
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 0
     }
 
@@ -133,7 +134,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def graph = factory.from(new Package("com.bitresolution.xtest.examples"))
 
         then:
-        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(Relationships.contains()).toList()
+        def nodes = graph.getRootNode().getAdjacentNodesByRelationship(ContainsRelationship.class).toList()
         assert nodes.size() == 5
         assert nodes.containsAll(
                 new ClassNode(new FullyQualifiedClassName(TestNodeEmptyClassExample), graph),

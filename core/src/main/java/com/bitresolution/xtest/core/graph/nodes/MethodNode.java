@@ -4,7 +4,7 @@ import com.bitresolution.xtest.core.graph.TestGraph;
 
 import java.lang.reflect.Method;
 
-public class MethodNode extends BaseNode<Method> implements Node<Method> {
+public class MethodNode extends BaseNode<Method> implements XNode<Method> {
 
     public MethodNode(Method value, TestGraph testGraph) {
         super(value, testGraph);

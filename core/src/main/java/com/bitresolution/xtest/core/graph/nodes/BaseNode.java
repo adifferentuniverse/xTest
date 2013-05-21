@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.Set;
 
-public class BaseNode<T> implements Node<T> {
+public class BaseNode<T> implements XNode<T> {
 
     private final T value;
     private final TestGraph testGraph;
@@ -24,7 +24,7 @@ public class BaseNode<T> implements Node<T> {
     }
 
     @Override
-    public void addNode(Node node, Relationship relationship) throws TestGraphException {
+    public void addNode(XNode node, Relationship relationship) throws TestGraphException {
         if(testGraph.contains(node)) {
             testGraph.addRelationship(this, node, relationship);
         }
@@ -34,12 +34,12 @@ public class BaseNode<T> implements Node<T> {
     }
 
     @Override
-    public Set<Node<?>> getAdjacentNodesByRelationship(Relationship relationship) {
-        return testGraph.getAdjacentNodesByRelationship(this, relationship.getClass());
+    public Set<XNode<?>> getAdjacentNodesByRelationship(Class<? extends Relationship> relationship) {
+        return testGraph.getAdjacentNodesByRelationship(this, relationship);
     }
 
     @Override
-    public Set<Node<?>> getAdjacentNodes() {
+    public Set<XNode<?>> getAdjacentNodes() {
         return testGraph.getAdjacentNodes(this);
     }
 

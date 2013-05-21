@@ -1,30 +1,30 @@
 package com.bitresolution.xtest.core.graph;
 
-import com.bitresolution.xtest.core.graph.nodes.Node;
+import com.bitresolution.xtest.core.graph.nodes.XNode;
 import com.bitresolution.xtest.core.graph.relationships.Relationship;
 
 import java.util.Set;
 
 public interface TestGraph {
-    Node getRootNode();
+    XNode getRootNode();
 
-    void addNode(Node<?> source, Node<?> destination, Relationship relationship) throws TestGraphException;
+    void addNode(XNode<?> source, XNode<?> destination, Relationship relationship) throws TestGraphException;
 
-    Set<Node<?>> getAdjacentNodesByRelationship(Node<?> node, Class<? extends Relationship> relationship);
+    Set<XNode<?>> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship);
 
-    Set<Node<?>> getAdjacentNodes(Node<?> tBaseNode);
+    Set<XNode<?>> getAdjacentNodes(XNode<?> tBaseNode);
 
-    boolean contains(Node<?> node);
+    boolean contains(XNode<?> node);
 
-    void addRelationship(Node<?> source, Node<?> destination, Relationship relationship) throws TestGraphException;
+    void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws TestGraphException;
 
-    void addNode(Node source) throws TestGraphException;
+    void addNode(XNode source) throws TestGraphException;
 
     boolean contains(Relationship relationship);
 
-    Set<Relationship> getInboundRelationships(Node<?> node);
+    Set<Relationship> getInboundRelationships(XNode<?> node);
 
-    Set<Relationship> getOutboundRelationships(Node<?> node);
+    Set<Relationship> getOutboundRelationships(XNode<?> node);
 
     void removeRelationship(Relationship p);
 }
