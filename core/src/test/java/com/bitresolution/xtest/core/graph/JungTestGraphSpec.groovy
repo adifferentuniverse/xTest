@@ -6,7 +6,6 @@ import com.bitresolution.xtest.core.graph.nodes.XNode
 import com.bitresolution.xtest.core.graph.relationships.ContainsRelationship
 import com.bitresolution.xtest.core.graph.relationships.DependsOnRelationship
 import com.bitresolution.xtest.core.graph.relationships.Relationship
-import com.bitresolution.xtest.core.graph.relationships.RelationshipBuilder
 import spock.lang.Specification
 
 class JungTestGraphSpec extends Specification {
@@ -25,7 +24,7 @@ class JungTestGraphSpec extends Specification {
     def "should be able to add a node"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<Void> node = new BaseNode<Void>(null, graph)
+        XNode<Void> node = new BaseNode<Void>(null)
 
         when:
         graph.addNode(node)
@@ -37,8 +36,8 @@ class JungTestGraphSpec extends Specification {
     def "should be able to add a relationship between two nodes"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<String> nodeA = new BaseNode<String>("A", graph)
-        XNode<String> nodeB = new BaseNode<String>("B", graph)
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
         Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
 
         graph.addNode(nodeA)
@@ -50,14 +49,65 @@ class JungTestGraphSpec extends Specification {
         then:
         assert graph.contains(nodeA)
         assert graph.contains(nodeB)
-        assert graph.contains(relationship)
+        assert graph.contains(new DependsOnRelationship(nodeA, nodeB))
+    }
+
+    def "should not be able to add a relationship between when source node does not exist in the graph"() {
+        given:
+        TestGraph graph = new JungTestGraph()
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
+        Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
+
+        graph.addNode(nodeB)
+
+        when:
+        graph.addRelationship(nodeA, nodeB, relationship)
+
+        then:
+        thrown TestGraphException
+    }
+
+    def "should not be able to add a duplicate relationship between nodes"() {
+        given:
+        TestGraph graph = new JungTestGraph()
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
+        Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
+        Relationship relationshipCopy = new DependsOnRelationship(nodeA, nodeB)
+
+        graph.addNode(nodeA)
+        graph.addNode(nodeB)
+        graph.addRelationship(nodeA, nodeB, relationship)
+
+        when:
+        graph.addRelationship(nodeA, nodeB, relationshipCopy)
+
+        then:
+        thrown TestGraphException
+    }
+
+    def "should not be able to add a relationship between when detination node does not exist in the graph"() {
+        given:
+        TestGraph graph = new JungTestGraph()
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
+        Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
+
+        graph.addNode(nodeA)
+
+        when:
+        graph.addRelationship(nodeA, nodeB, relationship)
+
+        then:
+        thrown TestGraphException
     }
 
     def "should be able to remove a relationship between two nodes"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<String> nodeA = new BaseNode<String>("A", graph)
-        XNode<String> nodeB = new BaseNode<String>("B", graph)
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
         Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
 
         graph.addNode(nodeA)
@@ -70,14 +120,14 @@ class JungTestGraphSpec extends Specification {
         then:
         assert graph.contains(nodeA)
         assert graph.contains(nodeB)
-        assert !graph.contains(relationship)
+        assert !graph.contains(new DependsOnRelationship(nodeA, nodeB))
     }
 
     def "should be able to get inbound relationships of a node"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<String> nodeA = new BaseNode<String>("A", graph)
-        XNode<String> nodeB = new BaseNode<String>("B", graph)
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
         Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
 
         when:
@@ -87,14 +137,14 @@ class JungTestGraphSpec extends Specification {
 
         then:
         assert graph.getInboundRelationships(nodeA) == [] as Set
-        assert graph.getInboundRelationships(nodeB) == [relationship] as Set
+        assert graph.getInboundRelationships(nodeB) == [new DependsOnRelationship(nodeA, nodeB)] as Set
     }
 
     def "should be able to get outbound relationships of a node"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<String> nodeA = new BaseNode<String>("A", graph)
-        XNode<String> nodeB = new BaseNode<String>("B", graph)
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
         Relationship relationship = new DependsOnRelationship(nodeA, nodeB)
 
         when:
@@ -103,17 +153,17 @@ class JungTestGraphSpec extends Specification {
         graph.addRelationship(nodeA, nodeB, relationship)
 
         then:
-        assert graph.getOutboundRelationships(nodeA) == [relationship] as Set
+        assert graph.getOutboundRelationships(nodeA) == [new DependsOnRelationship(nodeA, nodeB)] as Set
         assert graph.getOutboundRelationships(nodeB) == [] as Set
     }
 
     def "should be able to get nodes adjacent by an outbound relationship of a node"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<String> nodeA = new BaseNode<String>("A", graph)
-        XNode<String> nodeB = new BaseNode<String>("B", graph)
-        XNode<String> nodeC = new BaseNode<String>("C", graph)
-        XNode<String> nodeD = new BaseNode<String>("D", graph)
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
+        XNode<String> nodeC = new BaseNode<String>("C")
+        XNode<String> nodeD = new BaseNode<String>("D")
         Relationship relationshipAB = new DependsOnRelationship(nodeA, nodeB)
         Relationship relationshipBC = new DependsOnRelationship(nodeB, nodeC)
         Relationship relationshipBD = new DependsOnRelationship(nodeB, nodeD)
@@ -137,10 +187,10 @@ class JungTestGraphSpec extends Specification {
     def "should be able to get nodes adjacent by type of an outbound relationship of a node"() {
         given:
         TestGraph graph = new JungTestGraph()
-        XNode<String> nodeA = new BaseNode<String>("A", graph)
-        XNode<String> nodeB = new BaseNode<String>("B", graph)
-        XNode<String> nodeC = new BaseNode<String>("C", graph)
-        XNode<String> nodeD = new BaseNode<String>("D", graph)
+        XNode<String> nodeA = new BaseNode<String>("A")
+        XNode<String> nodeB = new BaseNode<String>("B")
+        XNode<String> nodeC = new BaseNode<String>("C")
+        XNode<String> nodeD = new BaseNode<String>("D")
         Relationship relationshipAB = new ContainsRelationship(nodeA, nodeB)
         Relationship relationshipBC = new ContainsRelationship(nodeB, nodeC)
         Relationship relationshipBD = new ContainsRelationship(nodeB, nodeD)

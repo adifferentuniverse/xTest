@@ -1,8 +1,8 @@
 package com.bitresolution.xtest.core.graph;
 
 import com.bitresolution.xtest.core.graph.nodes.BaseNode;
-import com.bitresolution.xtest.core.graph.nodes.XNode;
 import com.bitresolution.xtest.core.graph.nodes.Root;
+import com.bitresolution.xtest.core.graph.nodes.XNode;
 import com.bitresolution.xtest.core.graph.relationships.Relationship;
 import com.google.common.collect.ImmutableSet;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
@@ -19,7 +19,7 @@ public class JungTestGraph implements TestGraph {
 
     public JungTestGraph() {
         graph = new DirectedSparseMultigraph<XNode, Relationship>();
-        root = new BaseNode<Root>(Root.ROOT, this);
+        root = new BaseNode<Root>(Root.ROOT);
         graph.addVertex(root);
     }
 
@@ -33,19 +33,6 @@ public class JungTestGraph implements TestGraph {
         boolean nodeAdded = graph.addVertex(source);
         if(!nodeAdded) {
             throw new TestGraphException("Error adding node:" + source);
-        }
-    }
-
-    @Override
-    public void addNode(XNode source, XNode destination, Relationship relationship) throws TestGraphException {
-        boolean destinationAdded = graph.addVertex(destination);
-        if(!destinationAdded) {
-            throw new TestGraphException("Error adding node:" + destination);
-        }
-        boolean edgeAdded = graph.addEdge(relationship, source, destination);
-        if(!edgeAdded) {
-            graph.removeVertex(destination);
-            throw new TestGraphException("Error adding node:" + destination);
         }
     }
 
@@ -83,6 +70,12 @@ public class JungTestGraph implements TestGraph {
 
     @Override
     public void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws TestGraphException {
+        if(!contains(source)) {
+            throw new TestGraphException("Source node '{}' not in graph", source);
+        }
+        else if(!contains(destination)) {
+            throw new TestGraphException("Source or destination not in graph");
+        }
         boolean edgeAdded = graph.addEdge(relationship, source, destination);
         if(!edgeAdded) {
             throw new TestGraphException("Error relationship " + relationship + " between source:" + source + " and destination:" + destination);

@@ -8,8 +8,6 @@ import java.util.Set;
 public interface TestGraph {
     XNode getRootNode();
 
-    void addNode(XNode<?> source, XNode<?> destination, Relationship relationship) throws TestGraphException;
-
     Set<XNode<?>> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship);
 
     Set<XNode<?>> getAdjacentNodes(XNode<?> tBaseNode);

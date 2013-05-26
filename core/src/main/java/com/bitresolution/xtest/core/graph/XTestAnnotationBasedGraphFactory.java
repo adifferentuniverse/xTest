@@ -38,7 +38,7 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     private void processClass(Class<?> klass, JungTestGraph graph) throws TestGraphException {
         XNode node = buildClassNode(klass, graph);
         XNode rootNode = graph.getRootNode();
-        rootNode.addNode(node, where(rootNode).contains(node));
+        graph.addRelationship(rootNode, node, where(rootNode).contains(node));
     }
 
     @Override
@@ -53,17 +53,20 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     }
 
     private ClassNode buildClassNode(Class<?> klass, JungTestGraph graph) throws TestGraphException {
-        ClassNode classNode = new ClassNode(new FullyQualifiedClassName(klass), graph);
+        ClassNode classNode = new ClassNode(new FullyQualifiedClassName(klass));
+        graph.addNode(classNode);
         for(Method method : klass.getMethods()) {
             if(method.isAnnotationPresent(Node.class)) {
                 XNode methodNode = buildMethodNode(method, graph);
-                classNode.addNode(methodNode, where(classNode).contains(methodNode));
+                graph.addRelationship(classNode, methodNode, where(classNode).contains(methodNode));
             }
         }
         return classNode;
     }
 
-    private MethodNode buildMethodNode(Method method, JungTestGraph graph) {
-        return new MethodNode(method, graph);
+    private MethodNode buildMethodNode(Method method, JungTestGraph graph) throws TestGraphException {
+        MethodNode methodNode = new MethodNode(method);
+        graph.addNode(methodNode);
+        return methodNode;
     }
 }

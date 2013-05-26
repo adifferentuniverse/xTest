@@ -1,10 +1,5 @@
 package com.bitresolution.xtest.core.graph.nodes;
 
-import com.bitresolution.xtest.core.graph.TestGraph;
-
-import java.util.List;
-import java.util.Set;
-
 public class Root {
 
     public static Root ROOT = new Root();

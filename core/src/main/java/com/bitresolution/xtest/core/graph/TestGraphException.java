@@ -1,11 +1,14 @@
 package com.bitresolution.xtest.core.graph;
 
-public class TestGraphException extends Exception {
-    public TestGraphException(String message) {
-        super(message);
+import com.bitresolution.xtest.core.FormattedMessageException;
+
+public class TestGraphException extends FormattedMessageException {
+
+    public TestGraphException(String s) {
+        super(s);
     }
 
-    public TestGraphException(String s, Throwable throwable) {
-        super(s, throwable);
+    public TestGraphException(String s, Object... parameters) {
+        super(s, parameters);
     }
 }
