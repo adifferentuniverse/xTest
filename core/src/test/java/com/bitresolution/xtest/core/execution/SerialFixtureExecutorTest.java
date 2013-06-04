@@ -1,6 +1,7 @@
 package com.bitresolution.xtest.core.execution;
 
 import com.bitresolution.xtest.events.Publisher;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -26,31 +27,29 @@ import static org.mockito.Mockito.*;
 public class SerialFixtureExecutorTest {
 
     @Mock
-    ExecutionTree tree;
-    @Mock
     Publisher<TestExectionListener> publisher;
     @Mock
-    ExecutionPathBuilderFactory builderFactory;
-    @Mock
     FixtureInvoker fixtureInvoker;
-    @Mock
-    ExecutionPathBuilder builder;
+
+    private FixtureExecutor fixtureExecutor;
+
+    @Before
+    public void setup() {
+        fixtureExecutor = new SerialFixtureExecutor(fixtureInvoker, publisher);
+    }
 
     @Test
     public void shouldExecuteEmptyTreeSuccessfully() {
-        //given:
-        given(builderFactory.getBuilder()).willReturn(builder);
-        given(builder.parse(tree)).willReturn(new TreeSet<Fixture>());
-
-        FixtureExecutor testExecutor = new SerialFixtureExecutor(builderFactory, fixtureInvoker, publisher);
+        //given
+        Fixtures fixtures = new Fixtures();
 
         //when:
-        testExecutor.execute(tree);
+        fixtureExecutor.execute(fixtures);
 
         //then:
         InOrder order = inOrder(publisher);
-        order.verify(publisher).publish(start(testExecutor));
-        order.verify(publisher).publish(complete(testExecutor));
+        order.verify(publisher).publish(start(fixtureExecutor));
+        order.verify(publisher).publish(complete(fixtureExecutor));
         verifyNoMoreInteractions(publisher);
         verifyNoMoreInteractions(fixtureInvoker);
     }
@@ -58,34 +57,29 @@ public class SerialFixtureExecutorTest {
     @Test
     public void shouldExecuteSingleFixtureTreeSuccessfully() {
         //given:
-        TreeSet<Fixture> fixtures = new TreeSet<Fixture>();
+        Fixtures fixtures = new Fixtures();
         Fixture fixture = mock(Fixture.class);
         fixtures.add(fixture);
 
         Future<Boolean> future = mock(Future.class);
-
-        given(builderFactory.getBuilder()).willReturn(builder);
-        given(builder.parse(tree)).willReturn(fixtures);
         given(fixtureInvoker.execute(fixture, publisher)).willReturn(future);
 
-        FixtureExecutor testExecutor = new SerialFixtureExecutor(builderFactory, fixtureInvoker, publisher);
-
         //when:
-        testExecutor.execute(tree);
+        fixtureExecutor.execute(fixtures);
 
         //then:
         InOrder order = inOrder(publisher, fixtureInvoker);
-        order.verify(publisher).publish(start(testExecutor));
+        order.verify(publisher).publish(start(fixtureExecutor));
         order.verify(publisher).publish(queued(fixture));
         order.verify(fixtureInvoker).execute(fixture, publisher);
-        order.verify(publisher).publish(complete(testExecutor));
+        order.verify(publisher).publish(complete(fixtureExecutor));
         verifyNoMoreInteractions(fixtureInvoker, publisher);
     }
 
     @Test
     public void shouldExecuteFixturesSequentially() {
         //given:
-        TreeSet<Fixture> fixtures = new TreeSet<Fixture>();
+        Fixtures fixtures = new Fixtures();
         MockFixtureFactory fixtureFactory = new MockFixtureFactory();
         Fixture fixture0 = fixtureFactory.create();
         Fixture fixture1 = fixtureFactory.create();
@@ -95,40 +89,27 @@ public class SerialFixtureExecutorTest {
         fixtures.add(fixture2);
 
         Future<Boolean> future = mock(Future.class);
-
-        given(builderFactory.getBuilder()).willReturn(builder);
-        given(builder.parse(tree)).willReturn(fixtures);
         given(fixtureInvoker.execute(any(Fixture.class), eq(publisher))).willReturn(future);
 
-        FixtureExecutor testExecutor = new SerialFixtureExecutor(builderFactory, fixtureInvoker, publisher);
-
         //when:
-        testExecutor.execute(tree);
+        fixtureExecutor.execute(fixtures);
 
         //then:
         InOrder order = inOrder(publisher, fixtureInvoker);
-        order.verify(publisher).publish(start(testExecutor));
+        order.verify(publisher).publish(start(fixtureExecutor));
         order.verify(publisher).publish(queued(fixture0));
         order.verify(fixtureInvoker).execute(fixture0, publisher);
         order.verify(publisher).publish(queued(fixture1));
         order.verify(fixtureInvoker).execute(fixture1, publisher);
         order.verify(publisher).publish(queued(fixture2));
         order.verify(fixtureInvoker).execute(fixture2, publisher);
-        order.verify(publisher).publish(complete(testExecutor));
+        order.verify(publisher).publish(complete(fixtureExecutor));
         verifyNoMoreInteractions(fixtureInvoker, publisher);
     }
 
-    private static class MockFixture implements Fixture, Comparable<MockFixture> {
-
-        private final Integer index;
-
-        private MockFixture(Integer index) {
-            this.index = index;
-        }
-
-        @Override
-        public int compareTo(MockFixture that) {
-            return this.index.compareTo(that.index);
+    private static class MockFixture extends Fixture {
+        public MockFixture(Integer index) {
+            super(index);
         }
     }
 
