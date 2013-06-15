@@ -1,9 +1,9 @@
-package com.bitresolution.xtest.core.graph;
+package com.bitresolution.xtest.core.phases.parse;
 
-import com.bitresolution.xtest.core.graph.nodes.BaseNode;
-import com.bitresolution.xtest.core.graph.nodes.Root;
-import com.bitresolution.xtest.core.graph.nodes.XNode;
-import com.bitresolution.xtest.core.graph.relationships.Relationship;
+import com.bitresolution.xtest.core.phases.parse.nodes.BaseNode;
+import com.bitresolution.xtest.core.phases.parse.nodes.Root;
+import com.bitresolution.xtest.core.phases.parse.nodes.XNode;
+import com.bitresolution.xtest.core.phases.parse.relationships.Relationship;
 import com.google.common.collect.ImmutableSet;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;

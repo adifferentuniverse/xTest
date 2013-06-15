@@ -1,11 +1,11 @@
-package com.bitresolution.xtest.core.graph
+package com.bitresolution.xtest.core.phases.parse
 
-import com.bitresolution.xtest.core.graph.nodes.BaseNode
-import com.bitresolution.xtest.core.graph.nodes.Root
-import com.bitresolution.xtest.core.graph.nodes.XNode
-import com.bitresolution.xtest.core.graph.relationships.ContainsRelationship
-import com.bitresolution.xtest.core.graph.relationships.DependsOnRelationship
-import com.bitresolution.xtest.core.graph.relationships.Relationship
+import com.bitresolution.xtest.core.phases.parse.nodes.BaseNode
+import com.bitresolution.xtest.core.phases.parse.nodes.Root
+import com.bitresolution.xtest.core.phases.parse.nodes.XNode
+import com.bitresolution.xtest.core.phases.parse.relationships.ContainsRelationship
+import com.bitresolution.xtest.core.phases.parse.relationships.DependsOnRelationship
+import com.bitresolution.xtest.core.phases.parse.relationships.Relationship
 import spock.lang.Specification
 
 class JungTestGraphSpec extends Specification {

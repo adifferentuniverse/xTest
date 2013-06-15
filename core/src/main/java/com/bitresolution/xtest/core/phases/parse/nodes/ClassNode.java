@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.graph.nodes;
+package com.bitresolution.xtest.core.phases.parse.nodes;
 
 import com.bitresolution.xtest.reflection.FullyQualifiedClassName;
 

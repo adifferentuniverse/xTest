@@ -1,9 +1,9 @@
-package com.bitresolution.xtest.core.graph;
+package com.bitresolution.xtest.core.phases.parse;
 
 import com.bitresolution.xtest.Node;
-import com.bitresolution.xtest.core.graph.nodes.ClassNode;
-import com.bitresolution.xtest.core.graph.nodes.MethodNode;
-import com.bitresolution.xtest.core.graph.nodes.XNode;
+import com.bitresolution.xtest.core.phases.parse.nodes.ClassNode;
+import com.bitresolution.xtest.core.phases.parse.nodes.MethodNode;
+import com.bitresolution.xtest.core.phases.parse.nodes.XNode;
 import com.bitresolution.xtest.reflection.FullyQualifiedClassName;
 import com.bitresolution.xtest.reflection.Package;
 import org.reflections.Reflections;
@@ -11,7 +11,7 @@ import org.reflections.Reflections;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import static com.bitresolution.xtest.core.graph.relationships.RelationshipBuilder.where;
+import static com.bitresolution.xtest.core.phases.parse.relationships.RelationshipBuilder.where;
 
 public class XTestAnnotationBasedGraphFactory implements GraphFactory {
 

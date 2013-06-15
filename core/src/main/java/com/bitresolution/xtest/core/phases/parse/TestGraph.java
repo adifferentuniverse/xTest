@@ -1,7 +1,7 @@
-package com.bitresolution.xtest.core.graph;
+package com.bitresolution.xtest.core.phases.parse;
 
-import com.bitresolution.xtest.core.graph.nodes.XNode;
-import com.bitresolution.xtest.core.graph.relationships.Relationship;
+import com.bitresolution.xtest.core.phases.parse.nodes.XNode;
+import com.bitresolution.xtest.core.phases.parse.relationships.Relationship;
 
 import java.util.Set;
 

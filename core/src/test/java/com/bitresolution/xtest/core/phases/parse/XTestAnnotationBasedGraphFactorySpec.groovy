@@ -1,8 +1,8 @@
-package com.bitresolution.xtest.core.graph
+package com.bitresolution.xtest.core.phases.parse
 
-import com.bitresolution.xtest.core.graph.nodes.ClassNode
-import com.bitresolution.xtest.core.graph.nodes.MethodNode
-import com.bitresolution.xtest.core.graph.relationships.ContainsRelationship
+import com.bitresolution.xtest.core.phases.parse.nodes.ClassNode
+import com.bitresolution.xtest.core.phases.parse.nodes.MethodNode
+import com.bitresolution.xtest.core.phases.parse.relationships.ContainsRelationship
 import com.bitresolution.xtest.examples.TestNodeClassWithNoTestNodeMethodsExample
 import com.bitresolution.xtest.examples.TestNodeEmptyClassExample
 import com.bitresolution.xtest.examples.TestNodeMultipleMethodExample

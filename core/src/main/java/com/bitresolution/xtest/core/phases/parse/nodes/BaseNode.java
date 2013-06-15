@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.graph.nodes;
+package com.bitresolution.xtest.core.phases.parse.nodes;
 
 import com.google.common.base.Objects;
 import org.apache.commons.lang.builder.ToStringBuilder;

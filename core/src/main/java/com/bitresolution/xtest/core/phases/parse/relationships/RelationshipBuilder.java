@@ -1,6 +1,6 @@
-package com.bitresolution.xtest.core.graph.relationships;
+package com.bitresolution.xtest.core.phases.parse.relationships;
 
-import com.bitresolution.xtest.core.graph.nodes.XNode;
+import com.bitresolution.xtest.core.phases.parse.nodes.XNode;
 
 public class RelationshipBuilder<S> {
 
