@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.reflection;
+package com.bitresolution.xtest.commons.reflection;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;

@@ -1,4 +1,4 @@
-package com.bitresolution.commons;
+package com.bitresolution.xtest.commons.collections;
 
 import java.util.ArrayList;
 import java.util.Iterator;

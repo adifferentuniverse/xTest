@@ -1,4 +1,4 @@
-package com.bitresolution;
+package com.bitresolution.xtest.commons;
 
 public interface TestCategories {
 

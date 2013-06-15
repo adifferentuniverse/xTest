@@ -1,4 +1,4 @@
-package com.bitresolution.commons;
+package com.bitresolution.xtest.commons;
 
 public interface Factory<T> {
 

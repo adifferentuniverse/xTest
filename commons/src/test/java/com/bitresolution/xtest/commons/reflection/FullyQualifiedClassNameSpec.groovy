@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.reflection
+package com.bitresolution.xtest.commons.reflection
 
 import spock.lang.Specification
 
@@ -9,7 +9,7 @@ class FullyQualifiedClassNameSpec extends Specification {
         def fqcn = new FullyQualifiedClassName(fullname)
         assert fqcn.fullyQualifiedClassName == fullname
         assert fqcn.className == className
-        assert fqcn.packageName.equals(new Package(packageName))
+        assert fqcn.packageName.equals(new com.bitresolution.xtest.commons.reflection.Package(packageName))
         assert fqcn.inDefaultPackage == isInDefaultPackage
 
         where:

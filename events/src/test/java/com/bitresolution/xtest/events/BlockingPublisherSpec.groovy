@@ -2,7 +2,7 @@ package com.bitresolution.xtest.events
 
 import org.junit.experimental.categories.Category
 
-import static com.bitresolution.TestCategories.Unit
+import static com.bitresolution.xtest.commons.TestCategories.Unit
 
 @Category(Unit)
 class BlockingPublisherSpec extends PublisherSpec {

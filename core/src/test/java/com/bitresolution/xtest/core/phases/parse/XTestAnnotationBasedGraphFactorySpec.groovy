@@ -1,5 +1,7 @@
 package com.bitresolution.xtest.core.phases.parse
 
+import com.bitresolution.xtest.commons.reflection.FullyQualifiedClassName
+import com.bitresolution.xtest.commons.reflection.Package
 import com.bitresolution.xtest.core.phases.parse.nodes.ClassNode
 import com.bitresolution.xtest.core.phases.parse.nodes.MethodNode
 import com.bitresolution.xtest.core.phases.parse.relationships.ContainsRelationship
@@ -7,8 +9,6 @@ import com.bitresolution.xtest.examples.TestNodeClassWithNoTestNodeMethodsExampl
 import com.bitresolution.xtest.examples.TestNodeEmptyClassExample
 import com.bitresolution.xtest.examples.TestNodeMultipleMethodExample
 import com.bitresolution.xtest.examples.TestNodeSingleMethodExample
-import com.bitresolution.xtest.reflection.FullyQualifiedClassName
-import com.bitresolution.xtest.reflection.Package
 import spock.lang.Specification
 
 class XTestAnnotationBasedGraphFactorySpec extends Specification {

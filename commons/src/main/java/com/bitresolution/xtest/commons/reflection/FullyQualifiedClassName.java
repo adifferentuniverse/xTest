@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.reflection;
+package com.bitresolution.xtest.commons.reflection;
 
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.tuple.ImmutablePair;

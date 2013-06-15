@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.reflection
+package com.bitresolution.xtest.commons.reflection
 
 import spock.lang.Specification
 
@@ -6,7 +6,7 @@ class PackageSpec extends Specification {
 
     def "package with no arguments is the default package"() {
         given:
-        def p = new Package();
+        def p = new com.bitresolution.xtest.commons.reflection.Package();
         expect:
         assert p.defaultPackage
         assert p.parts == []
@@ -15,7 +15,7 @@ class PackageSpec extends Specification {
 
     def "package with no name is the default package"() {
         given:
-        def p = new Package(blank);
+        def p = new com.bitresolution.xtest.commons.reflection.Package(blank);
         expect:
         assert p.defaultPackage
         assert p.parts == []
@@ -27,7 +27,7 @@ class PackageSpec extends Specification {
 
     def "should create Package from parts"() {
         given:
-        def p = new Package(parts as String[]);
+        def p = new com.bitresolution.xtest.commons.reflection.Package(parts as String[]);
 
         expect:
         assert !p.defaultPackage
@@ -42,7 +42,7 @@ class PackageSpec extends Specification {
 
     def "should create Package from string"() {
         given:
-        def p = new Package(name);
+        def p = new com.bitresolution.xtest.commons.reflection.Package(name);
 
         expect:
         assert !p.defaultPackage
@@ -57,7 +57,7 @@ class PackageSpec extends Specification {
 
     def "should get child Package"() {
         given:
-        def p = new Package(name);
+        def p = new com.bitresolution.xtest.commons.reflection.Package(name);
 
         when:
         def childPackage = p.getChild(child)
@@ -74,7 +74,7 @@ class PackageSpec extends Specification {
 
     def "should get parent Package"() {
         given:
-        def p = new Package(name);
+        def p = new com.bitresolution.xtest.commons.reflection.Package(name);
 
         when:
         def parent = p.getParent()
@@ -91,6 +91,6 @@ class PackageSpec extends Specification {
 
     def "should have meaningful toString"() {
         expect:
-        assert new Package("com.bitresolution").toString().contains("com.bitresolution")
+        assert new com.bitresolution.xtest.commons.reflection.Package("com.bitresolution").toString().contains("com.bitresolution")
     }
 }

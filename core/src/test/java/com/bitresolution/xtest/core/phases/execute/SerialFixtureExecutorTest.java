@@ -12,7 +12,7 @@ import org.mockito.runners.VerboseMockitoJUnitRunner;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.bitresolution.TestCategories.Unit;
+import static com.bitresolution.xtest.commons.TestCategories.Unit;
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.QueuedEvent.queued;
 import static com.bitresolution.xtest.core.events.StartEvent.start;

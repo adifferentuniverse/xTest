@@ -1,5 +1,6 @@
 package com.bitresolution.xtest.core
 
+import com.bitresolution.xtest.commons.FormattedMessageException
 import spock.lang.Specification
 
 

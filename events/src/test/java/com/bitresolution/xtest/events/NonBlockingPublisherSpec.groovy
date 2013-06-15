@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-import static com.bitresolution.TestCategories.Unit
+import static com.bitresolution.xtest.commons.TestCategories.Unit
 
 @Category(Unit)
 class NonBlockingPublisherSpec extends PublisherSpec {

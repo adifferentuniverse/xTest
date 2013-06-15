@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.phases.parse.nodes;
 
-import com.bitresolution.xtest.reflection.FullyQualifiedClassName;
+import com.bitresolution.xtest.commons.reflection.FullyQualifiedClassName;
 
 public class ClassNode extends BaseNode<FullyQualifiedClassName> implements XNode<FullyQualifiedClassName> {
 

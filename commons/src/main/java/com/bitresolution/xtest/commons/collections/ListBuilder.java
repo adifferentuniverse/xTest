@@ -1,5 +1,6 @@
-package com.bitresolution.commons;
+package com.bitresolution.xtest.commons.collections;
 
+import com.bitresolution.xtest.commons.Factory;
 import com.google.common.collect.Lists;
 
 import java.util.Collection;

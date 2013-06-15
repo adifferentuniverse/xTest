@@ -1,7 +1,8 @@
 package com.bitresolution.xtest.events;
 
-import com.bitresolution.commons.Factory;
-import com.bitresolution.commons.ListBuilder;
+import com.bitresolution.xtest.commons.Factory;
+import com.bitresolution.xtest.commons.TestCategories;
+import com.bitresolution.xtest.commons.collections.ListBuilder;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.junit.Before;
@@ -15,12 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-import static com.bitresolution.TestCategories.Integration;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
-@Category(Integration.class)
+@Category(TestCategories.Integration.class)
 public class BlockingPublisherTest {
 
     private static final Logger log = LoggerFactory.getLogger(BlockingPublisherTest.class);

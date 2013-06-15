@@ -1,6 +1,6 @@
-package com.bitresolution.xtest.core;
+package com.bitresolution.xtest.commons;
 
-import com.bitresolution.commons.XIterables;
+import com.bitresolution.xtest.commons.collections.XIterables;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import org.apache.commons.lang3.StringUtils;

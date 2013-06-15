@@ -19,6 +19,16 @@
             <artifactId>annotations</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.bitresolution.xtest</groupId>
+            <artifactId>events</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bitresolution.xtest</groupId>
+            <artifactId>commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>net.sf.jung</groupId>

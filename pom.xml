@@ -16,6 +16,8 @@
     <modules>
         <module>core</module>
         <module>annotations</module>
+        <module>events</module>
+        <module>commons</module>
     </modules>
 
     <properties>

@@ -1,13 +1,13 @@
 package com.bitresolution.xtest.events
 
+import com.bitresolution.xtest.commons.TestCategories
 import org.junit.experimental.categories.Category
 import spock.lang.Shared
 import spock.lang.Specification
 
-import static com.bitresolution.TestCategories.Unit
 import static java.util.Collections.emptySet
 
-@Category(Unit)
+@Category(TestCategories.Unit)
 abstract class PublisherSpec extends Specification {
 
     @Shared
