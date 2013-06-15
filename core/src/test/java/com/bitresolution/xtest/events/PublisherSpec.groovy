@@ -15,7 +15,7 @@ abstract class PublisherSpec extends Specification {
     @Shared
     Subscriber subscriberB = Mock()
 
-    Publisher<Subscriber> publisher
+    Publisher publisher
 
     def "should have no subscribers when instantiated"() {
         expect: assert publisher.subscribers == emptySet()

@@ -1,6 +1,6 @@
-package com.bitresolution.xtest.core.execution.events;
+package com.bitresolution.xtest.core.events;
 
-public class CompleteEvent extends TestExecutorEvent {
+public class CompleteEvent extends BaseEvent {
     public CompleteEvent(Object source) {
         super(source);
     }

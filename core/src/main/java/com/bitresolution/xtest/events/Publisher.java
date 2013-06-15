@@ -3,16 +3,16 @@ package com.bitresolution.xtest.events;
 import java.util.Collection;
 import java.util.Set;
 
-public interface Publisher<L extends Subscriber> {
-    boolean subscribe(L subscriber);
+public interface Publisher {
+    boolean subscribe(Subscriber subscriber);
 
-    boolean subscribe(Collection<L> subscribers);
+    boolean subscribe(Collection<Subscriber> subscribers);
 
-    boolean unsubscribe(L subscriber);
+    boolean unsubscribe(Subscriber subscriber);
 
-    boolean unsubscribe(Collection<L> subscribers);
+    boolean unsubscribe(Collection<Subscriber> subscribers);
 
     void publish(XEvent event);
 
-    Set<L> getSubscribers();
+    Set<Subscriber> getSubscribers();
 }

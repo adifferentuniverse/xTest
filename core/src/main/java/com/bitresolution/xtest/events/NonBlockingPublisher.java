@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class NonBlockingPublisher<L extends Subscriber> extends BasePublisher<L> {
+public class NonBlockingPublisher extends BasePublisher {
 
     private static final Logger log = LoggerFactory.getLogger(NonBlockingPublisher.class);
 

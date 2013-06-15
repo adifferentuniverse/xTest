@@ -5,34 +5,34 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-public abstract class BasePublisher<L extends Subscriber> implements Publisher<L> {
-    protected final Set<L> subscribers;
+public abstract class BasePublisher implements Publisher {
+    protected final Set<Subscriber> subscribers;
 
     public BasePublisher() {
-        this(new CopyOnWriteArraySet<L>());
+        this(new CopyOnWriteArraySet<Subscriber>());
     }
 
-    protected BasePublisher(Set<L> subscribers) {
+    protected BasePublisher(Set<Subscriber> subscribers) {
         this.subscribers = subscribers;
     }
 
-    public boolean subscribe(L subscriber) {
+    public boolean subscribe(Subscriber subscriber) {
         return subscribers.add(subscriber);
     }
 
-    public boolean subscribe(Collection<L> subscribers) {
+    public boolean subscribe(Collection<Subscriber> subscribers) {
         return this.subscribers.addAll(subscribers);
     }
 
-    public boolean unsubscribe(L subscriber) {
+    public boolean unsubscribe(Subscriber subscriber) {
         return this.subscribers.remove(subscriber);
     }
 
-    public boolean unsubscribe(Collection<L> subscribers) {
+    public boolean unsubscribe(Collection<Subscriber> subscribers) {
         return this.subscribers.removeAll(subscribers);
     }
 
-    public Set<L> getSubscribers() {
+    public Set<Subscriber> getSubscribers() {
         return Collections.unmodifiableSet(subscribers);
     }
 

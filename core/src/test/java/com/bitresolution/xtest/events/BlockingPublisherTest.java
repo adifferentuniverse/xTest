@@ -30,14 +30,14 @@ public class BlockingPublisherTest {
     private static final int SUBSCRIBER_COUNT = 100;
     private static final int EVENT_COUNT = 500;
 
-    private BlockingPublisher<Subscriber> publisher;
+    private BlockingPublisher publisher;
     private List<Subscriber> subscribers;
     private List<SubscribeTask> subscriptionTasks;
     private List<PublishEventTask> publishTasks;
 
     @Before
     public void setup() {
-        publisher = new BlockingPublisher<Subscriber>();
+        publisher = new BlockingPublisher();
 
         subscribers = ListBuilder.using(new ArrayList<Subscriber>()).insert(SUBSCRIBER_COUNT, new Factory<Subscriber>() {
             @Override
@@ -106,9 +106,9 @@ public class BlockingPublisherTest {
     private static class SubscribeTask implements Callable<Boolean> {
 
         private final Subscriber subscriber;
-        private final Publisher<Subscriber> publisher;
+        private final Publisher publisher;
 
-        private SubscribeTask(Subscriber subscriber, Publisher<Subscriber> publisher) {
+        private SubscribeTask(Subscriber subscriber, Publisher publisher) {
             this.subscriber = subscriber;
             this.publisher = publisher;
         }
@@ -121,9 +121,9 @@ public class BlockingPublisherTest {
 
     private static class PublishEventTask implements Callable<Boolean> {
 
-        private final Publisher<Subscriber> publisher;
+        private final Publisher publisher;
 
-        private PublishEventTask(Publisher<Subscriber> publisher) {
+        private PublishEventTask(Publisher publisher) {
             this.publisher = publisher;
         }
 

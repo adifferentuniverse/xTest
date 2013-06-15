@@ -1,6 +1,6 @@
-package com.bitresolution.xtest.core.execution.events;
+package com.bitresolution.xtest.core.events;
 
-public class AbortedEvent extends TestExecutorEvent {
+public class AbortedEvent extends BaseEvent {
     public AbortedEvent(Object source) {
         super(source);
     }

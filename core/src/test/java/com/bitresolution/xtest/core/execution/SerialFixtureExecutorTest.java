@@ -9,14 +9,13 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.VerboseMockitoJUnitRunner;
 
-import java.util.TreeSet;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.bitresolution.TestCategories.Unit;
-import static com.bitresolution.xtest.core.execution.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.execution.events.QueuedEvent.queued;
-import static com.bitresolution.xtest.core.execution.events.StartEvent.start;
+import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.core.events.QueuedEvent.queued;
+import static com.bitresolution.xtest.core.events.StartEvent.start;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -27,7 +26,7 @@ import static org.mockito.Mockito.*;
 public class SerialFixtureExecutorTest {
 
     @Mock
-    Publisher<TestExectionListener> publisher;
+    Publisher publisher;
     @Mock
     FixtureInvoker fixtureInvoker;
 

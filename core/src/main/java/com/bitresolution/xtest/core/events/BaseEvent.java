@@ -1,13 +1,13 @@
-package com.bitresolution.xtest.core.execution.events;
+package com.bitresolution.xtest.core.events;
 
 import com.bitresolution.xtest.events.XEvent;
 import com.google.common.base.Objects;
 
-public abstract class TestExecutorEvent implements XEvent {
+public abstract class BaseEvent implements XEvent {
 
     private final Object source;
 
-    public TestExecutorEvent(Object source) {
+    public BaseEvent(Object source) {
         this.source = source;
     }
 
@@ -29,7 +29,7 @@ public abstract class TestExecutorEvent implements XEvent {
         if(obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final TestExecutorEvent other = (TestExecutorEvent) obj;
+        final BaseEvent other = (BaseEvent) obj;
         return Objects.equal(this.source, other.source);
     }
 
