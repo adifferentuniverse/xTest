@@ -15,13 +15,13 @@ class NonBlockingPublisherSpec extends PublisherSpec {
 
     def setup() {
         executor = Executors.newFixedThreadPool(10);
-        publisher = new NonBlockingPublisher<Subscriber>(executor)
+        publisher = new NonBlockingPublisher(executor)
     }
 
     def "should publish events to all subscribera"() {
         given:
-        Subscriber a = Mock()
-        Subscriber b = Mock()
+        Subscriber a = Mock(Subscriber)
+        Subscriber b = Mock(Subscriber)
         publisher.subscribe([a, b])
         XEvent event = Mock(XEvent)
         when:

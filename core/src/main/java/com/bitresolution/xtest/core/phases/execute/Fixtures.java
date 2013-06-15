@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.execution;
+package com.bitresolution.xtest.core.phases.execute;
 
 import com.google.common.collect.Iterators;
 

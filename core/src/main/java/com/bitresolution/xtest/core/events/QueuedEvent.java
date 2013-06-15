@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.events;
 
-import com.bitresolution.xtest.core.execution.Fixture;
+import com.bitresolution.xtest.core.phases.execute.Fixture;
 
 public class QueuedEvent extends BaseEvent {
     public QueuedEvent(Fixture source) {

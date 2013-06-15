@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.execution;
+package com.bitresolution.xtest.core.phases.execute;
 
 public abstract class Fixture implements Comparable<Fixture> {
 
