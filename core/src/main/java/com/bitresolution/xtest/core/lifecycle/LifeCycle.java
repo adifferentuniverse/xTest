@@ -12,6 +12,11 @@ public class Lifecycle implements Iterable<Phase<?, ?>> {
         phases = new ArrayList<Phase<?, ?>>();
     }
 
+    public Lifecycle add(Phase<?, ?> phase) {
+        phases.add(phase);
+        return this;
+    }
+
     @Override
     public Iterator<Phase<?, ?>> iterator() {
         return phases.iterator();
