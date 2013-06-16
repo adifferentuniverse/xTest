@@ -7,7 +7,7 @@ public abstract class BaseEvent implements XEvent {
 
     private final Object source;
 
-    public BaseEvent(Object source) {
+    protected BaseEvent(Object source) {
         this.source = source;
     }
 

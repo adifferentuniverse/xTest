@@ -2,7 +2,7 @@ package com.bitresolution.xtest.core.phases.parse.nodes;
 
 public class Root {
 
-    public static Root ROOT = new Root();
+    public static final Root ROOT = new Root();
 
     private Root() {
     }

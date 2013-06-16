@@ -11,9 +11,9 @@ import static java.util.Collections.emptySet
 abstract class PublisherSpec extends Specification {
 
     @Shared
-    Subscriber subscriberA = Mock()
+    Subscriber subscriberA = Mock(Subscriber)
     @Shared
-    Subscriber subscriberB = Mock()
+    Subscriber subscriberB = Mock(Subscriber)
 
     Publisher publisher
 

@@ -91,7 +91,7 @@ public class BlockingPublisherTest {
     }
 
     private static class MockSubscriber implements Subscriber {
-        private List<XEvent> events;
+        private final List<XEvent> events;
 
         private MockSubscriber() {
             events = new ArrayList<XEvent>();

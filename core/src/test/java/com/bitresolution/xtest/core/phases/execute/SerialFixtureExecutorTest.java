@@ -54,6 +54,7 @@ public class SerialFixtureExecutorTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void shouldExecuteSingleFixtureTreeSuccessfully() {
         //given:
         Fixtures fixtures = new Fixtures();
@@ -76,6 +77,7 @@ public class SerialFixtureExecutorTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void shouldExecuteFixturesSequentially() {
         //given:
         Fixtures fixtures = new Fixtures();
@@ -113,7 +115,7 @@ public class SerialFixtureExecutorTest {
     }
 
     private static class MockFixtureFactory {
-        private AtomicInteger count = new AtomicInteger(0);
+        private final AtomicInteger count = new AtomicInteger(0);
 
         public MockFixture create() {
             return new MockFixture(count.getAndIncrement());

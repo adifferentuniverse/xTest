@@ -6,11 +6,11 @@ import com.google.common.base.Objects;
 public abstract class BasePhase<I, O> implements Phase<I, O> {
 
     private final Class<I> inputType;
-    private final Class<O> onputType;
+    private final Class<O> outputType;
 
-    protected BasePhase(Class<I> inputType, Class<O> onputType) {
+    protected BasePhase(Class<I> inputType, Class<O> outputType) {
         this.inputType = inputType;
-        this.onputType = onputType;
+        this.outputType = outputType;
     }
 
     @Override
@@ -20,12 +20,12 @@ public abstract class BasePhase<I, O> implements Phase<I, O> {
 
     @Override
     public Class<O> getOutputType() {
-        return onputType;
+        return outputType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(inputType, onputType);
+        return Objects.hashCode(inputType, outputType);
     }
 
     @Override
@@ -37,14 +37,14 @@ public abstract class BasePhase<I, O> implements Phase<I, O> {
             return false;
         }
         final BasePhase other = (BasePhase) obj;
-        return Objects.equal(this.inputType, other.inputType) && Objects.equal(this.onputType, other.onputType);
+        return Objects.equal(this.inputType, other.inputType) && Objects.equal(this.outputType, other.outputType);
     }
 
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("inputType", inputType)
-                .add("onputType", onputType)
+                .add("outputType", outputType)
                 .toString();
     }
 }

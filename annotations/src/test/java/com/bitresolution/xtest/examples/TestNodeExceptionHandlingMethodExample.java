@@ -1,8 +1,8 @@
 package com.bitresolution.xtest.examples;
 
 import com.bitresolution.xtest.Node;
-import com.bitresolution.xtest.Promises;
 import com.bitresolution.xtest.PromiseException;
+import com.bitresolution.xtest.Promises;
 import com.bitresolution.xtest.transform.ThrowTransform;
 
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class TestNodeExceptionHandlingMethodExample {
     }
 
     @Node
-    public Promises delayedExecution() throws IOException {
+    public Promises delayedExecution() {
         return promise().when(new Callable<Void>() {
             @Override
             public Void call() throws Exception {

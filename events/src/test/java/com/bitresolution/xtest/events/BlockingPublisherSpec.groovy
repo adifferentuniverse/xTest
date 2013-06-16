@@ -8,14 +8,14 @@ import static com.bitresolution.xtest.commons.TestCategories.Unit
 class BlockingPublisherSpec extends PublisherSpec {
 
     def setup() {
-        publisher = new BlockingPublisher<Subscriber>()
+        publisher = new BlockingPublisher()
     }
 
     @Override
     def "should publish events to all subscribera"() {
         given:
-        Subscriber a = Mock()
-        Subscriber b = Mock()
+        Subscriber a = Mock(Subscriber)
+        Subscriber b = Mock(Subscriber)
         publisher.subscribe([a, b])
         XEvent event = Mock(XEvent)
         when:

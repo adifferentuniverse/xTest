@@ -26,8 +26,8 @@ public class Fixtures implements Iterable<Fixture> {
         return fixtures.contains(o);
     }
 
-    public boolean add(Fixture fixture) {
-        return fixtures.add(fixture);
+    public void add(Fixture fixture) {
+        fixtures.add(fixture);
     }
 
     public boolean remove(Fixture o) {
