@@ -1,7 +1,5 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.CoreConfiguration;
-import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -11,21 +9,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Engine extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(Engine.class);
+    private Class<?> configurationClass;
 
-    public Engine() {
+    public Engine(Class<?> configurationClass) {
         setName("engine");
+        this.configurationClass = configurationClass;
     }
 
     public void run() {
         logBorderedMessage("Starting xTest");
-        Class<CoreConfiguration> configurationClass = CoreConfiguration.class;
         try {
             AnnotationConfigApplicationContext context = buildApplicationContext(configurationClass);
             LifecycleExecutor executor = context.getBean(LifecycleExecutor.class);
-            Lifecycle lifecycle = buildLifecycle();
 
             log.info("Executing lifecycle...");
-            executor.execute(lifecycle);
+            executor.execute();
 
             log.info("Lifecycle complete, shutting down xTest...");
             context.close();
@@ -34,10 +32,6 @@ public class Engine extends Thread {
             log.error("Terminal error: {}", e.getMessage(), e);
         }
         logBorderedMessage("Stopped xTest");
-    }
-
-    protected Lifecycle buildLifecycle() {
-        return new Lifecycle();
     }
 
     protected AnnotationConfigApplicationContext buildApplicationContext(Class<?> configurationClass) {
