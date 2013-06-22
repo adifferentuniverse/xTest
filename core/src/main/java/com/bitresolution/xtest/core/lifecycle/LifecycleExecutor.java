@@ -13,14 +13,16 @@ import static com.bitresolution.xtest.core.events.StartEvent.start;
 public class LifecycleExecutor {
 
     private final Publisher publisher;
+    private final Lifecycle lifecycle;
 
     @Inject
-    public LifecycleExecutor(Publisher publisher) {
+    public LifecycleExecutor(Lifecycle lifecycle, Publisher publisher) {
+        this.lifecycle = lifecycle;
         this.publisher = publisher;
     }
 
     @SuppressWarnings("unchecked")
-    public void execute(Lifecycle lifecycle) throws LifecycleExecutorException {
+    public void execute() throws LifecycleExecutorException {
         publisher.publish(start(this));
         try {
             Object result = null;

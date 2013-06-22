@@ -1,67 +1,33 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.lifecycle.Lifecycle;
-import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
+import com.bitresolution.xtest.commons.junit.SpringInjectionRule;
+import com.bitresolution.xtest.core.CoreConfiguration;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.VerboseMockitoJUnitRunner;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.experimental.categories.Category;
+import org.junit.rules.TestRule;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static com.bitresolution.xtest.commons.TestCategories.Integration;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.nullValue;
+import static org.junit.Assert.assertThat;
 
-@RunWith(VerboseMockitoJUnitRunner.class)
+@ContextConfiguration(classes = CoreConfiguration.class)
+@Category(Integration.class)
 public class EngineTest {
 
-    @Mock
-    private Lifecycle lifecycle;
-    @Mock
-    private LifecycleExecutor executor;
-    @Mock
-    private AnnotationConfigApplicationContext context;
+    @Autowired
+    ApplicationContext context;
+
+    @Rule
+    public TestRule contextRule = new SpringInjectionRule(this);
 
     @Test
-    public void shouldExecuteLifecycle() throws Exception {
-        //given
-        given(context.getBean(LifecycleExecutor.class)).willReturn(executor);
-        Engine engine = new Engine(){
-            @Override
-            protected Lifecycle buildLifecycle() {
-                return lifecycle;
-            }
-
-            @Override
-            protected AnnotationConfigApplicationContext buildApplicationContext(Class<?> configurationClass) {
-                return context;
-            }
-        };
-
-        //when
-        engine.run();
-
-        //then
-        verify(executor).execute(lifecycle);
-    }
-
-    @Test
-    public void shouldShutdownWithErrorIfNoLifecycleExecutorFound() {
-        //given
-        given(context.getBean(LifecycleExecutor.class)).willThrow(new NoSuchBeanDefinitionException(LifecycleExecutor.class));
-        Engine engine = new Engine(){
-            @Override
-            protected AnnotationConfigApplicationContext buildApplicationContext(Class<?> configurationClass) {
-                return context;
-            }
-        };
-
-        //when
-        engine.run();
-
-        //then no exception thrown
-        verify(context).getBean(LifecycleExecutor.class);
-        verifyNoMoreInteractions(context);
+    public void contextShouldNotBeNull() {
+        assertThat(context, is(not(nullValue())));
     }
 }

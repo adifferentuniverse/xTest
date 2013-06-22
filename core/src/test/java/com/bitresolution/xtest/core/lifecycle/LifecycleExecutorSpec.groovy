@@ -12,11 +12,11 @@ class LifecycleExecutorSpec extends Specification {
     def "should publish lifecycle execution start and finish events"() {
         given:
         Publisher publisher = Mock(Publisher)
-        LifecycleExecutor executor = new LifecycleExecutor(publisher)
         Lifecycle lifecycle = new Lifecycle()
+        LifecycleExecutor executor = new LifecycleExecutor(lifecycle, publisher)
 
         when:
-        executor.execute(lifecycle)
+        executor.execute()
 
         then:
         1 * publisher.publish(start(executor))
@@ -26,8 +26,8 @@ class LifecycleExecutorSpec extends Specification {
     def "should execute lifecycle phases in order"() {
         given:
         Publisher publisher = Mock(Publisher)
-        LifecycleExecutor executor = new LifecycleExecutor(publisher)
         Lifecycle lifecycle = new Lifecycle()
+        LifecycleExecutor executor = new LifecycleExecutor(lifecycle, publisher)
         MockPhase<Void, Integer> phaseA = new MockPhase(Void, Integer, 1)
         MockPhase<Integer, Integer> phaseB = new MockPhase(Integer, Integer, 2)
         MockPhase<Integer, Void> phaseC = new MockPhase(Integer, Void, null)
@@ -37,7 +37,7 @@ class LifecycleExecutorSpec extends Specification {
                 .add(phaseC)
 
         when:
-        executor.execute(lifecycle)
+        executor.execute()
 
         then:
         1 * publisher.publish(start(executor))
@@ -50,8 +50,8 @@ class LifecycleExecutorSpec extends Specification {
     def "should propogate exceptions fron lifecycle phasess"() {
         given:
         Publisher publisher = Mock(Publisher)
-        LifecycleExecutor executor = new LifecycleExecutor(publisher)
         Lifecycle lifecycle = new Lifecycle()
+        LifecycleExecutor executor = new LifecycleExecutor(lifecycle, publisher)
         MockPhase<Void, Integer> phaseA = new MockPhase(Void, Integer, 1)
         Phase<Integer, Integer> phaseB = new MockExceptionThrowingPhase(Integer, Integer)
         MockPhase<Integer, Void> phaseC = new MockPhase(Integer, Void, null)
@@ -61,7 +61,7 @@ class LifecycleExecutorSpec extends Specification {
                 .add(phaseC)
 
         when:
-        executor.execute(lifecycle)
+        executor.execute()
 
         then:
         1 * publisher.publish(start(executor))

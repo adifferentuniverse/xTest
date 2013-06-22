@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(VerboseMockitoJUnitRunner.class)
 @Category(Unit.class)
-public class SerialFixtureExecutorTest {
+public class SerialFixtureExecutorSpec {
 
     @Mock
     Publisher publisher;
