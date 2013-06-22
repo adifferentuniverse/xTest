@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.core.phases.parse.nodes;
 
 import com.google.common.base.Objects;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class BaseNode<T> implements XNode<T> {
 

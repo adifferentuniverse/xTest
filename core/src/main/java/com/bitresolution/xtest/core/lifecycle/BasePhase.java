@@ -1,6 +1,5 @@
-package com.bitresolution.xtest.core.lifecycle.phase;
+package com.bitresolution.xtest.core.lifecycle;
 
-import com.bitresolution.xtest.core.lifecycle.Phase;
 import com.google.common.base.Objects;
 
 public abstract class BasePhase<I, O> implements Phase<I, O> {
@@ -33,7 +32,7 @@ public abstract class BasePhase<I, O> implements Phase<I, O> {
         if(this == obj) {
             return true;
         }
-        if(obj == null || getClass() != obj.getClass()) {
+        if(obj == null || obj.getClass().isInstance(this)) {
             return false;
         }
         final BasePhase other = (BasePhase) obj;

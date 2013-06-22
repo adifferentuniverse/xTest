@@ -2,17 +2,21 @@ package com.bitresolution.xtest.events;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Component
 public class NonBlockingPublisher extends BasePublisher {
 
     private static final Logger log = LoggerFactory.getLogger(NonBlockingPublisher.class);
 
     private final ExecutorService executor;
 
-    public NonBlockingPublisher(ExecutorService executor) {
+    @Inject
+    public NonBlockingPublisher(@PublisherExecutor ExecutorService executor) {
         this.executor = executor;
     }
 

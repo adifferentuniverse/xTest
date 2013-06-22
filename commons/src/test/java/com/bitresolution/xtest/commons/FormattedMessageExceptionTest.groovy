@@ -1,8 +1,6 @@
-package com.bitresolution.xtest.core
+package com.bitresolution.xtest.commons
 
-import com.bitresolution.xtest.commons.FormattedMessageException
 import spock.lang.Specification
-
 
 class FormattedMessageExceptionTest extends Specification {
 

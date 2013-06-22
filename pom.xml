@@ -22,6 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>3.2.0.RELEASE</spring.version>
         <slf4j.version>1.6.5</slf4j.version>
         <logback.version>1.0.7</logback.version>
     </properties>
@@ -131,10 +132,36 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.functionaljava</groupId>
-            <artifactId>functionaljava</artifactId>
-            <version>3.0</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.functionaljava</groupId>-->
+            <!--<artifactId>functionaljava</artifactId>-->
+            <!--<version>3.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -145,11 +172,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.op4j</groupId>
-            <artifactId>op4j</artifactId>
-            <version>1.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.op4j</groupId>-->
+            <!--<artifactId>op4j</artifactId>-->
+            <!--<version>1.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
@@ -213,18 +240,18 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>1.4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-            <version>1.4.10</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.powermock</groupId>-->
+            <!--<artifactId>powermock-module-junit4</artifactId>-->
+            <!--<version>1.4.10</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.powermock</groupId>-->
+            <!--<artifactId>powermock-api-mockito</artifactId>-->
+            <!--<version>1.4.10</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>

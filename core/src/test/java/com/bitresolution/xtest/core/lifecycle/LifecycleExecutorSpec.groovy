@@ -1,6 +1,5 @@
 package com.bitresolution.xtest.core.lifecycle
 
-import com.bitresolution.xtest.core.lifecycle.phase.BasePhase
 import com.bitresolution.xtest.events.Publisher
 import spock.lang.Specification
 
@@ -70,35 +69,5 @@ class LifecycleExecutorSpec extends Specification {
         thrown(LifecycleExecutorException)
         assert !phaseC.executed
         1 * publisher.publish(aborted(executor))
-    }
-}
-
-class MockPhase<I, O> extends BasePhase<I, O> {
-
-    O value
-    boolean executed
-
-    MockPhase(Class<I> inputType, Class<O> onputType, O value) {
-        super(inputType, onputType)
-        this.value = value
-        this.executed = false
-    }
-
-    @Override
-    O execute(I inpur) throws LifecycleExecutorException {
-        executed = true
-        return value
-    }
-}
-
-class MockExceptionThrowingPhase<I, O> extends BasePhase<I, O> {
-
-    MockExceptionThrowingPhase(Class<I> inputType, Class<O> onputType) {
-        super(inputType, onputType)
-    }
-
-    @Override
-    O execute(I inpur) throws LifecycleExecutorException {
-        throw new LifecycleExecutorException("Error")
     }
 }

@@ -1,15 +1,20 @@
 package com.bitresolution.xtest.core.lifecycle;
 
 import com.bitresolution.xtest.events.Publisher;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 import static com.bitresolution.xtest.core.events.AbortedEvent.aborted;
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
+@Component
 public class LifecycleExecutor {
 
     private final Publisher publisher;
 
+    @Inject
     public LifecycleExecutor(Publisher publisher) {
         this.publisher = publisher;
     }
