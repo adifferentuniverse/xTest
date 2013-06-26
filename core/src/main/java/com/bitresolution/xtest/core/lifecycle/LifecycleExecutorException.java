@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.lifecycle;
 
-import com.bitresolution.xtest.commons.FormattedMessageException;
+import com.bitresolution.succor.exceptions.FormattedMessageException;
 
 public class LifecycleExecutorException extends FormattedMessageException {
     public LifecycleExecutorException(String message) {

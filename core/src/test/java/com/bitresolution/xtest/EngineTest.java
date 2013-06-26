@@ -1,6 +1,7 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.commons.junit.SpringInjectionRule;
+import com.bitresolution.succor.junit.category.Integration;
+import com.bitresolution.succor.junit.rules.spring.SpringInjectionRule;
 import com.bitresolution.xtest.core.CoreConfiguration;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 
-import static com.bitresolution.xtest.commons.TestCategories.Integration;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;

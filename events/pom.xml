@@ -12,12 +12,4 @@
     <packaging>jar</packaging>
 
     <name>events</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.bitresolution.xtest</groupId>
-            <artifactId>commons</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
 </project>

@@ -1,5 +1,6 @@
 package com.bitresolution.xtest.core.phases.execute;
 
+import com.bitresolution.succor.junit.category.Unit;
 import com.bitresolution.xtest.events.Publisher;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,6 @@ import org.mockito.runners.VerboseMockitoJUnitRunner;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.bitresolution.xtest.commons.TestCategories.Unit;
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.QueuedEvent.queued;
 import static com.bitresolution.xtest.core.events.StartEvent.start;

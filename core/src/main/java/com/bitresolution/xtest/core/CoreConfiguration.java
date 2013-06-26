@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core;
 
-import com.bitresolution.xtest.commons.concurrent.GroupNamedThreadFactory;
+import com.bitresolution.succor.concurrent.GroupNamedThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.commons.TestCategories;
+import com.bitresolution.succor.junit.category.Unit;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @RunWith(VerboseMockitoJUnitRunner.class)
-@Category(TestCategories.Unit.class)
+@Category(Unit.class)
 public class EngineSpec {
 
     @Mock

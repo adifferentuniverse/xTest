@@ -1,12 +1,12 @@
 package com.bitresolution.xtest.events
 
+import com.bitresolution.succor.junit.category.Unit
 import org.junit.experimental.categories.Category
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-import static com.bitresolution.xtest.commons.TestCategories.Unit
 
 @Category(Unit)
 class NonBlockingPublisherSpec extends PublisherSpec {

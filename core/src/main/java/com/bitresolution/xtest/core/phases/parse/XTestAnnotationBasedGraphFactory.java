@@ -1,8 +1,8 @@
 package com.bitresolution.xtest.core.phases.parse;
 
+import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.bitresolution.succor.reflection.Package;
 import com.bitresolution.xtest.Node;
-import com.bitresolution.xtest.commons.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.commons.reflection.Package;
 import com.bitresolution.xtest.core.phases.parse.nodes.ClassNode;
 import com.bitresolution.xtest.core.phases.parse.nodes.MethodNode;
 import com.bitresolution.xtest.core.phases.parse.nodes.XNode;

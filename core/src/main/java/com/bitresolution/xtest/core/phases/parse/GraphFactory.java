@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.core.phases.parse;
 
-import com.bitresolution.xtest.commons.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.commons.reflection.Package;
+import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.bitresolution.succor.reflection.Package;
 
 public interface GraphFactory {
 

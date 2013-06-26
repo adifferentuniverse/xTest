@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.phases.parse;
 
-import com.bitresolution.xtest.commons.FormattedMessageException;
+import com.bitresolution.succor.exceptions.FormattedMessageException;
 
 public class TestGraphException extends FormattedMessageException {
 
