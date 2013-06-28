@@ -1,27 +1,60 @@
 package com.bitresolution.xtest.core;
 
-import com.bitresolution.succor.concurrent.GroupNamedThreadFactory;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
-import org.springframework.beans.factory.annotation.Value;
+import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase;
+import com.bitresolution.xtest.core.phases.execute.ExecuteFixturesPhase;
+import com.bitresolution.xtest.core.phases.generate.GenerateFixturesPhase;
+import com.bitresolution.xtest.core.phases.reporting.ProcessReportPhase;
+import com.bitresolution.xtest.core.phases.sources.GenerateSourcesPhase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Configuration
 @Import({CoreConfiguration.class})
 public class DefaultXTestConfiguration {
 
+    @Autowired
+    private GenerateSourcesPhase generateSourcesPhase;
+    @Autowired
+    private CompileGraphPhase compileGraphPhase;
+    @Autowired
+    private GenerateFixturesPhase generateFixturesPhase;
+    @Autowired
+    private ExecuteFixturesPhase executeFixturesPhase;
+    @Autowired
+    private ProcessReportPhase processReportPhase;
+
     @Bean
     public Lifecycle lifecycle() throws LifecycleExecutorException {
-        return new Lifecycle();
+        Lifecycle lifecycle = new Lifecycle();
+        lifecycle.add(generateSourcesPhase);
+        lifecycle.add(compileGraphPhase);
+        lifecycle.add(generateFixturesPhase);
+        lifecycle.add(executeFixturesPhase);
+        lifecycle.add(processReportPhase);
+        return lifecycle;
     }
 
-    @Bean(destroyMethod = "shutdown")
-    public ExecutorService publisherExecutor(@Value("${xtest.events.publisher.threads:1}") Integer threadCount) {
-        return Executors.newFixedThreadPool(threadCount, new GroupNamedThreadFactory("publisher"));
+    public void setGenerateSourcesPhase(GenerateSourcesPhase generateSourcesPhase) {
+        this.generateSourcesPhase = generateSourcesPhase;
+    }
+
+    public void setCompileGraphPhase(CompileGraphPhase compileGraphPhase) {
+        this.compileGraphPhase = compileGraphPhase;
+    }
+
+    public void setGenerateFixturesPhase(GenerateFixturesPhase generateFixturesPhase) {
+        this.generateFixturesPhase = generateFixturesPhase;
+    }
+
+    public void setExecuteFixturesPhase(ExecuteFixturesPhase executeFixturesPhase) {
+        this.executeFixturesPhase = executeFixturesPhase;
+    }
+
+    public void setProcessReportPhase(ProcessReportPhase processReportPhase) {
+        this.processReportPhase = processReportPhase;
     }
 }

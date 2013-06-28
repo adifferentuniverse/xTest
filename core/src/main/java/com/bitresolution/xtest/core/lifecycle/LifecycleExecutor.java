@@ -27,7 +27,9 @@ public class LifecycleExecutor {
         try {
             Object result = null;
             for(Phase phase : lifecycle) {
+                publisher.publish(start(phase));
                 result = phase.execute(phase.getInputType().cast(result));
+                publisher.publish(complete(phase));
             }
         }
         catch (LifecycleExecutorException e) {

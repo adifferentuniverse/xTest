@@ -25,6 +25,11 @@ public class Engine extends Thread {
         this.factory = annotationConfigApplicationContextFactory;
     }
 
+    @Override
+    public void run() {
+        execute();
+    }
+
     public ExitStatus execute() {
         logBorderedMessage("Starting xTest");
         ExitStatus status;

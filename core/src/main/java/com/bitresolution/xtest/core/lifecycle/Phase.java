@@ -5,5 +5,7 @@ public interface Phase<I, O> {
     Class<I> getInputType();
     Class<O> getOutputType();
 
-    O execute(I inpur) throws LifecycleExecutorException;
+    O execute(I input) throws LifecycleExecutorException;
+
+    String getName();
 }
