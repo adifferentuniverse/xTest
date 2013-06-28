@@ -11,5 +11,5 @@
     <artifactId>events</artifactId>
     <packaging>jar</packaging>
 
-    <name>events</name>
+    <name>xTest :: Events</name>
 </project>

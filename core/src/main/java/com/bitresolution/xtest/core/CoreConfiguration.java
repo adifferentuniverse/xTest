@@ -1,19 +1,21 @@
 package com.bitresolution.xtest.core;
 
-import com.bitresolution.succor.concurrent.GroupNamedThreadFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 @ComponentScan(basePackages = "com.bitresolution.xtest")
 public class CoreConfiguration {
 
-    @Bean(destroyMethod = "shutdown")
-    public ExecutorService publisherExecutor() {
-        return Executors.newFixedThreadPool(1, new GroupNamedThreadFactory("publisher"));
+    @Bean
+    public static PropertyPlaceholderConfigurer properties() {
+        PropertyPlaceholderConfigurer properties = new PropertyPlaceholderConfigurer();
+        ClassPathResource[] resources = new ClassPathResource[] {new ClassPathResource("default.properties")};
+        properties.setLocations(resources);
+        properties.setIgnoreUnresolvablePlaceholders(true);
+        return properties;
     }
 }

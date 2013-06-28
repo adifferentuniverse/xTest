@@ -11,7 +11,7 @@
     <artifactId>annotations</artifactId>
     <packaging>jar</packaging>
 
-    <name>annotations</name>
+    <name>xTest :: Annotations</name>
     <url>http://maven.apache.org</url>
 
     <properties>
