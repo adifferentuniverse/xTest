@@ -1,7 +1,6 @@
 package com.bitresolution.xtest;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.core.DefaultXTestConfiguration;
 import com.bitresolution.xtest.core.Engine;
 import com.bitresolution.xtest.core.spring.context.DefaultAnnotationConfigApplicationContextFactory;
 import org.slf4j.Logger;

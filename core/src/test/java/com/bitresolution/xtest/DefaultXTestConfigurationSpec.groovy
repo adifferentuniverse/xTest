@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core
+package com.bitresolution.xtest
 
 import com.bitresolution.xtest.core.lifecycle.Phase
 import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase

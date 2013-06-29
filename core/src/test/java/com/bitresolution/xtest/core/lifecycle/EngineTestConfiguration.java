@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.lifecycle;
 
-import com.bitresolution.xtest.core.DefaultXTestConfiguration;
+import com.bitresolution.xtest.DefaultXTestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 public class EngineTestConfiguration extends DefaultXTestConfiguration {
