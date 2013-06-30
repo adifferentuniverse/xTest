@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.succor.reflection.Package;
+import com.bitresolution.succor.reflection.PackageName;
 
 public interface GraphFactory {
 
@@ -9,5 +9,5 @@ public interface GraphFactory {
 
     TestGraph from(FullyQualifiedClassName name) throws ClassNotFoundException, TestGraphException;
 
-    TestGraph from(Package name) throws TestGraphException;
+    TestGraph from(PackageName name) throws TestGraphException;
 }

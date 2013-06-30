@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.core.events.StartEvent.start;
+
 @Component
 public class ExecuteFixturesPhase implements Phase<Fixtures, Report> {
 
@@ -33,8 +36,10 @@ public class ExecuteFixturesPhase implements Phase<Fixtures, Report> {
 
     @Override
     public Report execute(Fixtures input) throws LifecycleExecutorException {
-        log.debug("Executing phase: {}", getName());
-        return new Report();
+        publisher.publish(start(this));
+        Report report = new Report();
+        publisher.publish(complete(this));
+        return report;
     }
 
     @Override

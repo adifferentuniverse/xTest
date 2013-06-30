@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.core.events.StartEvent.start;
+
 @Component
 public class ProcessReportPhase implements Phase<Report, Void> {
 
@@ -32,7 +35,8 @@ public class ProcessReportPhase implements Phase<Report, Void> {
 
     @Override
     public Void execute(Report input) throws LifecycleExecutorException {
-        log.debug("Executing phase: {}", getName());
+        publisher.publish(start(this));
+        publisher.publish(complete(this));
         return null;
     }
 

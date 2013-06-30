@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.core.phases.compile
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName
-import com.bitresolution.succor.reflection.Package
+import com.bitresolution.succor.reflection.PackageName
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode
 import com.bitresolution.xtest.core.phases.compile.relationships.ContainsRelationship
@@ -118,7 +118,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def factory = new XTestAnnotationBasedGraphFactory()
 
         when:
-        def graph = factory.from(new Package("com.bitresolution.xtest.core"))
+        def graph = factory.from(new PackageName("com.bitresolution.xtest.core"))
 
         then:
         def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()
@@ -130,7 +130,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
         def factory = new XTestAnnotationBasedGraphFactory()
 
         when:
-        def graph = factory.from(new Package("com.bitresolution.xtest.examples"))
+        def graph = factory.from(new PackageName("com.bitresolution.xtest.examples"))
 
         then:
         def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()

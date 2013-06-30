@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
 
 @Configuration
 @ComponentScan(basePackages = "com.bitresolution.xtest")
-public class CoreConfiguration {
+public class CoreContext {
 
     @Bean
     public static PropertyPlaceholderConfigurer properties() {

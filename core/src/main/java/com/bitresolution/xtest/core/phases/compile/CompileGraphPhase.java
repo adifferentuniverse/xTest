@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.core.events.StartEvent.start;
+
 @Component
 public class CompileGraphPhase implements Phase<Sources, TestGraph> {
 
@@ -34,7 +37,10 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
     @Override
     public TestGraph execute(Sources input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
-        return new JungTestGraph();
+        publisher.publish(start(this));
+        JungTestGraph graph = new JungTestGraph();
+        publisher.publish(complete(this));
+        return graph;
     }
 
     @Override

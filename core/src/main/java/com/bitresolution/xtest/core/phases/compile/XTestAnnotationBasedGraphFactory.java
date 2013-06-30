@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.succor.reflection.Package;
+import com.bitresolution.succor.reflection.PackageName;
 import com.bitresolution.xtest.Node;
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode;
@@ -42,7 +42,7 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
     }
 
     @Override
-    public TestGraph from(Package p) throws TestGraphException {
+    public TestGraph from(PackageName p) throws TestGraphException {
         Reflections reflections = new Reflections(p.getName());
         Set<Class<?>> klasses = reflections.getTypesAnnotatedWith(Node.class);
         JungTestGraph graph = new JungTestGraph();

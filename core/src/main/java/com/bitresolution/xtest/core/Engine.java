@@ -17,10 +17,12 @@ public class Engine extends Thread {
     private final FullyQualifiedClassName configurationClass;
     private final Properties properties;
     private final AnnotationConfigApplicationContextFactory factory;
+    private final SourceConfiguration sourceConfiguration;
 
-    public Engine(FullyQualifiedClassName configurationClass, Properties properties, AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
+    public Engine(FullyQualifiedClassName configurationClass, SourceConfiguration sourceConfiguration, Properties properties, AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
         setName("engine");
         this.configurationClass = configurationClass;
+        this.sourceConfiguration = sourceConfiguration;
         this.properties = properties;
         this.factory = annotationConfigApplicationContextFactory;
     }
@@ -38,6 +40,7 @@ public class Engine extends Thread {
             context = factory.create();
             context.register(configurationClass.loadClass());
             context.getBeanFactory().registerSingleton("properties", properties);
+            context.getBeanFactory().registerSingleton("configuration", sourceConfiguration);
             context.refresh();
 
             log.info("Starting engine...");

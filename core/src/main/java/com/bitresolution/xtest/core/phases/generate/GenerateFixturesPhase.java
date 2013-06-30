@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.core.events.StartEvent.start;
+
 @Component
 public class GenerateFixturesPhase implements Phase<TestGraph, Fixtures> {
 
@@ -34,8 +37,10 @@ public class GenerateFixturesPhase implements Phase<TestGraph, Fixtures> {
 
     @Override
     public Fixtures execute(TestGraph input) throws LifecycleExecutorException {
-        log.debug("Executing phase: {}", getName());
-        return new Fixtures();
+        publisher.publish(start(this));
+        Fixtures fixtures = new Fixtures();
+        publisher.publish(complete(this));
+        return fixtures;
     }
 
     @Override

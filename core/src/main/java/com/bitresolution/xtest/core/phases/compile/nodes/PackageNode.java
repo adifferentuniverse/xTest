@@ -1,10 +1,10 @@
 package com.bitresolution.xtest.core.phases.compile.nodes;
 
-import com.bitresolution.succor.reflection.Package;
+import com.bitresolution.succor.reflection.PackageName;
 
-public class PackageNode extends BaseNode<Package> implements XNode<Package> {
+public class PackageNode extends BaseNode<PackageName> implements XNode<PackageName> {
 
-    public PackageNode(Package packageName) {
+    public PackageNode(PackageName packageName) {
         super(packageName);
     }
 }

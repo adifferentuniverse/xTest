@@ -1,6 +1,6 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.CoreConfiguration;
+import com.bitresolution.xtest.core.CoreContext;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase;
@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({CoreConfiguration.class})
-public class DefaultXTestConfiguration {
+@Import({CoreContext.class})
+public class XTestDefaultContext {
 
     @Autowired
     private GenerateSourcesPhase generateSourcesPhase;
