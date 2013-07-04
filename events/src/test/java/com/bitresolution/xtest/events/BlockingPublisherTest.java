@@ -1,7 +1,6 @@
 package com.bitresolution.xtest.events;
 
 import com.bitresolution.succor.collections.Factory;
-import com.bitresolution.succor.collections.ListBuilder;
 import com.bitresolution.succor.junit.category.Integration;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -39,12 +38,12 @@ public class BlockingPublisherTest {
     public void setup() {
         publisher = new BlockingPublisher();
 
-        subscribers = ListBuilder.using(new ArrayList<Subscriber>()).insert(SUBSCRIBER_COUNT, new Factory<Subscriber>() {
+        subscribers = buildUsingFactory(SUBSCRIBER_COUNT, new Factory<Subscriber>() {
             @Override
             public Subscriber create() {
                 return new MockSubscriber();
             }
-        }).build();
+        });
         log.info("Built {} subscribers", subscribers.size());
 
         subscriptionTasks = Lists.transform(subscribers, new Function<Subscriber, SubscribeTask>() {
@@ -56,12 +55,12 @@ public class BlockingPublisherTest {
         log.info("Built {} subscription tasks", subscriptionTasks.size());
 
 
-        publishTasks = ListBuilder.using(new ArrayList<PublishEventTask>(EVENT_COUNT)).insert(EVENT_COUNT, new Factory<PublishEventTask>() {
+        publishTasks = buildUsingFactory(EVENT_COUNT, new Factory<PublishEventTask>() {
             @Override
             public PublishEventTask create() {
                 return new PublishEventTask(publisher);
             }
-        }).build();
+        });
         log.info("Built {} publish tasks", publishTasks.size());
     }
 
@@ -88,6 +87,14 @@ public class BlockingPublisherTest {
         for(Future<Boolean> f : publishingFutures) {
             assertThat(f.get(), is(true));
         }
+    }
+
+    public static <T> List<T> buildUsingFactory(int count, Factory<T> factory) {
+        ArrayList<T> out = new ArrayList<T>();
+        for(int i = 0; i < count; i++) {
+            out.add(factory.create());
+        }
+        return out;
     }
 
     private static class MockSubscriber implements Subscriber {
