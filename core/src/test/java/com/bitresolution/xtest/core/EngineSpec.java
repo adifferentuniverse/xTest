@@ -57,6 +57,7 @@ public class EngineSpec {
         verify(context).register(configClass.loadClass());
         verify(context).getBeanFactory();
         verify(beanFactory).registerSingleton("properties", properties);
+        verify(beanFactory).registerSingleton("configuration", sourceConfiguration);
         verify(context).refresh();
         verify(context).getBean(LifecycleExecutor.class);
         verify(lifecycleExecutor).execute();
@@ -82,6 +83,7 @@ public class EngineSpec {
         verify(context).register(configClass.loadClass());
         verify(context).getBeanFactory();
         verify(beanFactory).registerSingleton("properties", properties);
+        verify(beanFactory).registerSingleton("configuration", sourceConfiguration);
         verify(context).refresh();
         verify(context).getBean(LifecycleExecutor.class);
         verify(context).close();
@@ -107,6 +109,7 @@ public class EngineSpec {
         verify(context).register(configClass.loadClass());
         verify(context).getBeanFactory();
         verify(beanFactory).registerSingleton("properties", properties);
+        verify(beanFactory).registerSingleton("configuration", sourceConfiguration);
         verify(context).refresh();
         verify(context).getBean(LifecycleExecutor.class);
         verify(lifecycleExecutor).execute();
@@ -133,6 +136,7 @@ public class EngineSpec {
         verify(context).register(configClass.loadClass());
         verify(context).getBeanFactory();
         verify(beanFactory).registerSingleton("properties", properties);
+        verify(beanFactory).registerSingleton("configuration", sourceConfiguration);
         verify(context).refresh();
         verify(context).getBean(LifecycleExecutor.class);
         verify(lifecycleExecutor).execute();

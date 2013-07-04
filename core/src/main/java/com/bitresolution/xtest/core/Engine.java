@@ -6,6 +6,7 @@ import com.bitresolution.xtest.core.spring.context.AnnotationConfigApplicationCo
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Properties;
@@ -39,8 +40,9 @@ public class Engine extends Thread {
         try {
             context = factory.create();
             context.register(configurationClass.loadClass());
-            context.getBeanFactory().registerSingleton("properties", properties);
-            context.getBeanFactory().registerSingleton("configuration", sourceConfiguration);
+            ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
+            beanFactory.registerSingleton("properties", properties);
+            beanFactory.registerSingleton("configuration", sourceConfiguration);
             context.refresh();
 
             log.info("Starting engine...");
