@@ -17,7 +17,7 @@ public class Bootstrap {
         this.configuration = configuration;
     }
 
-    public void execute(XTestConfiguration configuration) {
+    public void execute() {
         DefaultAnnotationConfigApplicationContextFactory contextFactory = new DefaultAnnotationConfigApplicationContextFactory();
 
         Engine engine = new Engine(configuration, contextFactory);
