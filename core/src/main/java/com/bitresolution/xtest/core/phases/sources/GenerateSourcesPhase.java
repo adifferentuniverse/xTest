@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.phases.sources;
 
-import com.bitresolution.xtest.core.SourceConfiguration;
+import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;
 import com.bitresolution.xtest.events.Publisher;
@@ -22,10 +22,10 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
     private final SourceConfiguration configuration;
 
     @Autowired
-    public GenerateSourcesPhase(Publisher publisher, SourceBuilderFactory factory, SourceConfiguration configuration) {
+    public GenerateSourcesPhase(Publisher publisher, SourceBuilderFactory factory, XTestConfiguration configuration) {
         this.publisher = publisher;
         this.factory = factory;
-        this.configuration = configuration;
+        this.configuration = configuration.getSourceConfiguration();
     }
 
     @Override
@@ -44,9 +44,9 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
         publisher.publish(start(this));
         Sources sources = factory.create()
                 .includeClassSources(configuration.getIncludedClasses())
-                .includePackageSources(configuration.getIncludedPackages())
+//                .includePackageSources(configuration.getIncludedPackages())
                 .excludeClassSources(configuration.getExcludedClasses())
-                .excludePackageSources(configuration.getExcludedPackages())
+//                .excludePackageSources(configuration.getExcludedPackages())
                 .build();
         publisher.publish(complete(this));
         return sources;

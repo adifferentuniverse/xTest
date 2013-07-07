@@ -1,6 +1,5 @@
 package com.bitresolution.xtest.core;
 
-import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
 import com.bitresolution.xtest.core.spring.context.AnnotationConfigApplicationContextFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -9,22 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.Properties;
-
 public class Engine extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(Engine.class);
 
-    private final FullyQualifiedClassName configurationClass;
-    private final Properties properties;
     private final AnnotationConfigApplicationContextFactory factory;
-    private final SourceConfiguration sourceConfiguration;
+    private final XTestConfiguration configuration;
 
-    public Engine(FullyQualifiedClassName configurationClass, SourceConfiguration sourceConfiguration, Properties properties, AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
+    public Engine(XTestConfiguration configuration, AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
         setName("engine");
-        this.configurationClass = configurationClass;
-        this.sourceConfiguration = sourceConfiguration;
-        this.properties = properties;
+        this.configuration = configuration;
         this.factory = annotationConfigApplicationContextFactory;
     }
 
@@ -39,10 +32,9 @@ public class Engine extends Thread {
         AnnotationConfigApplicationContext context = null;
         try {
             context = factory.create();
-            context.register(configurationClass.loadClass());
+            context.register(configuration.getConfigurationClass().loadClass());
             ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
-            beanFactory.registerSingleton("properties", properties);
-            beanFactory.registerSingleton("configuration", sourceConfiguration);
+            beanFactory.registerSingleton("configuration", configuration);
             context.refresh();
 
             log.info("Starting engine...");

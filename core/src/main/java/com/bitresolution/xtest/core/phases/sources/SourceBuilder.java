@@ -11,54 +11,33 @@ public class SourceBuilder {
     private Set<Source> includedSources;
     private Set<Source> excludedSources;
 
-    public SourceBuilder includeClassSource(String className) {
-        ClassSource source = new ClassSource(new FullyQualifiedClassName(className));
-        includedSources.add(source);
-        return this;
-    }
-
-    public SourceBuilder includeClassSources(List<String> classNames) {
-        for(String className : classNames) {
-            includeClassSource(className);
+    public SourceBuilder includeClassSources(List<FullyQualifiedClassName> classNames) {
+        for(FullyQualifiedClassName className : classNames) {
+            includedSources.add(new ClassSource(className));
         }
-        return this;
-    }
-
-    public SourceBuilder includePackageSource(String packageName) {
-        PackageSource source = new PackageSource(new PackageName(packageName));
-        includedSources.add(source);
         return this;
     }
 
     public SourceBuilder includePackageSources(List<String> packageNames) {
         for(String packageName : packageNames) {
-            includePackageSource(packageName);
+            PackageSource source = new PackageSource(new PackageName(packageName));
+            includedSources.add(source);
         }
         return this;
     }
 
-    public SourceBuilder excludeClassSource(String className) {
-        ClassSource source = new ClassSource(new FullyQualifiedClassName(className));
-        excludedSources.add(source);
-        return this;
-    }
-
-    public SourceBuilder excludeClassSources(List<String> classNames) {
-        for(String className : classNames) {
-            excludeClassSource(className);
+    public SourceBuilder excludeClassSources(List<FullyQualifiedClassName> classNames) {
+        for(FullyQualifiedClassName className : classNames) {
+            ClassSource source = new ClassSource(className);
+            excludedSources.add(source);
         }
-        return this;
-    }
-
-    public SourceBuilder excludePackageSource(String packageName) {
-        PackageSource source = new PackageSource(new PackageName(packageName));
-        excludedSources.add(source);
         return this;
     }
 
     public SourceBuilder excludePackageSources(List<String> packageNames) {
         for(String packageName : packageNames) {
-            excludePackageSource(packageName);
+            PackageSource source = new PackageSource(new PackageName(packageName));
+            excludedSources.add(source);
         }
         return this;
     }

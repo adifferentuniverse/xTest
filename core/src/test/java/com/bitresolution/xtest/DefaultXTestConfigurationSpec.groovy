@@ -1,6 +1,6 @@
 package com.bitresolution.xtest
 
-import com.bitresolution.xtest.core.SourceConfiguration
+import com.bitresolution.xtest.core.XTestConfiguration
 import com.bitresolution.xtest.core.lifecycle.Phase
 import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase
 import com.bitresolution.xtest.core.phases.execute.ExecuteFixturesPhase
@@ -17,7 +17,7 @@ class DefaultXTestConfigurationSpec extends Specification {
         given:
         Publisher publisher = Mock(Publisher)
         XTestDefaultContext configuration = new XTestDefaultContext()
-        configuration.generateSourcesPhase = new GenerateSourcesPhase(publisher, Mock(SourceBuilderFactory), Mock(SourceConfiguration))
+        configuration.generateSourcesPhase = new GenerateSourcesPhase(publisher, Mock(SourceBuilderFactory), Mock(XTestConfiguration))
         configuration.compileGraphPhase = new CompileGraphPhase(publisher)
         configuration.generateFixturesPhase = new GenerateFixturesPhase(publisher)
         configuration.executeFixturesPhase = new ExecuteFixturesPhase(publisher)

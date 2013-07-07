@@ -1,25 +1,26 @@
-package com.bitresolution.xtest;
+package com.bitresolution.xtest.cli;
 
-import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.beust.jcommander.JCommander;
 import com.bitresolution.xtest.core.Engine;
-import com.bitresolution.xtest.core.SourceConfiguration;
+import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.spring.context.DefaultAnnotationConfigApplicationContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Properties;
 
 public class Bootstrap {
 
     private static final Logger log = LoggerFactory.getLogger(Bootstrap.class);
 
-    public static void main(String[] args) {
-        FullyQualifiedClassName configurationClass = new FullyQualifiedClassName(XTestDefaultContext.class);
-        Properties properties = new Properties();
-        SourceConfiguration sourceConfiguration = new SourceConfiguration();
+    private final XTestConfiguration configuration;
+
+    public Bootstrap(XTestConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public void execute(XTestConfiguration configuration) {
         DefaultAnnotationConfigApplicationContextFactory contextFactory = new DefaultAnnotationConfigApplicationContextFactory();
 
-        Engine engine = new Engine(configurationClass, sourceConfiguration, properties, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory);
         engine.start();
         try {
             engine.join();
@@ -27,5 +28,12 @@ public class Bootstrap {
         catch (InterruptedException e) {
             log.error("Error waiting for engine to complete", e);
         }
+    }
+
+    public static void main(String[] args) {
+        XTestConfiguration configuration = new XTestConfiguration();
+        new JCommander(configuration, args);
+
+        new Bootstrap(configuration).execute();
     }
 }

@@ -12,4 +12,13 @@
     <packaging>jar</packaging>
 
     <name>xTest :: Events</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jayway.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>1.3.5</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

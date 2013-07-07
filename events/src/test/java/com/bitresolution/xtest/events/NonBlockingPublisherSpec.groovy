@@ -27,7 +27,7 @@ class NonBlockingPublisherSpec extends PublisherSpec {
         when:
         publisher.publish(event)
         executor.shutdown()
-        executor.awaitTermination(5, TimeUnit.SECONDS)
+        executor.awaitTermination(6, TimeUnit.SECONDS)
         then:
         1 * a.process(event)
         1 * b.process(event)

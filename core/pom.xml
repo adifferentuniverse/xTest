@@ -53,6 +53,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.30</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.bitresolution.xtest</groupId>
             <artifactId>annotations</artifactId>
             <version>${project.version}</version>
