@@ -18,13 +18,13 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
     private static final Logger log = LoggerFactory.getLogger(GenerateSourcesPhase.class);
 
     private final Publisher publisher;
-    private final SourceBuilderFactory factory;
+    private final SourceBuilder builder;
     private final SourceConfiguration configuration;
 
     @Autowired
-    public GenerateSourcesPhase(Publisher publisher, SourceBuilderFactory factory, XTestConfiguration configuration) {
+    public GenerateSourcesPhase(Publisher publisher, SourceBuilder builder, XTestConfiguration configuration) {
         this.publisher = publisher;
-        this.factory = factory;
+        this.builder = builder;
         this.configuration = configuration.getSourceConfiguration();
     }
 
@@ -42,11 +42,8 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
     public Sources execute(Void input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
         publisher.publish(start(this));
-        Sources sources = factory.create()
-                .includeClassSources(configuration.getIncludedClasses())
-//                .includePackageSources(configuration.getIncludedPackages())
+        Sources sources = builder.includeClassSources(configuration.getIncludedClasses())
                 .excludeClassSources(configuration.getExcludedClasses())
-//                .excludePackageSources(configuration.getExcludedPackages())
                 .build();
         publisher.publish(complete(this));
         return sources;
