@@ -36,6 +36,8 @@ public class DefaultSourceBuilder implements SourceBuilder {
 
     @Override
     public Sources build() {
-        return new Sources();
+        HashSet<FullyQualifiedClassName> classes = new HashSet<FullyQualifiedClassName>();
+        classes.addAll(includedSources);
+        return new Sources(classes);
     }
 }

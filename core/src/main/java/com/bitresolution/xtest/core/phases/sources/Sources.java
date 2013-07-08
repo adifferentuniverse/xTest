@@ -10,12 +10,8 @@ public class Sources implements Source {
 
     private final Set<FullyQualifiedClassName> testClasses;
 
-    public Sources() {
-        testClasses = new TreeSet<FullyQualifiedClassName>();
-    }
-
-    public boolean add(Source source) {
-        return testClasses.addAll(source.getClasses());
+    public Sources(Set<FullyQualifiedClassName> sources) {
+        testClasses = new TreeSet<FullyQualifiedClassName>(sources);
     }
 
     public int size() {
