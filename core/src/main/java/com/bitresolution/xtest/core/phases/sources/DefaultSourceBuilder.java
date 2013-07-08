@@ -10,27 +10,26 @@ import java.util.Set;
 @Component
 public class DefaultSourceBuilder implements SourceBuilder {
 
-    private final Set<Source> includedSources;
-    private final Set<Source> excludedSources;
+    private final Set<FullyQualifiedClassName> includedSources;
+    private final Set<FullyQualifiedClassName> excludedSources;
 
     public DefaultSourceBuilder() {
-        includedSources = new HashSet<Source>();
-        excludedSources = new HashSet<Source>();
+        includedSources = new HashSet<FullyQualifiedClassName>();
+        excludedSources = new HashSet<FullyQualifiedClassName>();
     }
 
     @Override
-    public DefaultSourceBuilder includeClassSources(List<FullyQualifiedClassName> classNames) {
-        for(FullyQualifiedClassName className : classNames) {
-            includedSources.add(new ClassSource(className));
+    public DefaultSourceBuilder includeClassSources(List<ClassSource> sources) {
+        for(ClassSource className : sources) {
+            includedSources.addAll(className.getClasses());
         }
         return this;
     }
 
     @Override
-    public DefaultSourceBuilder excludeClassSources(List<FullyQualifiedClassName> classNames) {
-        for(FullyQualifiedClassName className : classNames) {
-            ClassSource source = new ClassSource(className);
-            excludedSources.add(source);
+    public DefaultSourceBuilder excludeClassSources(List<ClassSource> sources) {
+        for(ClassSource source : sources) {
+            excludedSources.addAll(source.getClasses());
         }
         return this;
     }

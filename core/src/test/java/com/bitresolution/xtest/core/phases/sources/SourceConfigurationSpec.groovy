@@ -1,7 +1,6 @@
 package com.bitresolution.xtest.core.phases.sources
 
 import com.beust.jcommander.JCommander
-import com.bitresolution.succor.reflection.FullyQualifiedClassName
 import spock.lang.Specification
 
 
@@ -16,7 +15,7 @@ class SourceConfigurationSpec extends Specification {
         new JCommander(configuration, args)
 
         then:
-        assert configuration.includedClasses == [new FullyQualifiedClassName(SourceConfiguration)]
+        assert configuration.includedClasses == [new ClassSource(SourceConfiguration)]
         assert configuration.excludedClasses == []
     }
 
@@ -30,8 +29,8 @@ class SourceConfigurationSpec extends Specification {
 
         then:
         assert configuration.includedClasses == [
-                new FullyQualifiedClassName(SourceConfiguration),
-                new FullyQualifiedClassName(SourceConfigurationSpec)
+                new ClassSource(SourceConfiguration),
+                new ClassSource(SourceConfigurationSpec)
         ]
         assert configuration.excludedClasses == []
     }
@@ -47,7 +46,7 @@ class SourceConfigurationSpec extends Specification {
 
         then:
         assert configuration.includedClasses == []
-        assert configuration.excludedClasses == [new FullyQualifiedClassName(SourceConfiguration)]
+        assert configuration.excludedClasses == [new ClassSource(SourceConfiguration)]
     }
 
     def "should configure excluded classes from command line args"() {
@@ -61,8 +60,8 @@ class SourceConfigurationSpec extends Specification {
         then:
         assert configuration.includedClasses == []
         assert configuration.excludedClasses == [
-                new FullyQualifiedClassName(SourceConfiguration),
-                new FullyQualifiedClassName(SourceConfigurationSpec)
+                new ClassSource(SourceConfiguration),
+                new ClassSource(SourceConfigurationSpec)
         ]
     }
 }

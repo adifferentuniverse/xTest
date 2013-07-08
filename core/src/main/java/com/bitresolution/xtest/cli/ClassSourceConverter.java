@@ -2,14 +2,14 @@ package com.bitresolution.xtest.cli;
 
 import com.beust.jcommander.IStringConverter;
 import com.beust.jcommander.ParameterException;
-import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.bitresolution.xtest.core.phases.sources.ClassSource;
 
-public class FullyQualifiedClassNameConverter implements IStringConverter<FullyQualifiedClassName> {
+public class ClassSourceConverter implements IStringConverter<ClassSource> {
 
     @Override
-    public FullyQualifiedClassName convert(String s) {
+    public ClassSource convert(String s) {
         try {
-            return new FullyQualifiedClassName(s);
+            return new ClassSource(s);
         }
         catch (Exception e) {
             throw new ParameterException("Error parsing FullyQualifiedClassName '" + s + "', cause was: " +e);

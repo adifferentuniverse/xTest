@@ -1,8 +1,7 @@
 package com.bitresolution.xtest.core.phases.sources;
 
 import com.beust.jcommander.Parameter;
-import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.cli.FullyQualifiedClassNameConverter;
+import com.bitresolution.xtest.cli.ClassSourceConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,35 +11,35 @@ public class SourceConfiguration {
     @Parameter(
             names = {"-class","-classes"},
             variableArity = true,
-            converter = FullyQualifiedClassNameConverter.class,
+            converter = ClassSourceConverter.class,
             description = "class names to be executed")
-    private List<FullyQualifiedClassName> includedClasses;
+    private List<ClassSource> includedClasses;
 
     @Parameter(
             names = "-excludeclasses",
             variableArity = true,
-            converter = FullyQualifiedClassNameConverter.class,
+            converter = ClassSourceConverter.class,
             description ="class names to exclude")
-    private List<FullyQualifiedClassName> excludedClasses;
+    private List<ClassSource> excludedClasses;
 
     public SourceConfiguration() {
-        this.includedClasses = new ArrayList<FullyQualifiedClassName>();
-        this.excludedClasses = new ArrayList<FullyQualifiedClassName>();
+        this.includedClasses = new ArrayList<ClassSource>();
+        this.excludedClasses = new ArrayList<ClassSource>();
     }
 
-    public List<FullyQualifiedClassName> getIncludedClasses() {
+    public List<ClassSource> getIncludedClasses() {
         return includedClasses;
     }
 
-    public void setIncludedClasses(List<FullyQualifiedClassName> includedClasses) {
+    public void setIncludedClasses(List<ClassSource> includedClasses) {
         this.includedClasses = includedClasses;
     }
 
-    public List<FullyQualifiedClassName> getExcludedClasses() {
+    public List<ClassSource> getExcludedClasses() {
         return excludedClasses;
     }
 
-    public void setExcludedClasses(List<FullyQualifiedClassName> excludedClasses) {
+    public void setExcludedClasses(List<ClassSource> excludedClasses) {
         this.excludedClasses = excludedClasses;
     }
 }
