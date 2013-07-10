@@ -52,8 +52,8 @@ public class GenerateSourcesPhaseSpec {
     public void shouldBuildSources() throws Exception {
         //given
         Sources sources = mock(Sources.class);
-        given(builder.includeClassSources(anyList())).willReturn(builder);
-        given(builder.excludeClassSources(anyList())).willReturn(builder);
+        given(builder.include(anyList())).willReturn(builder);
+        given(builder.exclude(anyList())).willReturn(builder);
         given(builder.build()).willReturn(sources);
 
         GenerateSourcesPhase phase = new GenerateSourcesPhase(publisher, builder, configuration);
@@ -62,8 +62,8 @@ public class GenerateSourcesPhaseSpec {
         Sources output = phase.execute(null);
 
         //then
-        verify(builder).includeClassSources(anyList());
-        verify(builder).excludeClassSources(anyList());
+        verify(builder).include(anyList());
+        verify(builder).exclude(anyList());
         assert output.equals(sources);
     }
 }

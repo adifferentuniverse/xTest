@@ -42,8 +42,8 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
     public Sources execute(Void input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
         publisher.publish(start(this));
-        Sources sources = builder.includeClassSources(configuration.getIncludedClasses())
-                .excludeClassSources(configuration.getExcludedClasses())
+        Sources sources = builder.include(configuration.getIncludedClasses())
+                .exclude(configuration.getExcludedClasses())
                 .build();
         publisher.publish(complete(this));
         return sources;
@@ -52,10 +52,5 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
     @Override
     public String getName() {
         return "generate-sources";
-    }
-
-    @Override
-    public String toString() {
-        return getName();
     }
 }

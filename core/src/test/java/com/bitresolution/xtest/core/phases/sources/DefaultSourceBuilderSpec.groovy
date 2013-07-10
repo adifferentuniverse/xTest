@@ -22,7 +22,7 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should include class source if no excluded classes"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.includeClassSources([new ClassSource(SourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder)])
 
         when:
         Sources sources = builder.build()
@@ -36,7 +36,7 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should include class sources if no excluded classes"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.includeClassSources([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
 
         when:
         Sources sources = builder.build()
@@ -53,8 +53,8 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should not include class in sources if it is an excluded class"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.includeClassSources([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
-        builder.excludeClassSources([new ClassSource(SourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
+        builder.exclude([new ClassSource(SourceBuilder)])
 
         when:
         Sources sources = builder.build()
@@ -70,8 +70,8 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should not include classes in sources if they are excluded classes"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.includeClassSources([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
-        builder.excludeClassSources([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
+        builder.exclude([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
 
         when:
         Sources sources = builder.build()

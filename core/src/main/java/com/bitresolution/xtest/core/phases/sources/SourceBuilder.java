@@ -3,9 +3,8 @@ package com.bitresolution.xtest.core.phases.sources;
 import java.util.List;
 
 public interface SourceBuilder {
-    SourceBuilder includeClassSources(List<ClassSource> sources);
-
-    SourceBuilder excludeClassSources(List<ClassSource> sources);
+    SourceBuilder include(List<? extends Source> sources);
+    SourceBuilder exclude(List<? extends Source> sources);
 
     Sources build();
 }

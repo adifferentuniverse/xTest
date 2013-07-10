@@ -19,16 +19,16 @@ public class DefaultSourceBuilder implements SourceBuilder {
     }
 
     @Override
-    public DefaultSourceBuilder includeClassSources(List<ClassSource> sources) {
-        for(ClassSource className : sources) {
+    public DefaultSourceBuilder include(List<? extends Source> sources) {
+        for(Source className : sources) {
             includedSources.addAll(className.getClasses());
         }
         return this;
     }
 
     @Override
-    public DefaultSourceBuilder excludeClassSources(List<ClassSource> sources) {
-        for(ClassSource source : sources) {
+    public DefaultSourceBuilder exclude(List<? extends Source> sources) {
+        for(Source source : sources) {
             excludedSources.addAll(source.getClasses());
         }
         return this;
