@@ -38,6 +38,7 @@ public class DefaultSourceBuilder implements SourceBuilder {
     public Sources build() {
         HashSet<FullyQualifiedClassName> classes = new HashSet<FullyQualifiedClassName>();
         classes.addAll(includedSources);
+        classes.removeAll(excludedSources);
         return new Sources(classes);
     }
 }
