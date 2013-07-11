@@ -15,7 +15,7 @@ class SourceConfigurationSpec extends Specification {
         new JCommander(configuration, args)
 
         then:
-        assert configuration.includedClasses == [new ClassSource(SourceConfiguration)]
+        assert configuration.includedClasses == [new ClassSource(SourceConfiguration.canonicalName)]
         assert configuration.excludedClasses == []
     }
 
@@ -29,8 +29,8 @@ class SourceConfigurationSpec extends Specification {
 
         then:
         assert configuration.includedClasses == [
-                new ClassSource(SourceConfiguration),
-                new ClassSource(SourceConfigurationSpec)
+                new ClassSource(SourceConfiguration.canonicalName),
+                new ClassSource(SourceConfigurationSpec.canonicalName)
         ]
         assert configuration.excludedClasses == []
     }
@@ -46,7 +46,7 @@ class SourceConfigurationSpec extends Specification {
 
         then:
         assert configuration.includedClasses == []
-        assert configuration.excludedClasses == [new ClassSource(SourceConfiguration)]
+        assert configuration.excludedClasses == [new ClassSource(SourceConfiguration.canonicalName)]
     }
 
     def "should configure excluded classes from command line args"() {
@@ -60,8 +60,8 @@ class SourceConfigurationSpec extends Specification {
         then:
         assert configuration.includedClasses == []
         assert configuration.excludedClasses == [
-                new ClassSource(SourceConfiguration),
-                new ClassSource(SourceConfigurationSpec)
+                new ClassSource(SourceConfiguration.canonicalName),
+                new ClassSource(SourceConfigurationSpec.canonicalName)
         ]
     }
 }

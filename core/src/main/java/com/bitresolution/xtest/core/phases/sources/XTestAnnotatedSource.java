@@ -4,10 +4,12 @@ import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.succor.reflection.PackageName;
 import com.bitresolution.xtest.Node;
 import com.google.common.base.Objects;
+import org.apache.commons.lang3.Validate;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +19,8 @@ public class XTestAnnotatedSource implements Source {
 
     private final PackageName packageName;
 
-    public XTestAnnotatedSource(PackageName packageName) {
+    public XTestAnnotatedSource(@NotNull PackageName packageName) {
+        Validate.notNull(packageName, "package name can not be null");
         this.packageName = packageName;
     }
 

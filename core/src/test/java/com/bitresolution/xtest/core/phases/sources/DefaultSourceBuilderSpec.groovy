@@ -22,7 +22,7 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should include class source if no excluded classes"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.include([new ClassSource(SourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder.canonicalName)])
 
         when:
         Sources sources = builder.build()
@@ -30,13 +30,13 @@ class DefaultSourceBuilderSpec extends Specification {
         then:
         assert !sources.empty
         assert sources.size() == 1
-        assert sources.classes == [new FullyQualifiedClassName(SourceBuilder)] as Set
+        assert sources.classes == [new FullyQualifiedClassName(SourceBuilder.canonicalName)] as Set
     }
 
     def "should include class sources if no excluded classes"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.include([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder.canonicalName), new ClassSource(DefaultSourceBuilder.canonicalName)])
 
         when:
         Sources sources = builder.build()
@@ -45,7 +45,7 @@ class DefaultSourceBuilderSpec extends Specification {
         assert !sources.empty
         assert sources.size() == 2
         assert sources.classes == [
-                new FullyQualifiedClassName(SourceBuilder),
+                new FullyQualifiedClassName(SourceBuilder.canonicalName),
                 new FullyQualifiedClassName(DefaultSourceBuilder)
         ] as Set
     }
@@ -53,8 +53,8 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should not include class in sources if it is an excluded class"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.include([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
-        builder.exclude([new ClassSource(SourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder.canonicalName), new ClassSource(DefaultSourceBuilder.canonicalName)])
+        builder.exclude([new ClassSource(SourceBuilder.canonicalName)])
 
         when:
         Sources sources = builder.build()
@@ -70,8 +70,8 @@ class DefaultSourceBuilderSpec extends Specification {
     def "should not include classes in sources if they are excluded classes"() {
         given:
         SourceBuilder builder = new DefaultSourceBuilder()
-        builder.include([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
-        builder.exclude([new ClassSource(SourceBuilder), new ClassSource(DefaultSourceBuilder)])
+        builder.include([new ClassSource(SourceBuilder.canonicalName), new ClassSource(DefaultSourceBuilder.canonicalName)])
+        builder.exclude([new ClassSource(SourceBuilder.canonicalName), new ClassSource(DefaultSourceBuilder.canonicalName)])
 
         when:
         Sources sources = builder.build()

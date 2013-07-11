@@ -65,5 +65,19 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>1.0.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>equalsverifier-repository</id>
+            <url>http://equalsverifier.googlecode.com/svn/maven/</url>
+        </repository>
+    </repositories>
 </project>

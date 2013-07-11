@@ -14,10 +14,6 @@ public class ClassSource implements Source {
 
     private final FullyQualifiedClassName className;
 
-    public ClassSource(Class<?> className) {
-        this.className = new FullyQualifiedClassName(className);
-    }
-
     public ClassSource(String className) {
         this.className = new FullyQualifiedClassName(className);
     }
