@@ -147,4 +147,29 @@ public class EngineSpec {
         verifyNoMoreInteractions(lifecycleExecutor, context, beanFactory, contextFactory);
         assertThat(status, is(Engine.ExitStatus.SUCCESS));
     }
+
+    @Test
+    public void shouldExecuteWhenInvokedAsThread() throws Exception {
+        //given:
+        given(contextFactory.create()).willReturn(context);
+        given(context.getBeanFactory()).willReturn(beanFactory);
+        given(context.getBean(Matchers.eq(LifecycleExecutor.class))).willReturn(lifecycleExecutor);
+
+        Engine engine = new Engine(configuration, contextFactory);
+
+        //when:
+        engine.start();
+        engine.join();
+
+        //then:
+        verify(contextFactory).create();
+        verify(context).register(configuration.getConfigurationClass().loadClass());
+        verify(context).getBeanFactory();
+        verify(beanFactory).registerSingleton("configuration", configuration);
+        verify(context).refresh();
+        verify(context).getBean(LifecycleExecutor.class);
+        verify(lifecycleExecutor).execute();
+        verify(context).close();
+        verifyNoMoreInteractions(lifecycleExecutor, context, beanFactory, contextFactory);
+    }
 }
