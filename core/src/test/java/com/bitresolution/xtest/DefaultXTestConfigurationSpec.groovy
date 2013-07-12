@@ -16,15 +16,17 @@ class DefaultXTestConfigurationSpec extends Specification {
     def "shouldCreateDefaultLifecycle"() {
         given:
         Publisher publisher = Mock(Publisher)
-        XTestDefaultContext configuration = new XTestDefaultContext()
-        configuration.generateSourcesPhase = new GenerateSourcesPhase(publisher, Mock(SourceBuilder), Mock(XTestConfiguration))
-        configuration.compileGraphPhase = new CompileGraphPhase(publisher)
-        configuration.generateFixturesPhase = new GenerateFixturesPhase(publisher)
-        configuration.executeFixturesPhase = new ExecuteFixturesPhase(publisher)
-        configuration.processReportPhase = new ProcessReportPhase(publisher)
+        XTestConfiguration configuration = Mock(XTestConfiguration)
+
+        XTestDefaultContext context = new XTestDefaultContext()
+        context.generateSourcesPhase = new GenerateSourcesPhase(publisher, Mock(SourceBuilder), configuration)
+        context.compileGraphPhase = new CompileGraphPhase(publisher)
+        context.generateFixturesPhase = new GenerateFixturesPhase(publisher)
+        context.executeFixturesPhase = new ExecuteFixturesPhase(publisher)
+        context.processReportPhase = new ProcessReportPhase(publisher)
 
         when:
-        List<Phase<?, ?>> phases = configuration.lifecycle().toList()
+        List<Phase<?, ?>> phases = context.lifecycle().toList()
 
         then:
         assert phases*.class == [
