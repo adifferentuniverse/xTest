@@ -36,8 +36,9 @@ abstract class BaseRelationship<S,D> implements Relationship<S, D> {
             return false;
         }
         final BaseRelationship other = (BaseRelationship) obj;
-        return Objects.equal(this.source, other.source)
+        boolean b = Objects.equal(this.source, other.source)
                 && Objects.equal(this.destination, other.destination);
+        return b;
     }
 
     @Override

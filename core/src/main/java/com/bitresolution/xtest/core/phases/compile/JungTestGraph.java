@@ -4,6 +4,7 @@ import com.bitresolution.xtest.core.phases.compile.nodes.BaseNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.Root;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
 import com.bitresolution.xtest.core.phases.compile.relationships.Relationship;
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;
@@ -95,5 +96,35 @@ public class JungTestGraph implements TestGraph {
     @Override
     public void removeRelationship(Relationship relationship) {
         graph.removeEdge(relationship);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(graph, root);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+        if(obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final JungTestGraph that = (JungTestGraph) obj;
+        //the following is horrid but working around the fact that Jung graphs don't implement equals
+        //and returns Collections.unmodifiableCollection so can even compare those directly
+        boolean verticesEqual = Objects.equal(new HashSet<XNode>(this.graph.getVertices()), new HashSet<XNode>(that.graph.getVertices()));
+        boolean edgesEqual = Objects.equal(new HashSet<Relationship>(this.graph.getEdges()), new HashSet<Relationship>(that.graph.getEdges()));
+        boolean rootEqual = Objects.equal(this.root, that.root);
+        return verticesEqual && edgesEqual && rootEqual;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("graph", graph)
+                .add("root", root)
+                .toString();
     }
 }

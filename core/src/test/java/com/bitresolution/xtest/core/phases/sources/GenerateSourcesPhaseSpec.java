@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.VerboseMockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyList;
@@ -63,6 +64,6 @@ public class GenerateSourcesPhaseSpec {
         //then
         verify(builder, times(2)).include(anyList());
         verify(builder, times(2)).exclude(anyList());
-        assert output.equals(sources);
+        assertThat(output, is(sources));
     }
 }

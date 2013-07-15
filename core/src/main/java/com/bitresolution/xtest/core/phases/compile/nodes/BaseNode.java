@@ -1,7 +1,6 @@
 package com.bitresolution.xtest.core.phases.compile.nodes;
 
 import com.google.common.base.Objects;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class BaseNode<T> implements XNode<T> {
 
@@ -22,21 +21,21 @@ public class BaseNode<T> implements XNode<T> {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("value", value)
-                .toString();
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if(this == obj) {
             return true;
         }
-        if(obj == null || getClass() != obj.getClass()) {
-            return false;
+        if(obj instanceof BaseNode) {
+            final BaseNode other = (BaseNode) obj;
+            return Objects.equal(this.value, other.value);
         }
-        final BaseNode other = (BaseNode) obj;
-        return Objects.equal(this.value, other.value);
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("value", value)
+                .toString();
     }
 }
