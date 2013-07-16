@@ -2,9 +2,9 @@ package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.xtest.core.XTestConfiguration;
-import com.bitresolution.xtest.core.phases.sources.SourceBuilder;
 import com.bitresolution.xtest.core.phases.sources.Sources;
 import com.bitresolution.xtest.events.Publisher;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,38 +13,38 @@ import org.mockito.runners.VerboseMockitoJUnitRunner;
 
 import java.util.Collections;
 
+import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.core.events.StartEvent.start;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(VerboseMockitoJUnitRunner.class)
 public class CompileGraphPhaseSpec {
 
     @Mock
-    private SourceBuilder builder;
+    private GraphBuilder builder;
     @Mock
     private Publisher publisher;
 
     private XTestConfiguration configuration;
+    private CompileGraphPhase phase;
 
     @Before
     public void setUp() throws Exception {
         configuration = new XTestConfiguration();
+        phase = new CompileGraphPhase(publisher, builder);
     }
 
     @Test
     public void shouldHaveInputTypeOfVoid() {
-        //when
-        CompileGraphPhase phase = new CompileGraphPhase(publisher);
-
-        //then
         assertThat(phase.getInputType(), equalTo(Sources.class));
     }
 
     @Test
     public void shouldHaveOutputTypeOfSources() {
-        //when
-        CompileGraphPhase phase = new CompileGraphPhase(publisher);
-
         //then
         assertThat(phase.getOutputType(), equalTo(TestGraph.class));
     }
@@ -52,14 +52,26 @@ public class CompileGraphPhaseSpec {
     @Test
     public void shouldBuildGraph() throws Exception {
         //given
-        CompileGraphPhase phase = new CompileGraphPhase(publisher);
         Sources input = new Sources(Collections.<FullyQualifiedClassName>emptySet());
+        given(builder.add(input)).willReturn(builder);
+        given(builder.build()).willReturn(new JungTestGraph());
 
         //when
         TestGraph output = phase.execute(input);
 
         //then
-        TestGraph expectedGraph = new JungTestGraph();
-        assertThat(output, equalTo(expectedGraph));
+        assertThat(output, is((TestGraph) new JungTestGraph()));
+        verify(publisher).publish(start(phase));
+        verify(builder).add(input);
+        verify(builder).build();
+        verify(publisher).publish(complete(phase));
+    }
+
+    @Test
+    public void shouldHonorEqualsContract() {
+        EqualsVerifier.forClass(CompileGraphPhase.class)
+                .usingGetClass()
+                .verify();
+
     }
 }

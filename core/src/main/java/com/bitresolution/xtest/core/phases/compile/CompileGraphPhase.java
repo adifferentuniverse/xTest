@@ -18,10 +18,12 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
     private static final Logger log = LoggerFactory.getLogger(CompileGraphPhase.class);
 
     private final Publisher publisher;
+    private final GraphBuilder builder;
 
     @Autowired
-    public CompileGraphPhase(Publisher publisher) {
+    public CompileGraphPhase(Publisher publisher, GraphBuilder builder) {
         this.publisher = publisher;
+        this.builder = builder;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
     public TestGraph execute(Sources input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
         publisher.publish(start(this));
-        JungTestGraph graph = new JungTestGraph();
+        TestGraph graph = builder.add(input).build();
         publisher.publish(complete(this));
         return graph;
     }

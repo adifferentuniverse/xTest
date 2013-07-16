@@ -6,16 +6,18 @@ import com.bitresolution.xtest.Node;
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
+import com.bitresolution.xtest.core.phases.sources.Sources;
 import org.reflections.Reflections;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Set;
 
 import static com.bitresolution.xtest.core.phases.compile.relationships.RelationshipBuilder.where;
 
-public class XTestAnnotationBasedGraphFactory implements GraphFactory {
+@Component
+public class DefaultGraphBuilder implements GraphBuilder {
 
-    @Override
     public TestGraph from(FullyQualifiedClassName name) throws TestGraphException {
         try {
             return from(name.loadClass());
@@ -25,7 +27,6 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
         }
     }
 
-    @Override
     public TestGraph from(Class<?> klass) throws TestGraphException {
         if(klass.isAnnotationPresent(Node.class)){
             JungTestGraph graph = new JungTestGraph();
@@ -35,13 +36,6 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
         throw new TestGraphException("Class " + klass.getName() + " is not an xTest node");
     }
 
-    private void processClass(Class<?> klass, JungTestGraph graph) throws TestGraphException {
-        XNode node = buildClassNode(klass, graph);
-        XNode rootNode = graph.getRootNode();
-        graph.addRelationship(rootNode, node, where(rootNode).contains(node));
-    }
-
-    @Override
     public TestGraph from(PackageName p) throws TestGraphException {
         Reflections reflections = new Reflections(p.getName());
         Set<Class<?>> klasses = reflections.getTypesAnnotatedWith(Node.class);
@@ -50,6 +44,17 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
             processClass(klass, graph);
         }
         return graph;
+    }
+
+    @Override
+    public GraphBuilder add(Sources input) {
+        return this;
+    }
+
+    private void processClass(Class<?> klass, JungTestGraph graph) throws TestGraphException {
+        XNode node = buildClassNode(klass, graph);
+        XNode rootNode = graph.getRootNode();
+        graph.addRelationship(rootNode, node, where(rootNode).contains(node));
     }
 
     private ClassNode buildClassNode(Class<?> klass, JungTestGraph graph) throws TestGraphException {
@@ -68,5 +73,10 @@ public class XTestAnnotationBasedGraphFactory implements GraphFactory {
         MethodNode methodNode = new MethodNode(method);
         graph.addNode(methodNode);
         return methodNode;
+    }
+
+    @Override
+    public TestGraph build() {
+        return new JungTestGraph();
     }
 }

@@ -15,7 +15,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create empty test graph from non-annotated class"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
         def klass = String.class
 
         when:
@@ -27,7 +27,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create test graph from class with TestNode annotation but no methods"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
         def klass = TestNodeEmptyClassExample.class
 
         when:
@@ -42,7 +42,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should ignore non-annotated methods when creating test graph from class with TestNode annotation"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
         def klass = TestNodeClassWithNoTestNodeMethodsExample.class
 
         when:
@@ -57,7 +57,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create test graph from class with TestNode annotation and a TestNode annotated method"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
         def klass = TestNodeSingleMethodExample.class
 
         when:
@@ -75,7 +75,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create test graph from class with TestNode annotation and annotated methods"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
         def klass = TestNodeMultipleMethodExample.class
 
         when:
@@ -97,7 +97,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create test graph from fully qualified class name"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
         def klass = new FullyQualifiedClassName("com.bitresolution.xtest.examples.TestNodeSingleMethodExample")
 
         when:
@@ -115,7 +115,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create empty test graph from package with no annotated members"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
 
         when:
         def graph = factory.from(new PackageName("com.bitresolution.xtest.core"))
@@ -127,7 +127,7 @@ class XTestAnnotationBasedGraphFactorySpec extends Specification {
 
     def "should create test graph from package with annotated members"() {
         given:
-        def factory = new XTestAnnotationBasedGraphFactory()
+        def factory = new DefaultGraphBuilder()
 
         when:
         def graph = factory.from(new PackageName("com.bitresolution.xtest.examples"))
