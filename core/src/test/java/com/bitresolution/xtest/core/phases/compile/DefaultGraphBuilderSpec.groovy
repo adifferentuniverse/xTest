@@ -11,7 +11,7 @@ import com.bitresolution.xtest.examples.TestNodeMultipleMethodExample
 import com.bitresolution.xtest.examples.TestNodeSingleMethodExample
 import spock.lang.Specification
 
-class XTestAnnotationBasedGraphFactorySpec extends Specification {
+class DefaultGraphBuilderSpec extends Specification {
 
     def "should create empty test graph from non-annotated class"() {
         given:
