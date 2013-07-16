@@ -30,10 +30,10 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public void addNode(XNode source) throws TestGraphException {
+    public void addNode(XNode source) throws CompileGraphException {
         boolean nodeAdded = graph.addVertex(source);
         if(!nodeAdded) {
-            throw new TestGraphException("Error adding node:" + source);
+            throw new CompileGraphException("Error adding node:" + source);
         }
     }
 
@@ -70,16 +70,16 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws TestGraphException {
+    public void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws CompileGraphException {
         if(!contains(source)) {
-            throw new TestGraphException("Source node '{}' not in graph", source);
+            throw new CompileGraphException("Source node '{}' not in graph", source);
         }
         else if(!contains(destination)) {
-            throw new TestGraphException("Source or destination not in graph");
+            throw new CompileGraphException("Source or destination not in graph");
         }
         boolean edgeAdded = graph.addEdge(relationship, source, destination);
         if(!edgeAdded) {
-            throw new TestGraphException("Error relationship " + relationship + " between source:" + source + " and destination:" + destination);
+            throw new CompileGraphException("Error relationship " + relationship + " between source:" + source + " and destination:" + destination);
         }
     }
 

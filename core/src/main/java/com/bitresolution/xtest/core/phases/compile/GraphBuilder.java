@@ -4,7 +4,7 @@ import com.bitresolution.xtest.core.phases.sources.Sources;
 
 public interface GraphBuilder {
 
-    GraphBuilder add(Sources input);
+    GraphBuilder add(Sources input) throws CompileGraphException;
 
     TestGraph build();
 }

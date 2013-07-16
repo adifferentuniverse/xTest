@@ -40,7 +40,13 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
     public TestGraph execute(Sources input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
         publisher.publish(start(this));
-        TestGraph graph = builder.add(input).build();
+        TestGraph graph = null;
+        try {
+            graph = builder.add(input).build();
+        }
+        catch (CompileGraphException e) {
+            throw new LifecycleExecutorException("Error executing phase: {}", e);
+        }
         publisher.publish(complete(this));
         return graph;
     }

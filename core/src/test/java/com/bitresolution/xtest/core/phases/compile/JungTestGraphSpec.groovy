@@ -65,7 +65,7 @@ class JungTestGraphSpec extends Specification {
         graph.addRelationship(nodeA, nodeB, relationship)
 
         then:
-        thrown TestGraphException
+        thrown CompileGraphException
     }
 
     def "should not be able to add a duplicate relationship between nodes"() {
@@ -84,7 +84,7 @@ class JungTestGraphSpec extends Specification {
         graph.addRelationship(nodeA, nodeB, relationshipCopy)
 
         then:
-        thrown TestGraphException
+        thrown CompileGraphException
     }
 
     def "should not be able to add a relationship between when detination node does not exist in the graph"() {
@@ -100,7 +100,7 @@ class JungTestGraphSpec extends Specification {
         graph.addRelationship(nodeA, nodeB, relationship)
 
         then:
-        thrown TestGraphException
+        thrown CompileGraphException
     }
 
     def "should be able to remove a relationship between two nodes"() {
