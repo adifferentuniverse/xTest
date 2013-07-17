@@ -24,7 +24,6 @@ class DefaultGraphBuilderSpec extends Specification {
 
         then:
         graph == new JungTestGraph()
-        graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList().empty
     }
 
     def "should create test graph from class with TestNode annotation but no methods"() {

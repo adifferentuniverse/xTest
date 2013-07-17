@@ -212,4 +212,20 @@ class JungTestGraphSpec extends Specification {
         assert graph.getAdjacentNodesByRelationship(nodeC, ContainsRelationship) == [] as Set
         assert graph.getAdjacentNodesByRelationship(nodeD, ContainsRelationship) == [] as Set
     }
+
+
+    def "should honor equals contract"() {
+        expect:
+        left.equals(right) == equal
+        left.equals(right) == right.equals(left)
+        left.equals(left) == right.equals(right)
+
+        where:
+        left                | right               | equal
+        new JungTestGraph() | null                | false
+        new JungTestGraph() | ""                  | false
+        new JungTestGraph() | new JungTestGraph() | true
+
+    }
+
 }

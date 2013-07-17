@@ -8,9 +8,9 @@ import java.util.Set;
 public interface TestGraph {
     XNode getRootNode();
 
-    Set<XNode<?>> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship);
+    Set<XNode> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship);
 
-    Set<XNode<?>> getAdjacentNodes(XNode<?> tBaseNode);
+    Set<XNode> getAdjacentNodes(XNode<?> tBaseNode);
 
     boolean contains(XNode<?> node);
 
@@ -25,4 +25,8 @@ public interface TestGraph {
     Set<Relationship> getOutboundRelationships(XNode<?> node);
 
     void removeRelationship(Relationship p);
+
+    Set<XNode> getNodes();
+
+    Set<Relationship> getRelationships();
 }

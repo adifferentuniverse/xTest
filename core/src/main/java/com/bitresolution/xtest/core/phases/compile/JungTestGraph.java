@@ -38,9 +38,9 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<XNode<?>> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship) {
+    public Set<XNode> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship) {
         Collection<Relationship> edges = graph.getOutEdges(node);
-        Set<XNode<?>> nodes = new HashSet<XNode<?>>();
+        Set<XNode> nodes = new HashSet<XNode>();
         for(Relationship edge : edges) {
             if(edge.getClass().isAssignableFrom(relationship)) {
                 nodes.add(graph.getDest(edge));
@@ -50,9 +50,9 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
-    public Set<XNode<?>> getAdjacentNodes(XNode<?> node) {
+    public Set<XNode> getAdjacentNodes(XNode<?> node) {
         Collection<Relationship> edges = graph.getOutEdges(node);
-        Set<XNode<?>> nodes = new HashSet<XNode<?>>();
+        Set<XNode> nodes = new HashSet<XNode>();
         for(Relationship edge : edges) {
             nodes.add(graph.getDest(edge));
         }
@@ -99,6 +99,16 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
+    public Set<XNode> getNodes() {
+        return ImmutableSet.<XNode>copyOf(this.graph.getVertices());
+    }
+
+    @Override
+    public Set<Relationship> getRelationships() {
+        return ImmutableSet.<Relationship>copyOf(this.graph.getEdges());
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hashCode(graph, root);
     }
@@ -113,11 +123,9 @@ public class JungTestGraph implements TestGraph {
         }
         final JungTestGraph that = (JungTestGraph) obj;
         //the following is horrid but working around the fact that Jung graphs don't implement equals
-        //and returns Collections.unmodifiableCollection so can even compare those directly
-        boolean verticesEqual = Objects.equal(new HashSet<XNode>(this.graph.getVertices()), new HashSet<XNode>(that.graph.getVertices()));
-        boolean edgesEqual = Objects.equal(new HashSet<Relationship>(this.graph.getEdges()), new HashSet<Relationship>(that.graph.getEdges()));
-        boolean rootEqual = Objects.equal(this.root, that.root);
-        return verticesEqual && edgesEqual && rootEqual;
+        boolean verticesEqual = Objects.equal(this.getNodes(), that.getNodes());
+        boolean edgesEqual = Objects.equal(this.getRelationships(), that.getRelationships());
+        return verticesEqual && edgesEqual;
     }
 
     @Override

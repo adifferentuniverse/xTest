@@ -44,7 +44,7 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
         try {
             graph = builder.add(input).build();
         }
-        catch (CompileGraphException e) {
+        catch (Exception e) {
             throw new LifecycleExecutorException("Error executing phase: {}", e);
         }
         publisher.publish(complete(this));
