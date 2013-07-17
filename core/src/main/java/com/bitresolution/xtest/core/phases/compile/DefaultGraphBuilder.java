@@ -1,72 +1,67 @@
 package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.bitresolution.succor.reflection.FullyQualifiedMethodName;
 import com.bitresolution.xtest.Node;
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
 import com.bitresolution.xtest.core.phases.sources.Sources;
+import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Set;
 
 import static com.bitresolution.xtest.core.phases.compile.relationships.RelationshipBuilder.where;
+import static org.reflections.ReflectionUtils.withAnnotation;
 
 @Component
 public class DefaultGraphBuilder implements GraphBuilder {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultGraphBuilder.class);
 
-    private JungTestGraph graph = new JungTestGraph();
-
-    public void from(FullyQualifiedClassName name) throws CompileGraphException {
-        try {
-            from(name.loadClass());
-        }
-        catch (ClassNotFoundException e) {
-            throw new CompileGraphException("Error loading class: " + name, e);
-        }
-    }
-
-    public void from(Class<?> klass) throws CompileGraphException {
-        if(klass.isAnnotationPresent(Node.class)){
-            processClass(klass, graph);
-        }
-        log.error("Class " + klass.getName() + " is not an xTest node");
-    }
+    private final JungTestGraph graph = new JungTestGraph();
+    private final XNode rootNode = graph.getRootNode();
 
     @Override
     public GraphBuilder add(Sources input) throws CompileGraphException {
-        for(FullyQualifiedClassName name : input.getClasses()) {
-            from(name);
+        for(FullyQualifiedClassName fqcn : input.getClasses()) {
+            try {
+                Class<?> klass = fqcn.loadClass();
+
+                @SuppressWarnings("unchecked")
+                Set<Method> collectedMethods = ReflectionUtils.getAllMethods(klass, withAnnotation(Node.class));
+
+                if(klass.isAnnotationPresent(Node.class) || !collectedMethods.isEmpty()) {
+                    buildClassNode(fqcn, collectedMethods);
+                }
+                else {
+                    log.error("Class {} is not an xTest node", fqcn.getFullyQualifiedName());
+                }
+            }
+            catch (ClassNotFoundException e) {
+                throw new CompileGraphException("Error loading class: " + fqcn, e);
+            }
         }
         return this;
     }
 
-    private void processClass(Class<?> klass, JungTestGraph graph) throws CompileGraphException {
-        XNode node = buildClassNode(klass, graph);
-        XNode rootNode = graph.getRootNode();
-        graph.addRelationship(rootNode, node, where(rootNode).contains(node));
-    }
-
-    private ClassNode buildClassNode(Class<?> klass, JungTestGraph graph) throws CompileGraphException {
-        ClassNode classNode = new ClassNode(new FullyQualifiedClassName(klass));
+    private void buildClassNode(FullyQualifiedClassName fqcn, Set<Method> annotatedMethods) throws CompileGraphException {
+        ClassNode classNode = new ClassNode(fqcn);
         graph.addNode(classNode);
-        for(Method method : klass.getMethods()) {
-            if(method.isAnnotationPresent(Node.class)) {
-                XNode methodNode = buildMethodNode(method, graph);
-                graph.addRelationship(classNode, methodNode, where(classNode).contains(methodNode));
-            }
-        }
-        return classNode;
-    }
+        graph.addRelationship(rootNode, classNode, where(rootNode).contains(classNode));
+        log.debug("Adding class node for '{}' to graph", fqcn.getFullyQualifiedName());
 
-    private MethodNode buildMethodNode(Method method, JungTestGraph graph) throws CompileGraphException {
-        MethodNode methodNode = new MethodNode(method);
-        graph.addNode(methodNode);
-        return methodNode;
+        for(Method m : annotatedMethods) {
+            FullyQualifiedMethodName method = new FullyQualifiedMethodName(m);
+            MethodNode methodNode = new MethodNode(method);
+            graph.addNode(methodNode);
+            graph.addRelationship(classNode, methodNode, where(classNode).contains(methodNode));
+            log.debug("Adding method node for '{}' to graph", method.getFullyQualifiedName());
+        }
     }
 
     @Override

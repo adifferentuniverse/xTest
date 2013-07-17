@@ -160,7 +160,7 @@
         <dependency>
             <groupId>com.bitresolution</groupId>
             <artifactId>succor</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0.1</version>
         </dependency>
 
         <dependency>

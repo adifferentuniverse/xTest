@@ -1,10 +1,10 @@
 package com.bitresolution.xtest.core.phases.compile.nodes;
 
-import java.lang.reflect.Method;
+import com.bitresolution.succor.reflection.FullyQualifiedMethodName;
 
-public class MethodNode extends BaseNode<Method> implements XNode<Method> {
+public class MethodNode extends BaseNode<FullyQualifiedMethodName> implements XNode<FullyQualifiedMethodName> {
 
-    public MethodNode(Method value) {
+    public MethodNode(FullyQualifiedMethodName value) {
         super(value);
     }
 }

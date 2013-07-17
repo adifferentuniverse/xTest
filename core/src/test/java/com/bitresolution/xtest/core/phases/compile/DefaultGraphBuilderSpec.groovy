@@ -1,6 +1,7 @@
 package com.bitresolution.xtest.core.phases.compile
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName
+import com.bitresolution.succor.reflection.FullyQualifiedMethodName
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode
 import com.bitresolution.xtest.core.phases.compile.relationships.ContainsRelationship
@@ -68,7 +69,7 @@ class DefaultGraphBuilderSpec extends Specification {
 
         def methodNodes = graph.getAdjacentNodes(nodes[0]).toList()
         methodNodes.size() == 1
-        methodNodes[0] == new MethodNode(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething"))
+        methodNodes[0] == new MethodNode(new FullyQualifiedMethodName(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething")))
     }
 
     def "should create test graph from class with TestNode annotation and annotated methods"() {
@@ -86,9 +87,9 @@ class DefaultGraphBuilderSpec extends Specification {
         def methodNodes = graph.getAdjacentNodes(nodes[0]).toList()
         methodNodes.size() == 3
         methodNodes.containsAll([
-                new MethodNode(TestNodeMultipleMethodExample.class.getMethod("shouldTestA")),
-                new MethodNode(TestNodeMultipleMethodExample.class.getMethod("shouldTestB")),
-                new MethodNode(TestNodeMultipleMethodExample.class.getMethod("shouldTestC")),
+                new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestA"))),
+                new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestB"))),
+                new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestC"))),
         ])
     }
 
@@ -106,6 +107,6 @@ class DefaultGraphBuilderSpec extends Specification {
 
         def methodNodes = graph.getAdjacentNodes(nodes[0]).toList()
         methodNodes.size() == 1
-        methodNodes[0] == new MethodNode(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething"))
+        methodNodes[0] == new MethodNode(new FullyQualifiedMethodName(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething")))
     }
 }

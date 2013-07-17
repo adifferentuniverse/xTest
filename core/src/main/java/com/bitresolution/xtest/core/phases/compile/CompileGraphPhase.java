@@ -45,7 +45,7 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
             graph = builder.add(input).build();
         }
         catch (Exception e) {
-            throw new LifecycleExecutorException("Error executing phase: {}", e);
+            throw new LifecycleExecutorException("Error executing phase: {}", getName(), e);
         }
         publisher.publish(complete(this));
         return graph;
@@ -54,10 +54,5 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
     @Override
     public String getName() {
         return "compile-graph";
-    }
-
-    @Override
-    public String toString() {
-        return getName();
     }
 }
