@@ -44,7 +44,7 @@ class JungTestGraphSpec extends Specification {
         graph.addNode(nodeB)
 
         when:
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         then:
         assert graph.contains(nodeA)
@@ -62,7 +62,7 @@ class JungTestGraphSpec extends Specification {
         graph.addNode(nodeB)
 
         when:
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         then:
         thrown CompileGraphException
@@ -78,10 +78,10 @@ class JungTestGraphSpec extends Specification {
 
         graph.addNode(nodeA)
         graph.addNode(nodeB)
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         when:
-        graph.addRelationship(nodeA, nodeB, relationshipCopy)
+        graph.addRelationship(relationshipCopy)
 
         then:
         thrown CompileGraphException
@@ -97,7 +97,7 @@ class JungTestGraphSpec extends Specification {
         graph.addNode(nodeA)
 
         when:
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         then:
         thrown CompileGraphException
@@ -112,7 +112,7 @@ class JungTestGraphSpec extends Specification {
 
         graph.addNode(nodeA)
         graph.addNode(nodeB)
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         when:
         graph.removeRelationship(relationship)
@@ -133,7 +133,7 @@ class JungTestGraphSpec extends Specification {
         when:
         graph.addNode(nodeA)
         graph.addNode(nodeB)
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         then:
         assert graph.getInboundRelationships(nodeA) == [] as Set
@@ -150,7 +150,7 @@ class JungTestGraphSpec extends Specification {
         when:
         graph.addNode(nodeA)
         graph.addNode(nodeB)
-        graph.addRelationship(nodeA, nodeB, relationship)
+        graph.addRelationship(relationship)
 
         then:
         assert graph.getOutboundRelationships(nodeA) == [new DependsOnRelationship(nodeA, nodeB)] as Set
@@ -173,9 +173,9 @@ class JungTestGraphSpec extends Specification {
         graph.addNode(nodeB)
         graph.addNode(nodeC)
         graph.addNode(nodeD)
-        graph.addRelationship(nodeA, nodeB, relationshipAB)
-        graph.addRelationship(nodeB, nodeC, relationshipBC)
-        graph.addRelationship(nodeB, nodeD, relationshipBD)
+        graph.addRelationship(relationshipAB)
+        graph.addRelationship(relationshipBC)
+        graph.addRelationship(relationshipBD)
 
         then:
         assert graph.getAdjacentNodes(nodeA) == [nodeB] as Set
@@ -201,10 +201,10 @@ class JungTestGraphSpec extends Specification {
         graph.addNode(nodeB)
         graph.addNode(nodeC)
         graph.addNode(nodeD)
-        graph.addRelationship(nodeA, nodeB, relationshipAB)
-        graph.addRelationship(nodeB, nodeC, relationshipBC)
-        graph.addRelationship(nodeB, nodeD, relationshipBD)
-        graph.addRelationship(nodeD, nodeC, relationshipDC)
+        graph.addRelationship(relationshipAB)
+        graph.addRelationship(relationshipBC)
+        graph.addRelationship(relationshipBD)
+        graph.addRelationship(relationshipDC)
 
         then:
         assert graph.getAdjacentNodesByRelationship(nodeA, ContainsRelationship) == [nodeB] as Set

@@ -64,7 +64,7 @@ public class DefaultGraphBuilder implements GraphBuilder {
         XNode source = rootNode;
         for(PackageNode dest : packages) {
             graph.addNode(dest);
-            graph.addRelationship(source, dest, where(source).contains(dest));
+            graph.addRelationship(where(source).contains(dest));
             source = dest;
         }
         return source;
@@ -73,7 +73,7 @@ public class DefaultGraphBuilder implements GraphBuilder {
     private void buildClassNode(FullyQualifiedClassName fqcn, Set<Method> annotatedMethods, XNode<?> rootNode) throws CompileGraphException {
         ClassNode classNode = new ClassNode(fqcn);
         graph.addNode(classNode);
-        graph.addRelationship(rootNode, classNode, where(rootNode).contains(classNode));
+        graph.addRelationship(where(rootNode).contains(classNode));
         log.debug("Adding class node for '{}' to graph", fqcn.getFullyQualifiedName());
 
         for(Method m : annotatedMethods) {
@@ -85,7 +85,7 @@ public class DefaultGraphBuilder implements GraphBuilder {
         FullyQualifiedMethodName method = new FullyQualifiedMethodName(m);
         MethodNode methodNode = new MethodNode(method);
         graph.addNode(methodNode);
-        graph.addRelationship(classNode, methodNode, where(classNode).contains(methodNode));
+        graph.addRelationship(where(classNode).contains(methodNode));
         log.debug("Adding method node for '{}' to graph", method.getFullyQualifiedName());
     }
 

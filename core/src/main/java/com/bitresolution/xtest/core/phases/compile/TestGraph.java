@@ -14,8 +14,6 @@ public interface TestGraph {
 
     boolean contains(XNode<?> node);
 
-    void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws CompileGraphException;
-
     void addNode(XNode source) throws CompileGraphException;
 
     boolean contains(Relationship relationship);

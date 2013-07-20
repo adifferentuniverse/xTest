@@ -71,11 +71,8 @@ public class JungTestGraph implements TestGraph {
 
     @Override
     public void addRelationship(Relationship<?, ?> relationship) throws CompileGraphException {
-        addRelationship(relationship.getSource(), relationship.getDestination(), relationship);
-    }
-
-    @Override
-    public void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws CompileGraphException {
+        XNode<?> source = relationship.getSource();
+        XNode<?> destination = relationship.getDestination();
         if(!contains(source)) {
             throw new CompileGraphException("Source node '{}' not in graph", source);
         }
