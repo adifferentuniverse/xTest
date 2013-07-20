@@ -70,6 +70,11 @@ public class JungTestGraph implements TestGraph {
     }
 
     @Override
+    public void addRelationship(Relationship<?, ?> relationship) throws CompileGraphException {
+        addRelationship(relationship.getSource(), relationship.getDestination(), relationship);
+    }
+
+    @Override
     public void addRelationship(XNode<?> source, XNode<?> destination, Relationship relationship) throws CompileGraphException {
         if(!contains(source)) {
             throw new CompileGraphException("Source node '{}' not in graph", source);
@@ -106,6 +111,17 @@ public class JungTestGraph implements TestGraph {
     @Override
     public Set<Relationship> getRelationships() {
         return ImmutableSet.<Relationship>copyOf(this.graph.getEdges());
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> XNode<T> findNodeByValue(T value) {
+        for(XNode node : getNodes()) {
+            if(node.getValue().equals(value) && node.getValue().getClass().equals(value.getClass())) {
+                return node;
+            }
+        }
+        return null;
     }
 
     @Override

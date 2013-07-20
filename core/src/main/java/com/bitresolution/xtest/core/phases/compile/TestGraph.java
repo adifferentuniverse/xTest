@@ -29,4 +29,8 @@ public interface TestGraph {
     Set<XNode> getNodes();
 
     Set<Relationship> getRelationships();
+
+    <T> XNode<T> findNodeByValue(T packageName);
+
+    void addRelationship(Relationship<?, ?> relationship) throws CompileGraphException;
 }

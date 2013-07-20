@@ -2,15 +2,18 @@ package com.bitresolution.xtest.core.phases.compile
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName
 import com.bitresolution.succor.reflection.FullyQualifiedMethodName
+import com.bitresolution.succor.reflection.PackageName
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode
-import com.bitresolution.xtest.core.phases.compile.relationships.ContainsRelationship
+import com.bitresolution.xtest.core.phases.compile.nodes.PackageNode
 import com.bitresolution.xtest.core.phases.sources.Sources
 import com.bitresolution.xtest.examples.TestNodeClassWithNoTestNodeMethodsExample
 import com.bitresolution.xtest.examples.TestNodeEmptyClassExample
 import com.bitresolution.xtest.examples.TestNodeMultipleMethodExample
 import com.bitresolution.xtest.examples.TestNodeSingleMethodExample
 import spock.lang.Specification
+
+import static com.bitresolution.xtest.core.phases.compile.relationships.RelationshipBuilder.where
 
 class DefaultGraphBuilderSpec extends Specification {
 
@@ -29,16 +32,33 @@ class DefaultGraphBuilderSpec extends Specification {
 
     def "should create test graph from class with TestNode annotation but no methods"() {
         given:
-        builder.add(new Sources([new FullyQualifiedClassName(TestNodeEmptyClassExample)] as Set))
+        FullyQualifiedClassName className = new FullyQualifiedClassName(TestNodeEmptyClassExample)
+        builder.add(new Sources([className] as Set))
 
         when:
         TestGraph graph = builder.build()
 
         then:
-        def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()
-        nodes.size() == 1
-        nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeEmptyClassExample))
-        graph.getAdjacentNodes(nodes[0]).size() == 0
+        PackageNode com = new PackageNode(new PackageName("com"))
+        PackageNode comBitresolution = new PackageNode(new PackageName("com.bitresolution"))
+        PackageNode comBitresolutionXtest = new PackageNode(new PackageName("com.bitresolution.xtest"))
+        PackageNode comBitresolutionXtestExamples = new PackageNode(new PackageName("com.bitresolution.xtest.examples"))
+        ClassNode testClass = new ClassNode(className)
+
+        def expected = new JungTestGraph()
+        expected.addNode(com)
+        expected.addNode(comBitresolution)
+        expected.addNode(comBitresolutionXtest)
+        expected.addNode(comBitresolutionXtestExamples)
+        expected.addRelationship(where(expected.rootNode).contains(com))
+        expected.addRelationship(where(com).contains(comBitresolution))
+        expected.addRelationship(where(comBitresolution).contains(comBitresolutionXtest))
+        expected.addRelationship(where(comBitresolutionXtest).contains(comBitresolutionXtestExamples))
+
+        expected.addNode(testClass)
+        expected.addRelationship(where(comBitresolutionXtestExamples).contains(testClass))
+
+        assert expected.equals(graph)
     }
 
     def "should ignore non-annotated methods when creating test graph from class with TestNode annotation"() {
@@ -49,10 +69,26 @@ class DefaultGraphBuilderSpec extends Specification {
         TestGraph graph = builder.build()
 
         then:
-        def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()
-        nodes.size() == 1
-        nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeClassWithNoTestNodeMethodsExample))
-        graph.getAdjacentNodes(nodes[0]).size() == 0
+        PackageNode com = new PackageNode(new PackageName("com"))
+        PackageNode comBitresolution = new PackageNode(new PackageName("com.bitresolution"))
+        PackageNode comBitresolutionXtest = new PackageNode(new PackageName("com.bitresolution.xtest"))
+        PackageNode comBitresolutionXtestExamples = new PackageNode(new PackageName("com.bitresolution.xtest.examples"))
+        ClassNode testClass = new ClassNode(new FullyQualifiedClassName(TestNodeClassWithNoTestNodeMethodsExample))
+
+        def expected = new JungTestGraph()
+        expected.addNode(com)
+        expected.addNode(comBitresolution)
+        expected.addNode(comBitresolutionXtest)
+        expected.addNode(comBitresolutionXtestExamples)
+        expected.addRelationship(where(expected.rootNode).contains(com))
+        expected.addRelationship(where(com).contains(comBitresolution))
+        expected.addRelationship(where(comBitresolution).contains(comBitresolutionXtest))
+        expected.addRelationship(where(comBitresolutionXtest).contains(comBitresolutionXtestExamples))
+
+        expected.addNode(testClass)
+        expected.addRelationship(where(comBitresolutionXtestExamples).contains(testClass))
+
+        assert expected.equals(graph)
     }
 
     def "should create test graph from class with TestNode annotation and a TestNode annotated method"() {
@@ -63,13 +99,30 @@ class DefaultGraphBuilderSpec extends Specification {
         TestGraph graph = builder.build()
 
         then:
-        def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()
-        nodes.size() == 1
-        nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample))
+        PackageNode com = new PackageNode(new PackageName("com"))
+        PackageNode comBitresolution = new PackageNode(new PackageName("com.bitresolution"))
+        PackageNode comBitresolutionXtest = new PackageNode(new PackageName("com.bitresolution.xtest"))
+        PackageNode comBitresolutionXtestExamples = new PackageNode(new PackageName("com.bitresolution.xtest.examples"))
+        ClassNode testClass = new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample))
+        MethodNode method = new MethodNode(new FullyQualifiedMethodName(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething")))
 
-        def methodNodes = graph.getAdjacentNodes(nodes[0]).toList()
-        methodNodes.size() == 1
-        methodNodes[0] == new MethodNode(new FullyQualifiedMethodName(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething")))
+        def expected = new JungTestGraph()
+        expected.addNode(com)
+        expected.addNode(comBitresolution)
+        expected.addNode(comBitresolutionXtest)
+        expected.addNode(comBitresolutionXtestExamples)
+        expected.addRelationship(where(expected.rootNode).contains(com))
+        expected.addRelationship(where(com).contains(comBitresolution))
+        expected.addRelationship(where(comBitresolution).contains(comBitresolutionXtest))
+        expected.addRelationship(where(comBitresolutionXtest).contains(comBitresolutionXtestExamples))
+
+        expected.addNode(testClass)
+        expected.addRelationship(where(comBitresolutionXtestExamples).contains(testClass))
+
+        expected.addNode(method)
+        expected.addRelationship(where(testClass).contains(method))
+
+        assert expected.equals(graph)
     }
 
     def "should create test graph from class with TestNode annotation and annotated methods"() {
@@ -80,33 +133,35 @@ class DefaultGraphBuilderSpec extends Specification {
         TestGraph graph = builder.build()
 
         then:
-        def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()
-        nodes.size() == 1
-        nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeMultipleMethodExample))
+        PackageNode com = new PackageNode(new PackageName("com"))
+        PackageNode comBitresolution = new PackageNode(new PackageName("com.bitresolution"))
+        PackageNode comBitresolutionXtest = new PackageNode(new PackageName("com.bitresolution.xtest"))
+        PackageNode comBitresolutionXtestExamples = new PackageNode(new PackageName("com.bitresolution.xtest.examples"))
+        ClassNode testClass = new ClassNode(new FullyQualifiedClassName(TestNodeMultipleMethodExample))
+        MethodNode methodA = new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestA")))
+        MethodNode methodB = new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestB")))
+        MethodNode methodC = new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestC")))
 
-        def methodNodes = graph.getAdjacentNodes(nodes[0]).toList()
-        methodNodes.size() == 3
-        methodNodes.containsAll([
-                new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestA"))),
-                new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestB"))),
-                new MethodNode(new FullyQualifiedMethodName(TestNodeMultipleMethodExample.class.getMethod("shouldTestC"))),
-        ])
-    }
+        def expected = new JungTestGraph()
+        expected.addNode(com)
+        expected.addNode(comBitresolution)
+        expected.addNode(comBitresolutionXtest)
+        expected.addNode(comBitresolutionXtestExamples)
+        expected.addRelationship(where(expected.rootNode).contains(com))
+        expected.addRelationship(where(com).contains(comBitresolution))
+        expected.addRelationship(where(comBitresolution).contains(comBitresolutionXtest))
+        expected.addRelationship(where(comBitresolutionXtest).contains(comBitresolutionXtestExamples))
 
-    def "should create test graph from fully qualified class name"() {
-        given:
-        builder.add(new Sources([new FullyQualifiedClassName("com.bitresolution.xtest.examples.TestNodeSingleMethodExample")] as Set))
+        expected.addNode(testClass)
+        expected.addRelationship(where(comBitresolutionXtestExamples).contains(testClass))
 
-        when:
-        TestGraph graph = builder.build()
+        expected.addNode(methodA)
+        expected.addRelationship(where(testClass).contains(methodA))
+        expected.addNode(methodB)
+        expected.addRelationship(where(testClass).contains(methodB))
+        expected.addNode(methodC)
+        expected.addRelationship(where(testClass).contains(methodC))
 
-        then:
-        def nodes = graph.getAdjacentNodesByRelationship(graph.rootNode, ContainsRelationship.class).toList()
-        nodes.size() == 1
-        nodes[0] == new ClassNode(new FullyQualifiedClassName(TestNodeSingleMethodExample))
-
-        def methodNodes = graph.getAdjacentNodes(nodes[0]).toList()
-        methodNodes.size() == 1
-        methodNodes[0] == new MethodNode(new FullyQualifiedMethodName(TestNodeSingleMethodExample.class.getMethod("shouldTestSomething")))
+        assert expected.equals(graph)
     }
 }
