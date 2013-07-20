@@ -1,7 +1,6 @@
 package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.phases.sources.Sources;
 import com.bitresolution.xtest.events.Publisher;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -29,12 +28,10 @@ public class CompileGraphPhaseSpec {
     @Mock
     private Publisher publisher;
 
-    private XTestConfiguration configuration;
     private CompileGraphPhase phase;
 
     @Before
     public void setUp() throws Exception {
-        configuration = new XTestConfiguration();
         phase = new CompileGraphPhase(publisher, builder);
     }
 

@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
@@ -28,18 +30,21 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
         this.configuration = configuration.getSourceConfiguration();
     }
 
+    @NotNull
     @Override
     public Class<Void> getInputType() {
         return Void.class;
     }
 
+    @NotNull
     @Override
     public Class<Sources> getOutputType() {
         return Sources.class;
     }
 
+    @NotNull
     @Override
-    public Sources execute(Void input) throws LifecycleExecutorException {
+    public Sources execute(@NotNull Void input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
         publisher.publish(start(this));
         Sources sources = builder
@@ -52,6 +57,7 @@ public class GenerateSourcesPhase implements Phase<Void, Sources> {
         return sources;
     }
 
+    @NotNull
     @Override
     public String getName() {
         return "generate-sources";

@@ -1,18 +1,20 @@
 package com.bitresolution.xtest.events;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
 public interface Publisher {
-    boolean subscribe(Subscriber subscriber);
+    boolean subscribe(@NotNull Subscriber subscriber);
 
-    boolean subscribe(Collection<Subscriber> subscribers);
+    boolean subscribe(@NotNull Collection<Subscriber> subscribers);
 
-    boolean unsubscribe(Subscriber subscriber);
+    boolean unsubscribe(@NotNull Subscriber subscriber);
 
-    boolean unsubscribe(Collection<Subscriber> subscribers);
+    boolean unsubscribe(@NotNull Collection<Subscriber> subscribers);
 
-    void publish(XEvent event);
+    void publish(@NotNull XEvent event);
 
+    @NotNull
     Set<Subscriber> getSubscribers();
 }

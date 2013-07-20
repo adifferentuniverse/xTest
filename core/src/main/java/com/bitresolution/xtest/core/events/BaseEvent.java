@@ -3,15 +3,18 @@ package com.bitresolution.xtest.core.events;
 import com.bitresolution.xtest.events.XEvent;
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.NotNull;
+
 public abstract class BaseEvent implements XEvent {
 
     private final Object source;
 
-    protected BaseEvent(Object source) {
+    protected BaseEvent(@NotNull Object source) {
         this.source = source;
     }
 
     @Override
+    @NotNull
     public Object getSource() {
         return source;
     }

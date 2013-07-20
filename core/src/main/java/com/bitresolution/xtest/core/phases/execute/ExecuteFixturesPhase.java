@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
@@ -24,24 +26,28 @@ public class ExecuteFixturesPhase implements Phase<Fixtures, Report> {
         this.publisher = publisher;
     }
 
+    @NotNull
     @Override
     public Class<Fixtures> getInputType() {
         return Fixtures.class;
     }
 
+    @NotNull
     @Override
     public Class<Report> getOutputType() {
         return Report.class;
     }
 
+    @NotNull
     @Override
-    public Report execute(Fixtures input) throws LifecycleExecutorException {
+    public Report execute(@NotNull Fixtures input) throws LifecycleExecutorException {
         publisher.publish(start(this));
         Report report = new Report();
         publisher.publish(complete(this));
         return report;
     }
 
+    @NotNull
     @Override
     public String getName() {
         return "execute-fixtures";

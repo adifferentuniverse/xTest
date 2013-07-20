@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
@@ -17,30 +19,35 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
 
     private static final Logger log = LoggerFactory.getLogger(CompileGraphPhase.class);
 
+    @NotNull
     private final Publisher publisher;
+    @NotNull
     private final GraphBuilder builder;
 
     @Autowired
-    public CompileGraphPhase(Publisher publisher, GraphBuilder builder) {
+    public CompileGraphPhase(@NotNull Publisher publisher, @NotNull GraphBuilder builder) {
         this.publisher = publisher;
         this.builder = builder;
     }
 
     @Override
+    @NotNull
     public Class<Sources> getInputType() {
         return Sources.class;
     }
 
     @Override
+    @NotNull
     public Class<TestGraph> getOutputType() {
         return TestGraph.class;
     }
 
     @Override
-    public TestGraph execute(Sources input) throws LifecycleExecutorException {
+    @NotNull
+    public TestGraph execute(@NotNull Sources input) throws LifecycleExecutorException {
         log.debug("Executing phase: {}", getName());
         publisher.publish(start(this));
-        TestGraph graph = null;
+        TestGraph graph;
         try {
             graph = builder.add(input).build();
         }
@@ -52,6 +59,7 @@ public class CompileGraphPhase implements Phase<Sources, TestGraph> {
     }
 
     @Override
+    @NotNull
     public String getName() {
         return "compile-graph";
     }

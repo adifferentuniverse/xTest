@@ -1,5 +1,6 @@
 package com.bitresolution.xtest.core.lifecycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Lifecycle implements Iterable<Phase<?, ?>> {
         tailType = Void.class;
     }
 
-    public Lifecycle add(Phase<?, ?> phase) throws LifecycleExecutorException {
+    public Lifecycle add(@NotNull Phase<?, ?> phase) throws LifecycleExecutorException {
         if(tailType.equals(phase.getInputType())) {
             phases.add(phase);
             tailType = phase.getOutputType();
@@ -27,6 +28,7 @@ public class Lifecycle implements Iterable<Phase<?, ?>> {
         );
     }
 
+    @NotNull
     public Class<?> getTailType() {
         return tailType;
     }

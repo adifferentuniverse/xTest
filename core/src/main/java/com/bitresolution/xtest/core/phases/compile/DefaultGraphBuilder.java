@@ -9,11 +9,13 @@ import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.PackageNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
 import com.bitresolution.xtest.core.phases.sources.Sources;
+import com.google.common.base.Optional;
 import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Set;
@@ -29,7 +31,8 @@ public class DefaultGraphBuilder implements GraphBuilder {
     private final JungTestGraph graph = new JungTestGraph();
 
     @Override
-    public GraphBuilder add(Sources input) throws CompileGraphException {
+    @NotNull
+    public GraphBuilder add(@NotNull Sources input) throws CompileGraphException {
         for(FullyQualifiedClassName fqcn : input.getClasses()) {
             try {
                 Class<?> klass = fqcn.loadClass();
@@ -52,22 +55,23 @@ public class DefaultGraphBuilder implements GraphBuilder {
         return this;
     }
 
-    private XNode<PackageName> findOrBuildPackageNode(FullyQualifiedClassName fqcn, XNode rootNode) throws CompileGraphException {
-        XNode<PackageName> node = graph.findNodeByValue(fqcn.getPackageName());
-        if(node != null) {
-            return node;
+    @SuppressWarnings("unchecked")
+    private XNode<PackageName> findOrBuildPackageNode(FullyQualifiedClassName fqcn, XNode<?> rootNode) throws CompileGraphException {
+        Optional<XNode<PackageName>> node = graph.findNodeByValue(fqcn.getPackageName());
+        if(node.isPresent()) {
+            return node.get();
         }
         LinkedList<PackageNode> packages = new LinkedList<PackageNode>();
         for(PackageName p = fqcn.getPackageName(); !p.equals(PackageName.DEFAULT); p = p.getParent()) {
             packages.push(new PackageNode(p));
         }
-        XNode source = rootNode;
+        XNode<?> source = rootNode;
         for(PackageNode dest : packages) {
             graph.addNode(dest);
             graph.addRelationship(where(source).contains(dest));
             source = dest;
         }
-        return source;
+        return (XNode<PackageName>) source;
     }
 
     private void buildClassNode(FullyQualifiedClassName fqcn, Set<Method> annotatedMethods, XNode<?> rootNode) throws CompileGraphException {
@@ -90,6 +94,7 @@ public class DefaultGraphBuilder implements GraphBuilder {
     }
 
     @Override
+    @NotNull
     public TestGraph build() {
         return graph;
     }

@@ -2,6 +2,8 @@ package com.bitresolution.xtest.core.lifecycle;
 
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.NotNull;
+
 public class MockPhase<I, O> implements Phase<I, O> {
 
     private final Class<I> inputType;
@@ -16,21 +18,25 @@ public class MockPhase<I, O> implements Phase<I, O> {
         this.executed = false;
     }
 
+    @NotNull
     @Override
-    public O execute(I input) throws LifecycleExecutorException {
+    public O execute(@NotNull I input) throws LifecycleExecutorException {
         executed = true;
         return value;
     }
 
+    @NotNull
     @Override
     public String getName() {
         return "mock-phase";
     }
 
+    @NotNull
     public Class<I> getInputType() {
         return inputType;
     }
 
+    @NotNull
     public Class<O> getOutputType() {
         return outputType;
     }

@@ -2,33 +2,44 @@ package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
 import com.bitresolution.xtest.core.phases.compile.relationships.Relationship;
+import com.google.common.base.Optional;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 public interface TestGraph {
-    XNode getRootNode();
 
-    Set<XNode> getAdjacentNodesByRelationship(XNode<?> node, Class<? extends Relationship> relationship);
+    @NotNull
+    XNode<?> getRootNode();
 
-    Set<XNode> getAdjacentNodes(XNode<?> tBaseNode);
+    @NotNull
+    Set<XNode<?>> getAdjacentNodesByRelationship(@NotNull XNode<?> node, @NotNull Class<? extends Relationship<?, ?>> relationship);
 
-    boolean contains(XNode<?> node);
+    @NotNull
+    Set<XNode<?>> getAdjacentNodes(@NotNull XNode<?> node);
 
-    void addNode(XNode source) throws CompileGraphException;
+    boolean contains(@NotNull XNode<?> node);
 
-    boolean contains(Relationship relationship);
+    void addNode(@NotNull XNode<?> source) throws CompileGraphException;
 
-    Set<Relationship> getInboundRelationships(XNode<?> node);
+    boolean contains(@NotNull Relationship<?, ?> relationship);
 
-    Set<Relationship> getOutboundRelationships(XNode<?> node);
+    @NotNull
+    Set<Relationship<?, ?>> getInboundRelationships(@NotNull XNode<?> node);
 
-    void removeRelationship(Relationship p);
+    @NotNull
+    Set<Relationship<?, ?>> getOutboundRelationships(@NotNull XNode<?> node);
 
-    Set<XNode> getNodes();
+    void removeRelationship(@NotNull Relationship<?, ?> p);
 
-    Set<Relationship> getRelationships();
+    @NotNull
+    Set<XNode<?>> getNodes();
 
-    <T> XNode<T> findNodeByValue(T packageName);
+    @NotNull
+    Set<Relationship<?, ?>> getRelationships();
 
-    void addRelationship(Relationship<?, ?> relationship) throws CompileGraphException;
+    @NotNull
+    <T> Optional<XNode<T>> findNodeByValue(@NotNull T packageName);
+
+    void addRelationship(@NotNull Relationship<?, ?> relationship) throws CompileGraphException;
 }

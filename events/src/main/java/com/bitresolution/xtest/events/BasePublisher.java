@@ -1,5 +1,6 @@
 package com.bitresolution.xtest.events;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -12,26 +13,27 @@ public abstract class BasePublisher implements Publisher {
         this(new CopyOnWriteArraySet<Subscriber>());
     }
 
-    protected BasePublisher(Set<Subscriber> subscribers) {
+    protected BasePublisher(@NotNull Set<Subscriber> subscribers) {
         this.subscribers = subscribers;
     }
 
-    public boolean subscribe(Subscriber subscriber) {
+    public boolean subscribe(@NotNull Subscriber subscriber) {
         return subscribers.add(subscriber);
     }
 
-    public boolean subscribe(Collection<Subscriber> subscribers) {
+    public boolean subscribe(@NotNull Collection<Subscriber> subscribers) {
         return this.subscribers.addAll(subscribers);
     }
 
-    public boolean unsubscribe(Subscriber subscriber) {
+    public boolean unsubscribe(@NotNull Subscriber subscriber) {
         return this.subscribers.remove(subscriber);
     }
 
-    public boolean unsubscribe(Collection<Subscriber> subscribers) {
+    public boolean unsubscribe(@NotNull Collection<Subscriber> subscribers) {
         return this.subscribers.removeAll(subscribers);
     }
 
+    @NotNull
     public Set<Subscriber> getSubscribers() {
         return Collections.unmodifiableSet(subscribers);
     }

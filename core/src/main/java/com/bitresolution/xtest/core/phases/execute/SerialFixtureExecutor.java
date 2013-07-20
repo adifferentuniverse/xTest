@@ -1,7 +1,6 @@
 package com.bitresolution.xtest.core.phases.execute;
 
 import com.bitresolution.xtest.events.Publisher;
-import com.bitresolution.xtest.events.XEventSource;
 
 import java.util.concurrent.Future;
 
@@ -9,7 +8,7 @@ import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.QueuedEvent.queued;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
-public class SerialFixtureExecutor implements FixtureExecutor, XEventSource {
+public class SerialFixtureExecutor implements FixtureExecutor {
 
     private final FixtureInvoker fixtureInvoker;
     private final Publisher publisher;

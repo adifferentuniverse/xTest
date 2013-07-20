@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
@@ -25,24 +27,28 @@ public class GenerateFixturesPhase implements Phase<TestGraph, Fixtures> {
         this.publisher = publisher;
     }
 
+    @NotNull
     @Override
     public Class<TestGraph> getInputType() {
         return TestGraph.class;
     }
 
+    @NotNull
     @Override
     public Class<Fixtures> getOutputType() {
         return Fixtures.class;
     }
 
+    @NotNull
     @Override
-    public Fixtures execute(TestGraph input) throws LifecycleExecutorException {
+    public Fixtures execute(@NotNull TestGraph input) throws LifecycleExecutorException {
         publisher.publish(start(this));
         Fixtures fixtures = new Fixtures();
         publisher.publish(complete(this));
         return fixtures;
     }
 
+    @NotNull
     @Override
     public String getName() {
         return "generate-fixtures";

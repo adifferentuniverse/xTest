@@ -2,15 +2,19 @@ package com.bitresolution.xtest.core.phases.compile.nodes;
 
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.NotNull;
+
 public class BaseNode<T> implements XNode<T> {
 
+    @NotNull
     private final T value;
 
-    public BaseNode(T value) {
+    public BaseNode(@NotNull T value) {
         this.value = value;
     }
 
     @Override
+    @NotNull
     public T getValue() {
         return value;
     }
@@ -26,7 +30,7 @@ public class BaseNode<T> implements XNode<T> {
             return true;
         }
         if(obj instanceof BaseNode) {
-            final BaseNode other = (BaseNode) obj;
+            final BaseNode<?> other = (BaseNode<?>) obj;
             return Objects.equal(this.value, other.value);
         }
         return false;

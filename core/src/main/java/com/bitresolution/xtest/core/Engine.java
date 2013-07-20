@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.validation.constraints.NotNull;
+
 public class Engine extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(Engine.class);
@@ -15,7 +17,7 @@ public class Engine extends Thread {
     private final AnnotationConfigApplicationContextFactory factory;
     private final XTestConfiguration configuration;
 
-    public Engine(XTestConfiguration configuration, AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
+    public Engine(@NotNull XTestConfiguration configuration, @NotNull AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
         setName("engine");
         this.configuration = configuration;
         this.factory = annotationConfigApplicationContextFactory;
@@ -26,6 +28,7 @@ public class Engine extends Thread {
         execute();
     }
 
+    @NotNull
     public ExitStatus execute() {
         logBorderedMessage("Starting xTest");
         ExitStatus status;

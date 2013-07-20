@@ -6,16 +6,12 @@ import com.bitresolution.xtest.Node;
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.Validate;
 import org.reflections.Reflections;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 public class XTestAnnotatedSource implements Source {
-
-    private static final Logger log = LoggerFactory.getLogger(XTestAnnotatedSource.class);
 
     private final PackageName packageName;
 
@@ -25,6 +21,7 @@ public class XTestAnnotatedSource implements Source {
     }
 
     @Override
+    @NotNull
     public Set<FullyQualifiedClassName> getClasses() {
         Set<FullyQualifiedClassName> classes = new HashSet<FullyQualifiedClassName>();
         Reflections reflections = new Reflections(packageName.getName());

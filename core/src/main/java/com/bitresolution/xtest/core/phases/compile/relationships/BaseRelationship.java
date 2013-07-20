@@ -3,21 +3,28 @@ package com.bitresolution.xtest.core.phases.compile.relationships;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.NotNull;
+
 abstract class BaseRelationship<S,D> implements Relationship<S, D> {
+
+    @NotNull
     private final XNode<S> source;
+    @NotNull
     private final XNode<D> destination;
 
-    public BaseRelationship(XNode<S> source, XNode<D> destination) {
+    public BaseRelationship(@NotNull XNode<S> source, @NotNull XNode<D> destination) {
         this.source = source;
         this.destination = destination;
     }
 
     @Override
+    @NotNull
     public XNode<S> getSource() {
         return source;
     }
 
     @Override
+    @NotNull
     public XNode<D> getDestination() {
         return destination;
     }
@@ -35,10 +42,9 @@ abstract class BaseRelationship<S,D> implements Relationship<S, D> {
         if(obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final BaseRelationship other = (BaseRelationship) obj;
-        boolean b = Objects.equal(this.source, other.source)
+        final BaseRelationship<?, ?> other = (BaseRelationship<?, ?>) obj;
+        return Objects.equal(this.source, other.source)
                 && Objects.equal(this.destination, other.destination);
-        return b;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.bitresolution.xtest.events.Publisher;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 
 import static com.bitresolution.xtest.core.events.AbortedEvent.aborted;
 import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
@@ -16,12 +17,12 @@ public class LifecycleExecutor {
     private final Lifecycle lifecycle;
 
     @Inject
-    public LifecycleExecutor(Lifecycle lifecycle, Publisher publisher) {
+    public LifecycleExecutor(@NotNull Lifecycle lifecycle, @NotNull Publisher publisher) {
         this.lifecycle = lifecycle;
         this.publisher = publisher;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void execute() throws LifecycleExecutorException {
         publisher.publish(start(this));
         try {
