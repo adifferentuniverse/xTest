@@ -49,6 +49,7 @@ public class GenerateSourcesPhaseSpec {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void shouldBuildSources() throws Exception {
         //given
         Sources sources = mock(Sources.class);

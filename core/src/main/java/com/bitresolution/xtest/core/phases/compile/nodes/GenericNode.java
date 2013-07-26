@@ -4,12 +4,12 @@ import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;
 
-public class BaseNode<T> implements XNode<T> {
+public class GenericNode<T> implements XNode<T> {
 
     @NotNull
     private final T value;
 
-    public BaseNode(@NotNull T value) {
+    public GenericNode(@NotNull T value) {
         this.value = value;
     }
 
@@ -29,8 +29,8 @@ public class BaseNode<T> implements XNode<T> {
         if(this == obj) {
             return true;
         }
-        if(obj instanceof BaseNode) {
-            final BaseNode<?> other = (BaseNode<?>) obj;
+        if(obj instanceof GenericNode) {
+            final GenericNode<?> other = (GenericNode<?>) obj;
             return Objects.equal(this.value, other.value);
         }
         return false;

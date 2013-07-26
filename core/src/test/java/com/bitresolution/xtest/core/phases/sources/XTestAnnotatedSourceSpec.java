@@ -50,7 +50,6 @@ public class XTestAnnotatedSourceSpec {
                 new FullyQualifiedClassName(TestNodeMultipleMethodExample.class),
                 new FullyQualifiedClassName(TestNodeSingleMethodExample.class)
         );
-        Sets.SetView<FullyQualifiedClassName> difference = Sets.difference(expected, classes);
         assertThat(classes, is(expected));
     }
 

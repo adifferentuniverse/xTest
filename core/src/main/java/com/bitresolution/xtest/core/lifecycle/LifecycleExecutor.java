@@ -22,7 +22,7 @@ public class LifecycleExecutor {
         this.publisher = publisher;
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void execute() throws LifecycleExecutorException {
         publisher.publish(start(this));
         try {

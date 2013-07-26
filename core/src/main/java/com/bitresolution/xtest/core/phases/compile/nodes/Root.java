@@ -9,6 +9,6 @@ public class Root {
 
     @Override
     public String toString() {
-        return "Root Node";
+        return "Root";
     }
 }

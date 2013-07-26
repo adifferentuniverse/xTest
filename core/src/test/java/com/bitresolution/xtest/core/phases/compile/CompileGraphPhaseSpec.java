@@ -1,6 +1,7 @@
 package com.bitresolution.xtest.core.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.phases.sources.Sources;
 import com.bitresolution.xtest.events.Publisher;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -62,6 +63,19 @@ public class CompileGraphPhaseSpec {
         verify(builder).add(input);
         verify(builder).build();
         verify(publisher).publish(complete(phase));
+    }
+
+    @Test(expected = LifecycleExecutorException.class)
+    public void shouldTranslateExceptionsThrownDuringCompilations() throws Exception {
+        //given
+        Sources input = new Sources(Collections.<FullyQualifiedClassName>emptySet());
+        given(builder.add(input)).willReturn(builder);
+        given(builder.build()).willThrow(new IllegalArgumentException());
+
+        //when
+        TestGraph output = phase.execute(input);
+
+        //then exception thrown
     }
 
     @Test

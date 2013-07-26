@@ -39,7 +39,7 @@ public class EngineTest {
 
         //then
         for(Phase<?, ?> phase : lifecycle) {
-            assertThat(((MockPhase)phase).isExecuted(), is(true));
+            assertThat(((MockPhase<?, ?>)phase).isExecuted(), is(true));
         }
     }
 

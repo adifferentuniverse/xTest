@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.phases.compile;
 
-import com.bitresolution.xtest.core.phases.compile.nodes.BaseNode;
+import com.bitresolution.xtest.core.phases.compile.nodes.GenericNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.Root;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
 import com.bitresolution.xtest.core.phases.compile.relationships.Relationship;
@@ -23,8 +23,12 @@ public class JungTestGraph implements TestGraph {
     private final XNode<Root> root;
 
     public JungTestGraph() {
-        graph = new DirectedSparseMultigraph<XNode<?>, Relationship<?, ?>>();
-        root = new BaseNode<Root>(Root.ROOT);
+        this(new DirectedSparseMultigraph<XNode<?>, Relationship<?, ?>>(), new GenericNode<Root>(Root.ROOT));
+    }
+
+    public JungTestGraph(@NotNull Graph<XNode<?>, Relationship<?, ?>> graph, @NotNull XNode<Root> root) {
+        this.graph = graph;
+        this.root = root;
         graph.addVertex(root);
     }
 
@@ -135,7 +139,7 @@ public class JungTestGraph implements TestGraph {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(graph, root);
+        return Objects.hashCode(getNodes(), getRelationships());
     }
 
     @Override
@@ -156,8 +160,8 @@ public class JungTestGraph implements TestGraph {
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                .add("graph", graph)
-                .add("root", root)
+                .add("nodes", getNodes())
+                .add("relationships", getRelationships())
                 .toString();
     }
 }

@@ -4,7 +4,7 @@ import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 
 import javax.validation.constraints.NotNull;
 
-public class ClassNode extends BaseNode<FullyQualifiedClassName> implements XNode<FullyQualifiedClassName> {
+public class ClassNode extends GenericNode<FullyQualifiedClassName> implements XNode<FullyQualifiedClassName> {
 
     public ClassNode(@NotNull FullyQualifiedClassName fqcn) {
         super(fqcn);

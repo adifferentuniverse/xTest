@@ -57,7 +57,7 @@ public class MockPhase<I, O> implements Phase<I, O> {
         }
 
         if(obj instanceof MockPhase) {
-            final MockPhase other = (MockPhase) obj;
+            final MockPhase<?, ?> other = (MockPhase<?, ?>) obj;
             return Objects.equal(this.inputType, other.inputType) && Objects.equal(this.outputType, other.outputType);
         }
 
