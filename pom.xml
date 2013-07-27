@@ -19,6 +19,7 @@
         <module>events</module>
         <module>xtest-maven-plugin</module>
         <module>examples</module>
+        <module>engine</module>
     </modules>
 
     <properties>

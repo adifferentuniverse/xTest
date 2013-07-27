@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.bitresolution.xtest</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>engine</artifactId>
             <version>${project.version}</version>
         </dependency>
 

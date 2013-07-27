@@ -1,5 +1,6 @@
 package com.bitresolution.xtest
 
+import com.bitresolution.succor.junit.category.Unit
 import com.bitresolution.xtest.core.XTestConfiguration
 import com.bitresolution.xtest.core.lifecycle.Phase
 import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase
@@ -12,6 +13,7 @@ import com.bitresolution.xtest.core.phases.sources.SourceBuilder
 import com.bitresolution.xtest.events.Publisher
 import spock.lang.Specification
 
+@org.junit.experimental.categories.Category(Unit)
 class DefaultXTestConfigurationSpec extends Specification {
 
     def "shouldCreateDefaultLifecycle"() {
@@ -19,7 +21,7 @@ class DefaultXTestConfigurationSpec extends Specification {
         Publisher publisher = Mock(Publisher)
         XTestConfiguration configuration = Mock(XTestConfiguration)
 
-        XTestDefaultContext context = new XTestDefaultContext()
+        XTestStandardContext context = new XTestStandardContext()
         context.generateSourcesPhase = new GenerateSourcesPhase(publisher, Mock(SourceBuilder), configuration)
         context.compileGraphPhase = new CompileGraphPhase(publisher, Mock(GraphBuilder))
         context.generateFixturesPhase = new GenerateFixturesPhase(publisher)

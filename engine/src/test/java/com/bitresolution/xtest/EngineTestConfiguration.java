@@ -1,8 +1,11 @@
-package com.bitresolution.xtest.core.lifecycle;
+package com.bitresolution.xtest;
 
 import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.XTestContext;
+import com.bitresolution.xtest.core.lifecycle.Lifecycle;
+import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import org.springframework.context.annotation.Bean;
+
 
 public class EngineTestConfiguration extends XTestContext {
 

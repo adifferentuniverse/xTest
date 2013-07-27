@@ -12,13 +12,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Configuration
-@ComponentScan(basePackages = "com.bitresolution.xtest")
-public class CoreContext {
+@ComponentScan(basePackages = "com.bitresolution.xtest.core")
+class CoreContext {
+
+    @Autowired(required = false)
+    private List<Subscriber> subscribers = new ArrayList<Subscriber>();
 
     @Bean
     public static PropertyPlaceholderConfigurer properties() {
@@ -36,7 +40,7 @@ public class CoreContext {
 
     @Bean
     @Autowired
-    public Publisher publisher(ExecutorService executor, Collection<Subscriber> subscribers) {
+    public Publisher publisher(ExecutorService executor) {
         NonBlockingPublisher publisher = new NonBlockingPublisher(executor);
         publisher.subscribe(subscribers);
         return publisher;

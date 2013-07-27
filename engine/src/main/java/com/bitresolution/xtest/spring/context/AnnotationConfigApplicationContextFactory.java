@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.spring.context;
+package com.bitresolution.xtest.spring.context;
 
 import com.bitresolution.succor.collections.Factory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

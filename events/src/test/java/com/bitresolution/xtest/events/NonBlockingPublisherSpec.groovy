@@ -18,7 +18,7 @@ class NonBlockingPublisherSpec extends PublisherSpec {
         publisher = new NonBlockingPublisher(executor)
     }
 
-    def "should publish events to all subscribera"() {
+    def "should publish events to all subscribers"() {
         given:
         Subscriber a = Mock(Subscriber)
         Subscriber b = Mock(Subscriber)
@@ -27,7 +27,7 @@ class NonBlockingPublisherSpec extends PublisherSpec {
         when:
         publisher.publish(event)
         executor.shutdown()
-        executor.awaitTermination(6, TimeUnit.SECONDS)
+        executor.awaitTermination(10, TimeUnit.SECONDS)
         then:
         1 * a.process(event)
         1 * b.process(event)

@@ -1,10 +1,10 @@
-package com.bitresolution.xtest.core;
+package com.bitresolution.xtest;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.core.lifecycle.EngineTestConfiguration;
+import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
-import com.bitresolution.xtest.core.spring.context.AnnotationConfigApplicationContextFactory;
+import com.bitresolution.xtest.spring.context.AnnotationConfigApplicationContextFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

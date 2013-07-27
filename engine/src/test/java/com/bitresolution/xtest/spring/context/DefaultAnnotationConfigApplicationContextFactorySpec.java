@@ -1,7 +1,5 @@
-package com.bitresolution.xtest.core;
+package com.bitresolution.xtest.spring.context;
 
-import com.bitresolution.xtest.core.spring.context.AnnotationConfigApplicationContextFactory;
-import com.bitresolution.xtest.core.spring.context.DefaultAnnotationConfigApplicationContextFactory;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

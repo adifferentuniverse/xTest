@@ -1,8 +1,11 @@
-package com.bitresolution.xtest.core;
+package com.bitresolution.xtest;
 
 import com.bitresolution.succor.junit.category.Integration;
 import com.bitresolution.succor.spring.junit.rules.SpringInjectionRule;
-import com.bitresolution.xtest.core.lifecycle.*;
+import com.bitresolution.xtest.core.lifecycle.Lifecycle;
+import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
+import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
+import com.bitresolution.xtest.core.lifecycle.Phase;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

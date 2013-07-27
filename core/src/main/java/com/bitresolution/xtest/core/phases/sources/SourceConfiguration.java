@@ -1,25 +1,12 @@
 package com.bitresolution.xtest.core.phases.sources;
 
-import com.beust.jcommander.Parameter;
-import com.bitresolution.xtest.cli.ClassSourceConverter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class SourceConfiguration {
 
-    @Parameter(
-            names = {"-class", "-classes"},
-            variableArity = true,
-            converter = ClassSourceConverter.class,
-            description = "class names to be executed")
     private List<ClassSource> includedClasses;
 
-    @Parameter(
-            names = "-excludeclasses",
-            variableArity = true,
-            converter = ClassSourceConverter.class,
-            description = "class names to exclude")
     private List<ClassSource> excludedClasses;
 
     private List<XTestAnnotatedSource> includedPackages;
