@@ -18,6 +18,7 @@
         <module>annotations</module>
         <module>events</module>
         <module>xtest-maven-plugin</module>
+        <module>examples</module>
     </modules>
 
     <properties>

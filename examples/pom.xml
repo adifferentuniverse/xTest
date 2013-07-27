@@ -8,13 +8,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bitresolution.xtest</groupId>
-    <artifactId>annotations</artifactId>
+    <artifactId>examples</artifactId>
     <packaging>jar</packaging>
 
-    <name>xTest :: Annotations</name>
+    <name>examples</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
+        <dependency>
+            <groupId>com.bitresolution.xtest</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>

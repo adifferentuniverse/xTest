@@ -60,9 +60,8 @@
 
         <dependency>
             <groupId>com.bitresolution.xtest</groupId>
-            <artifactId>annotations</artifactId>
+            <artifactId>examples</artifactId>
             <version>${project.version}</version>
-            <type>test-jar</type>
             <scope>test</scope>
         </dependency>
 
