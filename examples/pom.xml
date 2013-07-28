@@ -11,7 +11,7 @@
     <artifactId>examples</artifactId>
     <packaging>jar</packaging>
 
-    <name>examples</name>
+    <name>xTest :: Examples</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>

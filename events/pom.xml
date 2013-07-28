@@ -8,10 +8,10 @@
     </parent>
 
     <groupId>com.bitresolution.xtest</groupId>
-    <artifactId>events</artifactId>
+    <artifactId>eventbus</artifactId>
     <packaging>jar</packaging>
 
-    <name>xTest :: Events</name>
+    <name>xTest :: Event Bus</name>
 
     <dependencies>
         <dependency>
