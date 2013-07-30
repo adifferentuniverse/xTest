@@ -20,9 +20,9 @@ import org.mockito.Mock;
 import org.mockito.runners.VerboseMockitoJUnitRunner;
 import spock.lang.Specification;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -61,7 +61,7 @@ public class DefaultXTestConfigurationSpec extends Specification {
         List<Phase<?, ?>> phases = Lists.newArrayList(context.lifecycle().iterator());
 
         //then:
-        assertThat(phases, is(asList(phase1, phase2, phase3, phase4, phase5)));
+        assertThat(phases, is(Arrays.<Phase<?, ?>>asList(phase1, phase2, phase3, phase4, phase5)));
     }
 
 }

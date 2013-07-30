@@ -14,24 +14,13 @@
     <name>xTest :: Core</name>
 
     <modules>
-        <module>lifecycle</module>
         <module>events</module>
+        <module>lifecycle</module>
         <module>phases</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.bitresolution.xtest</groupId>
-                <artifactId>annotations</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bitresolution.xtest</groupId>
-                <artifactId>eventbus</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>net.sf.jung</groupId>
                 <artifactId>jung-api</artifactId>
@@ -61,4 +50,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bitresolution.xtest</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bitresolution.xtest</groupId>
+            <artifactId>eventbus</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

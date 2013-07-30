@@ -1,6 +1,5 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.XTestContext;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase;

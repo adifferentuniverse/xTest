@@ -1,7 +1,6 @@
 package com.bitresolution.xtest;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.core.XTestContext;
 import com.bitresolution.xtest.core.phases.sources.SourceConfiguration;
 
 public class XTestConfiguration {

@@ -15,11 +15,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.bitresolution.xtest</groupId>
-            <artifactId>annotations</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
         </dependency>

@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 
 @Configuration
 @ComponentScan(basePackages = "com.bitresolution.xtest.core")
-class CoreContext {
+public class CoreContext {
 
     @Autowired(required = false)
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();

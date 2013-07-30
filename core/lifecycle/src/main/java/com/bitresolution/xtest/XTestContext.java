@@ -1,5 +1,6 @@
-package com.bitresolution.xtest.core;
+package com.bitresolution.xtest;
 
+import com.bitresolution.xtest.core.CoreContext;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import org.springframework.context.annotation.Bean;
