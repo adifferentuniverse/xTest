@@ -2,7 +2,8 @@ package com.bitresolution.xtest.cli;
 
 import com.beust.jcommander.JCommander;
 import com.bitresolution.xtest.Engine;
-import com.bitresolution.xtest.XTestConfiguration;
+import com.bitresolution.xtest.core.PhaseConfigurationBeanFactory;
+import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.spring.context.DefaultAnnotationConfigApplicationContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,9 @@ public class Bootstrap {
 
     public void execute() {
         DefaultAnnotationConfigApplicationContextFactory contextFactory = new DefaultAnnotationConfigApplicationContextFactory();
+        PhaseConfigurationBeanFactory phaseConfigurationFactory = new PhaseConfigurationBeanFactory();
 
-        Engine engine = new Engine(configuration, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory, phaseConfigurationFactory);
         engine.start();
         try {
             engine.join();

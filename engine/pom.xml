@@ -15,7 +15,6 @@
 
     <name>xTest :: Engine</name>
 
-
     <dependencies>
         <dependency>
             <groupId>com.bitresolution.xtest.core</groupId>
@@ -23,27 +22,27 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bitresolution.xtest.core.phases</groupId>
+            <groupId>com.bitresolution.xtest.phases</groupId>
             <artifactId>generate-sources-phase</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bitresolution.xtest.core.phases</groupId>
+            <groupId>com.bitresolution.xtest.phases</groupId>
             <artifactId>compile-graph-phase</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bitresolution.xtest.core.phases</groupId>
+            <groupId>com.bitresolution.xtest.phases</groupId>
             <artifactId>compile-fixtures-phase</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bitresolution.xtest.core.phases</groupId>
+            <groupId>com.bitresolution.xtest.phases</groupId>
             <artifactId>execute-fixtures-phase</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bitresolution.xtest.core.phases</groupId>
+            <groupId>com.bitresolution.xtest.phases</groupId>
             <artifactId>reporting-phase</artifactId>
             <version>${project.version}</version>
         </dependency>

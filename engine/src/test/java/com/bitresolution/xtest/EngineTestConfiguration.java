@@ -1,7 +1,9 @@
 package com.bitresolution.xtest;
 
+import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
+import com.bitresolution.xtest.core.phases.sources.SourceConfiguration;
 import org.springframework.context.annotation.Bean;
 
 
@@ -39,6 +41,8 @@ public class EngineTestConfiguration extends XTestContext {
     }
 
     private XTestConfiguration buildConfiguration() {
-        return new XTestConfiguration();
+        XTestConfiguration c = new XTestConfiguration();
+        c.addPhaseConfiguration(new SourceConfiguration());
+        return c;
     }
 }

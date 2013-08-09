@@ -1,6 +1,8 @@
 package com.bitresolution.xtest;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
+import com.bitresolution.xtest.core.PhaseConfigurationBeanFactory;
+import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.spring.context.AnnotationConfigApplicationContextFactory;
@@ -29,6 +31,8 @@ public class EngineSpec {
     @Mock
     private AnnotationConfigApplicationContextFactory contextFactory;
     @Mock
+    private PhaseConfigurationBeanFactory phaseConfigurationFactory;
+    @Mock
     private AnnotationConfigApplicationContext context;
     @Mock
     private ConfigurableListableBeanFactory beanFactory;
@@ -53,7 +57,7 @@ public class EngineSpec {
         given(context.getBeanFactory()).willReturn(beanFactory);
         given(context.getBean(Matchers.eq(LifecycleExecutor.class))).willReturn(lifecycleExecutor);
 
-        Engine engine = new Engine(configuration, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory, phaseConfigurationFactory);
 
         //when:
         Engine.ExitStatus status = engine.execute();
@@ -78,7 +82,7 @@ public class EngineSpec {
         given(context.getBeanFactory()).willReturn(beanFactory);
         given(context.getBean(Matchers.eq(LifecycleExecutor.class))).willThrow(new NoSuchBeanDefinitionException("lifecycleExecutor"));
 
-        Engine engine = new Engine(configuration, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory, phaseConfigurationFactory);
 
         //when:
         Engine.ExitStatus status = engine.execute();
@@ -103,7 +107,7 @@ public class EngineSpec {
         given(context.getBean(Matchers.eq(LifecycleExecutor.class))).willReturn(lifecycleExecutor);
         doThrow(new LifecycleExecutorException("error")).when(lifecycleExecutor).execute();
 
-        Engine engine = new Engine(configuration, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory, phaseConfigurationFactory);
 
         //when:
         Engine.ExitStatus status = engine.execute();
@@ -129,7 +133,7 @@ public class EngineSpec {
         given(context.getBean(Matchers.eq(LifecycleExecutor.class))).willReturn(lifecycleExecutor);
         doThrow(new RuntimeException("error")).when(context).close();
 
-        Engine engine = new Engine(configuration, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory, phaseConfigurationFactory);
 
         //when:
         Engine.ExitStatus status = engine.execute();
@@ -154,7 +158,7 @@ public class EngineSpec {
         given(context.getBeanFactory()).willReturn(beanFactory);
         given(context.getBean(Matchers.eq(LifecycleExecutor.class))).willReturn(lifecycleExecutor);
 
-        Engine engine = new Engine(configuration, contextFactory);
+        Engine engine = new Engine(configuration, contextFactory, phaseConfigurationFactory);
 
         //when:
         engine.start();

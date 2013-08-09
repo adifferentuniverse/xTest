@@ -1,11 +1,13 @@
 package com.bitresolution.xtest;
 
+import com.bitresolution.xtest.core.XTestConfiguration;
+import com.bitresolution.xtest.core.PhaseConfigurationBeanFactory;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
 import com.bitresolution.xtest.spring.context.AnnotationConfigApplicationContextFactory;
+import com.bitresolution.xtest.spring.context.ConfigurableAnnotationConfigApplicationContext;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.validation.constraints.NotNull;
@@ -14,12 +16,14 @@ public class Engine extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(Engine.class);
 
-    private final AnnotationConfigApplicationContextFactory factory;
     private final XTestConfiguration configuration;
+    private final PhaseConfigurationBeanFactory phaseConfigurationFactory;
+    private final AnnotationConfigApplicationContextFactory factory;
 
-    public Engine(@NotNull XTestConfiguration configuration, @NotNull AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory) {
+    public Engine(@NotNull XTestConfiguration configuration, @NotNull AnnotationConfigApplicationContextFactory annotationConfigApplicationContextFactory, PhaseConfigurationBeanFactory phaseConfigurationFactory) {
         setName("engine");
         this.configuration = configuration;
+        this.phaseConfigurationFactory = phaseConfigurationFactory;
         this.factory = annotationConfigApplicationContextFactory;
     }
 
@@ -36,8 +40,7 @@ public class Engine extends Thread {
         try {
             context = factory.create();
             context.register(configuration.getConfigurationClass().loadClass());
-            ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
-            beanFactory.registerSingleton("configuration", configuration);
+            phaseConfigurationFactory.registerBeans(configuration, context);
             context.refresh();
 
             log.info("Starting engine...");

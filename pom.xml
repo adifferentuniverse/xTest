@@ -17,6 +17,7 @@
         <module>eventbus</module>
         <module>annotations</module>
         <module>core</module>
+        <module>phases</module>
         <module>examples</module>
         <module>engine</module>
         <module>xtest-maven-plugin</module>
