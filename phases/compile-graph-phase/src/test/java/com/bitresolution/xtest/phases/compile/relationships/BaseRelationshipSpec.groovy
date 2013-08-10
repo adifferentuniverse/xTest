@@ -3,7 +3,6 @@ package com.bitresolution.xtest.phases.compile.relationships
 import com.bitresolution.succor.junit.category.Unit
 import com.bitresolution.xtest.phases.compile.nodes.GenericNode
 import com.bitresolution.xtest.phases.compile.nodes.XNode
-import com.bitresolution.xtest.phases.compile.relationships.BaseRelationship
 import spock.lang.Specification
 
 import javax.validation.constraints.NotNull

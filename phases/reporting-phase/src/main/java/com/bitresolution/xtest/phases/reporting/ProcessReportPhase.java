@@ -2,8 +2,8 @@ package com.bitresolution.xtest.phases.reporting;
 
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;
-import com.bitresolution.xtest.phases.execute.Report;
 import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.phases.execute.Report;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

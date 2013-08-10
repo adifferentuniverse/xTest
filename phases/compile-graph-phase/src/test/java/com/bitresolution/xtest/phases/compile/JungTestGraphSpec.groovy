@@ -1,9 +1,6 @@
 package com.bitresolution.xtest.phases.compile
 
 import com.bitresolution.succor.junit.category.Unit
-import com.bitresolution.xtest.phases.compile.CompileGraphException
-import com.bitresolution.xtest.phases.compile.JungTestGraph
-import com.bitresolution.xtest.phases.compile.TestGraph
 import com.bitresolution.xtest.phases.compile.nodes.GenericNode
 import com.bitresolution.xtest.phases.compile.nodes.Root
 import com.bitresolution.xtest.phases.compile.nodes.XNode
