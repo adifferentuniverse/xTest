@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.phases.reporting;
+package com.bitresolution.xtest.phases.reporting;
 
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;

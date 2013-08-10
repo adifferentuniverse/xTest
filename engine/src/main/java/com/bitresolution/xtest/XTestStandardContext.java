@@ -5,7 +5,7 @@ import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.phases.compile.CompileGraphPhase;
 import com.bitresolution.xtest.phases.execute.ExecuteFixturesPhase;
 import com.bitresolution.xtest.phases.generate.CompileFixturesPhase;
-import com.bitresolution.xtest.core.phases.reporting.ProcessReportPhase;
+import com.bitresolution.xtest.phases.reporting.ProcessReportPhase;
 import com.bitresolution.xtest.phases.sources.GenerateSourcesPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -7,7 +7,7 @@ import com.bitresolution.xtest.phases.compile.CompileGraphPhase;
 import com.bitresolution.xtest.phases.compile.GraphBuilder;
 import com.bitresolution.xtest.phases.execute.ExecuteFixturesPhase;
 import com.bitresolution.xtest.phases.generate.CompileFixturesPhase;
-import com.bitresolution.xtest.core.phases.reporting.ProcessReportPhase;
+import com.bitresolution.xtest.phases.reporting.ProcessReportPhase;
 import com.bitresolution.xtest.phases.sources.GenerateSourcesPhase;
 import com.bitresolution.xtest.phases.sources.SourceBuilder;
 import com.bitresolution.xtest.phases.sources.SourceConfiguration;
