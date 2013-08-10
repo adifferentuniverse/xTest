@@ -1,8 +1,8 @@
-package com.bitresolution.xtest.core.phases.execute;
+package com.bitresolution.xtest.phases.generate;
 
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;
-import com.bitresolution.xtest.core.phases.generate.Fixtures;
+import com.bitresolution.xtest.phases.compile.TestGraph;
 import com.bitresolution.xtest.events.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,42 +15,42 @@ import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
 import static com.bitresolution.xtest.core.events.StartEvent.start;
 
 @Component
-public class ExecuteFixturesPhase implements Phase<Fixtures, Report> {
+public class CompileFixturesPhase implements Phase<TestGraph, Fixtures> {
 
-    private static final Logger log = LoggerFactory.getLogger(ExecuteFixturesPhase.class);
+    private static final Logger log = LoggerFactory.getLogger(CompileFixturesPhase.class);
 
     private final Publisher publisher;
 
     @Autowired
-    public ExecuteFixturesPhase(Publisher publisher) {
+    public CompileFixturesPhase(Publisher publisher) {
         this.publisher = publisher;
     }
 
     @NotNull
     @Override
-    public Class<Fixtures> getInputType() {
+    public Class<TestGraph> getInputType() {
+        return TestGraph.class;
+    }
+
+    @NotNull
+    @Override
+    public Class<Fixtures> getOutputType() {
         return Fixtures.class;
     }
 
     @NotNull
     @Override
-    public Class<Report> getOutputType() {
-        return Report.class;
-    }
-
-    @NotNull
-    @Override
-    public Report execute(@NotNull Fixtures input) throws LifecycleExecutorException {
+    public Fixtures execute(@NotNull TestGraph input) throws LifecycleExecutorException {
         publisher.publish(start(this));
-        Report report = new Report();
+        Fixtures fixtures = new Fixtures();
         publisher.publish(complete(this));
-        return report;
+        return fixtures;
     }
 
     @NotNull
     @Override
     public String getName() {
-        return "execute-fixtures";
+        return "generate-fixtures";
     }
 
     @Override

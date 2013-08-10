@@ -1,8 +1,8 @@
-package com.bitresolution.xtest.core.phases.execute;
+package com.bitresolution.xtest.phases.execute;
 
 import com.bitresolution.succor.junit.category.Unit;
-import com.bitresolution.xtest.core.phases.generate.Fixture;
-import com.bitresolution.xtest.core.phases.generate.Fixtures;
+import com.bitresolution.xtest.phases.generate.Fixture;
+import com.bitresolution.xtest.phases.generate.Fixtures;
 import com.bitresolution.xtest.events.Publisher;
 import org.junit.Before;
 import org.junit.Test;

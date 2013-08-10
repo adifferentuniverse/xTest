@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.phases.execute;
+package com.bitresolution.xtest.phases.execute;
 
 
 public class ExecutionConfiguration {

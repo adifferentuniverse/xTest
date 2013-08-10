@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.phases.generate;
+package com.bitresolution.xtest.phases.generate;
 
 import com.google.common.collect.Iterators;
 
