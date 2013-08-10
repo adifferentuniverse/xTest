@@ -1,10 +1,11 @@
-package com.bitresolution.xtest.core.phases.sources;
+package com.bitresolution.xtest.phases.sources;
 
 import com.bitresolution.succor.junit.category.Integration;
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.succor.reflection.PackageName;
 import com.bitresolution.xtest.events.Publisher;
 import com.bitresolution.xtest.examples.*;
+import com.bitresolution.xtest.phases.sources.*;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

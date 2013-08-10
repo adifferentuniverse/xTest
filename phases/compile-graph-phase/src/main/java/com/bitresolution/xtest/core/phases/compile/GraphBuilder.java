@@ -1,6 +1,6 @@
 package com.bitresolution.xtest.core.phases.compile;
 
-import com.bitresolution.xtest.core.phases.sources.Sources;
+import com.bitresolution.xtest.phases.sources.Sources;
 
 import javax.validation.constraints.NotNull;
 

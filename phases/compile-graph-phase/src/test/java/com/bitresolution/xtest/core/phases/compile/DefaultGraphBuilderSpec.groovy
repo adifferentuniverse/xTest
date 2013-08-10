@@ -7,7 +7,7 @@ import com.bitresolution.succor.reflection.PackageName
 import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode
 import com.bitresolution.xtest.core.phases.compile.nodes.PackageNode
-import com.bitresolution.xtest.core.phases.sources.Sources
+import com.bitresolution.xtest.phases.sources.Sources
 import com.bitresolution.xtest.examples.TestNodeClassWithNoTestNodeMethodsExample
 import com.bitresolution.xtest.examples.TestNodeEmptyClassExample
 import com.bitresolution.xtest.examples.TestNodeMultipleMethodExample

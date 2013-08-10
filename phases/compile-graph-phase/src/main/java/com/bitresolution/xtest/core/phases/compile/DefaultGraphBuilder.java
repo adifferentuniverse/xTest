@@ -8,7 +8,7 @@ import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.PackageNode;
 import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
-import com.bitresolution.xtest.core.phases.sources.Sources;
+import com.bitresolution.xtest.phases.sources.Sources;
 import com.google.common.base.Optional;
 import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;

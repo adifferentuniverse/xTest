@@ -2,7 +2,7 @@ package com.bitresolution.xtest.cli;
 
 import com.beust.jcommander.IStringConverter;
 import com.beust.jcommander.ParameterException;
-import com.bitresolution.xtest.core.phases.sources.ClassSource;
+import com.bitresolution.xtest.phases.sources.ClassSource;
 
 public class ClassSourceConverter implements IStringConverter<ClassSource> {
 

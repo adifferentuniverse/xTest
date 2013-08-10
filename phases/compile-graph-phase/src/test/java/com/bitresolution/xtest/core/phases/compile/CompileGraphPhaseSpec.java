@@ -3,7 +3,7 @@ package com.bitresolution.xtest.core.phases.compile;
 import com.bitresolution.succor.junit.category.Unit;
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
-import com.bitresolution.xtest.core.phases.sources.Sources;
+import com.bitresolution.xtest.phases.sources.Sources;
 import com.bitresolution.xtest.events.Publisher;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;

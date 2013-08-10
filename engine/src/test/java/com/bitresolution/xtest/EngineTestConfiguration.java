@@ -3,7 +3,7 @@ package com.bitresolution.xtest;
 import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
-import com.bitresolution.xtest.core.phases.sources.SourceConfiguration;
+import com.bitresolution.xtest.phases.sources.SourceConfiguration;
 import org.springframework.context.annotation.Bean;
 
 

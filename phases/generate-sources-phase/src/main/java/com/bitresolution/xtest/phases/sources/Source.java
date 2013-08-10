@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.phases.sources;
+package com.bitresolution.xtest.phases.sources;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 

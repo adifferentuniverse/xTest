@@ -6,7 +6,7 @@ import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase;
 import com.bitresolution.xtest.core.phases.execute.ExecuteFixturesPhase;
 import com.bitresolution.xtest.core.phases.generate.CompileFixturesPhase;
 import com.bitresolution.xtest.core.phases.reporting.ProcessReportPhase;
-import com.bitresolution.xtest.core.phases.sources.GenerateSourcesPhase;
+import com.bitresolution.xtest.phases.sources.GenerateSourcesPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
