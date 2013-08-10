@@ -1,11 +1,14 @@
-package com.bitresolution.xtest.core.phases.compile.relationships
+package com.bitresolution.xtest.phases.compile.relationships
 
 import com.bitresolution.succor.junit.category.Unit
-import com.bitresolution.xtest.core.phases.compile.nodes.GenericNode
-import com.bitresolution.xtest.core.phases.compile.nodes.XNode
+import com.bitresolution.xtest.phases.compile.nodes.GenericNode
+import com.bitresolution.xtest.phases.compile.nodes.XNode
+import com.bitresolution.xtest.phases.compile.relationships.ContainsRelationship
+import com.bitresolution.xtest.phases.compile.relationships.DependsOnRelationship
+import com.bitresolution.xtest.phases.compile.relationships.Relationship
 import spock.lang.Specification
 
-import static RelationshipBuilder.where
+import static com.bitresolution.xtest.phases.compile.relationships.RelationshipBuilder.where
 
 
 @org.junit.experimental.categories.Category(Unit.class)

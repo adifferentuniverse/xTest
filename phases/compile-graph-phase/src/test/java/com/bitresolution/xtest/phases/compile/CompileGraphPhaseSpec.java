@@ -1,8 +1,12 @@
-package com.bitresolution.xtest.core.phases.compile;
+package com.bitresolution.xtest.phases.compile;
 
 import com.bitresolution.succor.junit.category.Unit;
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
+import com.bitresolution.xtest.phases.compile.CompileGraphPhase;
+import com.bitresolution.xtest.phases.compile.GraphBuilder;
+import com.bitresolution.xtest.phases.compile.JungTestGraph;
+import com.bitresolution.xtest.phases.compile.TestGraph;
 import com.bitresolution.xtest.phases.sources.Sources;
 import com.bitresolution.xtest.events.Publisher;
 import nl.jqno.equalsverifier.EqualsVerifier;

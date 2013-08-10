@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.phases.compile;
+package com.bitresolution.xtest.phases.compile;
 
 import com.bitresolution.succor.exceptions.FormattedMessageException;
 

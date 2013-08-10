@@ -1,7 +1,7 @@
-package com.bitresolution.xtest.core.phases.compile;
+package com.bitresolution.xtest.phases.compile;
 
-import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
-import com.bitresolution.xtest.core.phases.compile.relationships.Relationship;
+import com.bitresolution.xtest.phases.compile.nodes.XNode;
+import com.bitresolution.xtest.phases.compile.relationships.Relationship;
 import com.google.common.base.Optional;
 
 import javax.validation.constraints.NotNull;

@@ -2,7 +2,7 @@ package com.bitresolution.xtest.core.phases.generate;
 
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;
-import com.bitresolution.xtest.core.phases.compile.TestGraph;
+import com.bitresolution.xtest.phases.compile.TestGraph;
 import com.bitresolution.xtest.events.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,12 +1,15 @@
-package com.bitresolution.xtest.core.phases.compile
+package com.bitresolution.xtest.phases.compile
 
 import com.bitresolution.succor.junit.category.Unit
-import com.bitresolution.xtest.core.phases.compile.nodes.GenericNode
-import com.bitresolution.xtest.core.phases.compile.nodes.Root
-import com.bitresolution.xtest.core.phases.compile.nodes.XNode
-import com.bitresolution.xtest.core.phases.compile.relationships.ContainsRelationship
-import com.bitresolution.xtest.core.phases.compile.relationships.DependsOnRelationship
-import com.bitresolution.xtest.core.phases.compile.relationships.Relationship
+import com.bitresolution.xtest.phases.compile.CompileGraphException
+import com.bitresolution.xtest.phases.compile.JungTestGraph
+import com.bitresolution.xtest.phases.compile.TestGraph
+import com.bitresolution.xtest.phases.compile.nodes.GenericNode
+import com.bitresolution.xtest.phases.compile.nodes.Root
+import com.bitresolution.xtest.phases.compile.nodes.XNode
+import com.bitresolution.xtest.phases.compile.relationships.ContainsRelationship
+import com.bitresolution.xtest.phases.compile.relationships.DependsOnRelationship
+import com.bitresolution.xtest.phases.compile.relationships.Relationship
 import com.google.common.base.Optional
 import edu.uci.ics.jung.graph.Graph
 import spock.lang.Specification

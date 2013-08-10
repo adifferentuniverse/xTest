@@ -1,13 +1,13 @@
-package com.bitresolution.xtest.core.phases.compile;
+package com.bitresolution.xtest.phases.compile;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.succor.reflection.FullyQualifiedMethodName;
 import com.bitresolution.succor.reflection.PackageName;
 import com.bitresolution.xtest.Node;
-import com.bitresolution.xtest.core.phases.compile.nodes.ClassNode;
-import com.bitresolution.xtest.core.phases.compile.nodes.MethodNode;
-import com.bitresolution.xtest.core.phases.compile.nodes.PackageNode;
-import com.bitresolution.xtest.core.phases.compile.nodes.XNode;
+import com.bitresolution.xtest.phases.compile.nodes.ClassNode;
+import com.bitresolution.xtest.phases.compile.nodes.MethodNode;
+import com.bitresolution.xtest.phases.compile.nodes.PackageNode;
+import com.bitresolution.xtest.phases.compile.nodes.XNode;
 import com.bitresolution.xtest.phases.sources.Sources;
 import com.google.common.base.Optional;
 import org.reflections.ReflectionUtils;
@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Set;
 
-import static com.bitresolution.xtest.core.phases.compile.relationships.RelationshipBuilder.where;
+import static com.bitresolution.xtest.phases.compile.relationships.RelationshipBuilder.where;
 import static org.reflections.ReflectionUtils.withAnnotation;
 
 @Component

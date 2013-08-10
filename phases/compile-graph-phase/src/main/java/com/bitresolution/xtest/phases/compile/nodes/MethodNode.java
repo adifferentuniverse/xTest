@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.phases.compile.nodes;
+package com.bitresolution.xtest.phases.compile.nodes;
 
 import com.bitresolution.succor.reflection.FullyQualifiedMethodName;
 

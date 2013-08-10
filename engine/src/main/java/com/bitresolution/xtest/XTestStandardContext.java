@@ -2,7 +2,7 @@ package com.bitresolution.xtest;
 
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
-import com.bitresolution.xtest.core.phases.compile.CompileGraphPhase;
+import com.bitresolution.xtest.phases.compile.CompileGraphPhase;
 import com.bitresolution.xtest.core.phases.execute.ExecuteFixturesPhase;
 import com.bitresolution.xtest.core.phases.generate.CompileFixturesPhase;
 import com.bitresolution.xtest.core.phases.reporting.ProcessReportPhase;
