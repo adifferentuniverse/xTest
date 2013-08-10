@@ -7,7 +7,7 @@ import com.bitresolution.xtest.phases.sources.SourceConfiguration;
 import org.springframework.context.annotation.Bean;
 
 
-public class EngineTestConfiguration extends XTestContext {
+public class EngineTestConfiguration {
 
     private final Lifecycle lifecycle;
     private final XTestConfiguration configuration;

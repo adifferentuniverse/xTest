@@ -1,7 +1,6 @@
 package com.bitresolution.xtest.core;
 
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
-import com.bitresolution.xtest.XTestContext;
 import com.bitresolution.xtest.core.lifecycle.Phase;
 
 import java.util.HashMap;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public class XTestConfiguration {
 
-    private FullyQualifiedClassName configurationClass = new FullyQualifiedClassName(XTestContext.class);
+    private FullyQualifiedClassName configurationClass;
 
     private String logLevel;
 

@@ -28,7 +28,7 @@ import static org.junit.Assert.assertThat;
 
 @Category(Unit.class)
 @RunWith(VerboseMockitoJUnitRunner.class)
-public class XTestStandardContextSpec extends Specification {
+public class DefaultLifecycleContextSpec extends Specification {
 
     @Mock
     private Publisher publisher;
@@ -50,7 +50,7 @@ public class XTestStandardContextSpec extends Specification {
         ExecuteFixturesPhase phase4 = new ExecuteFixturesPhase(publisher);
         ProcessReportPhase phase5 = new ProcessReportPhase(publisher);
 
-        XTestStandardContext context = new XTestStandardContext();
+        DefaultLifecycleContext context = new DefaultLifecycleContext();
         context.setGenerateSourcesPhase(phase1);
         context.setCompileGraphPhase(phase2);
         context.setCompileFixturesPhase(phase3);
