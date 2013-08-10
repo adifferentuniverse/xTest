@@ -16,7 +16,7 @@
     <modules>
         <module>eventbus</module>
         <module>annotations</module>
-        <module>core</module>
+        <module>lifecycle</module>
         <module>phases</module>
         <module>examples</module>
         <module>engine</module>

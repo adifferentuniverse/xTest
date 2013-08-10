@@ -2,21 +2,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.bitresolution.xtest</groupId>
-        <artifactId>core</artifactId>
+        <groupId>com.bitresolution</groupId>
+        <artifactId>xtest</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.bitresolution.xtest.core</groupId>
+    <groupId>com.bitresolution.xtest</groupId>
     <artifactId>lifecycle</artifactId>
     <packaging>jar</packaging>
 
-    <name>xTest :: Core :: Lifecycle</name>
+    <name>xTest :: Lifecycle</name>
 
     <dependencies>
         <dependency>
-            <groupId>com.bitresolution.xtest.core</groupId>
-            <artifactId>events</artifactId>
+            <groupId>com.bitresolution.xtest</groupId>
+            <artifactId>eventbus</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

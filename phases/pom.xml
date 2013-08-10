@@ -66,13 +66,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.bitresolution.xtest.core</groupId>
+            <groupId>com.bitresolution.xtest</groupId>
             <artifactId>lifecycle</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bitresolution.xtest.core</groupId>
-            <artifactId>events</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
