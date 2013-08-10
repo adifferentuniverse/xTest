@@ -3,7 +3,7 @@ package com.bitresolution.xtest.phases.compile;
 import com.bitresolution.succor.junit.category.Unit;
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import com.bitresolution.xtest.phases.sources.Sources;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -14,8 +14,8 @@ import org.mockito.runners.VerboseMockitoJUnitRunner;
 
 import java.util.Collections;
 
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.StartEvent.start;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

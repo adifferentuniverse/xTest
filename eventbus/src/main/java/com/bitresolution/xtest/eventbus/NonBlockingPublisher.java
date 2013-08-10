@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.events;
+package com.bitresolution.xtest.eventbus;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

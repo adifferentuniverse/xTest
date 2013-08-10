@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.core.events;
+package com.bitresolution.xtest.events;
 
 import javax.validation.constraints.NotNull;
 

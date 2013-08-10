@@ -2,7 +2,7 @@ package com.bitresolution.xtest.phases.compile;
 
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import com.bitresolution.xtest.phases.sources.Sources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.StartEvent.start;
 
 @Component
 public class CompileGraphPhase implements Phase<Sources, TestGraph> {

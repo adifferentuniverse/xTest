@@ -1,14 +1,14 @@
 package com.bitresolution.xtest.phases.execute;
 
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import com.bitresolution.xtest.phases.generate.Fixture;
 import com.bitresolution.xtest.phases.generate.Fixtures;
 
 import java.util.concurrent.Future;
 
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.QueuedEvent.queued;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.QueuedEvent.queued;
+import static com.bitresolution.xtest.events.StartEvent.start;
 
 public class SerialFixtureExecutor implements FixtureExecutor {
 

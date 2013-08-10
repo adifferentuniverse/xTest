@@ -3,7 +3,7 @@ package com.bitresolution.xtest;
 import com.bitresolution.succor.junit.category.Unit;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.core.lifecycle.Phase;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import com.bitresolution.xtest.phases.compile.CompileGraphPhase;
 import com.bitresolution.xtest.phases.compile.GraphBuilder;
 import com.bitresolution.xtest.phases.execute.ExecuteFixturesPhase;

@@ -1,4 +1,4 @@
-package com.bitresolution.xtest.events
+package com.bitresolution.xtest.eventbus
 
 import com.bitresolution.succor.junit.category.Unit
 import org.junit.experimental.categories.Category

@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.phases.sources;
 
 import com.bitresolution.succor.junit.category.Unit;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

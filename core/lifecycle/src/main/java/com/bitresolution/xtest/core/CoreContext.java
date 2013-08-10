@@ -1,9 +1,9 @@
 package com.bitresolution.xtest.core;
 
 import com.bitresolution.succor.concurrent.GroupNamedThreadFactory;
-import com.bitresolution.xtest.events.NonBlockingPublisher;
-import com.bitresolution.xtest.events.Publisher;
-import com.bitresolution.xtest.events.Subscriber;
+import com.bitresolution.xtest.eventbus.NonBlockingPublisher;
+import com.bitresolution.xtest.eventbus.Publisher;
+import com.bitresolution.xtest.eventbus.Subscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;

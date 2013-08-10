@@ -1,16 +1,16 @@
 package com.bitresolution.xtest.core.lifecycle;
 
 import com.bitresolution.succor.junit.category.Unit;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.VerboseMockitoJUnitRunner;
 
-import static com.bitresolution.xtest.core.events.AbortedEvent.aborted;
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.AbortedEvent.aborted;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.StartEvent.start;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

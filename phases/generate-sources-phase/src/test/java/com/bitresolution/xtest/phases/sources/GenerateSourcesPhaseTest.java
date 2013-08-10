@@ -3,7 +3,7 @@ package com.bitresolution.xtest.phases.sources;
 import com.bitresolution.succor.junit.category.Integration;
 import com.bitresolution.succor.reflection.FullyQualifiedClassName;
 import com.bitresolution.succor.reflection.PackageName;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import com.bitresolution.xtest.examples.*;
 import com.google.common.collect.Sets;
 import org.junit.Test;
@@ -14,8 +14,8 @@ import org.mockito.runners.VerboseMockitoJUnitRunner;
 
 import java.util.Set;
 
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.StartEvent.start;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

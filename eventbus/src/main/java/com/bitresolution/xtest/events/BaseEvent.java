@@ -1,6 +1,6 @@
-package com.bitresolution.xtest.core.events;
+package com.bitresolution.xtest.events;
 
-import com.bitresolution.xtest.events.XEvent;
+import com.bitresolution.xtest.eventbus.XEvent;
 import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;

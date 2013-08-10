@@ -1,7 +1,7 @@
 package com.bitresolution.xtest.phases.execute;
 
 import com.bitresolution.succor.junit.category.Unit;
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import com.bitresolution.xtest.phases.generate.Fixture;
 import com.bitresolution.xtest.phases.generate.Fixtures;
 import org.junit.Before;
@@ -15,9 +15,9 @@ import org.mockito.runners.VerboseMockitoJUnitRunner;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.QueuedEvent.queued;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.QueuedEvent.queued;
+import static com.bitresolution.xtest.events.StartEvent.start;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;

@@ -1,14 +1,14 @@
 package com.bitresolution.xtest.core.lifecycle;
 
-import com.bitresolution.xtest.events.Publisher;
+import com.bitresolution.xtest.eventbus.Publisher;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
-import static com.bitresolution.xtest.core.events.AbortedEvent.aborted;
-import static com.bitresolution.xtest.core.events.CompleteEvent.complete;
-import static com.bitresolution.xtest.core.events.StartEvent.start;
+import static com.bitresolution.xtest.events.AbortedEvent.aborted;
+import static com.bitresolution.xtest.events.CompleteEvent.complete;
+import static com.bitresolution.xtest.events.StartEvent.start;
 
 @Component
 public class LifecycleExecutor {
