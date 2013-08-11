@@ -13,7 +13,7 @@ public abstract class BasePublisher implements Publisher {
         this(new CopyOnWriteArraySet<Subscriber>());
     }
 
-    protected BasePublisher(@NotNull Set<Subscriber> subscribers) {
+    public BasePublisher(@NotNull Set<Subscriber> subscribers) {
         this.subscribers = subscribers;
     }
 
