@@ -13,7 +13,7 @@ public class XTestConfiguration {
 
     private String logLevel;
 
-    private Map<Class<? extends Phase>, PhaseConfiguration> phaseConfigurations = new HashMap<Class<? extends Phase>, PhaseConfiguration>();
+    private Map<Class<? extends Phase<?, ?>>, PhaseConfiguration> phaseConfigurations = new HashMap<Class<? extends Phase<?, ?>>, PhaseConfiguration>();
 
     public FullyQualifiedClassName getConfigurationClass() {
         return configurationClass;
@@ -31,11 +31,11 @@ public class XTestConfiguration {
         this.logLevel = logLevel;
     }
 
-    public Map<Class<? extends Phase>, PhaseConfiguration> getPhaseConfigurations() {
+    public Map<Class<? extends Phase<?, ?>>, PhaseConfiguration> getPhaseConfigurations() {
         return phaseConfigurations;
     }
 
-    public void setPhaseConfigurations(Map<Class<? extends Phase>, PhaseConfiguration> phaseConfigurations) {
+    public void setPhaseConfigurations(Map<Class<? extends Phase<?, ?>>, PhaseConfiguration> phaseConfigurations) {
         this.phaseConfigurations = phaseConfigurations;
     }
 

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
-@Import({DefaultLifecycleContext.class, EventBusContext.class})
+@Import({DefaultPhaseContext.class, DefaultLifecycleContext.class, EventBusContext.class})
 public class DefaultXTestContext {
 
     @Bean

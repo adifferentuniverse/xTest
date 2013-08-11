@@ -6,6 +6,9 @@ import com.bitresolution.xtest.Node;
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.Validate;
 import org.reflections.Reflections;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -24,7 +27,10 @@ public class XTestAnnotatedSource implements Source {
     @NotNull
     public Set<FullyQualifiedClassName> getClasses() {
         Set<FullyQualifiedClassName> classes = new HashSet<FullyQualifiedClassName>();
-        Reflections reflections = new Reflections(packageName.getName());
+        Reflections reflections = new Reflections(new ConfigurationBuilder()
+                .addUrls(ClasspathHelper.forPackage(packageName.getName()))
+                .filterInputsBy(new FilterBuilder().exclude(".*.jnilib")) //can't scan this file type
+        );
         Set<Class<?>> annotatedClasses = reflections.getTypesAnnotatedWith(Node.class);
         for(Class<?> klass : annotatedClasses) {
             classes.add(new FullyQualifiedClassName(klass));

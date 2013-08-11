@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({LifecycleContext.class, DefaultPhaseContext.class})
+@Import({LifecycleContext.class})
 public class DefaultLifecycleContext {
 
     @Autowired
