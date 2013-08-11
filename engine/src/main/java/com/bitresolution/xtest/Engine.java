@@ -1,8 +1,7 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.PhaseConfigurationBeanFactory;
-import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutor;
+import com.bitresolution.xtest.spring.beans.PhaseConfigurationBeanFactory;
 import com.bitresolution.xtest.spring.context.AnnotationConfigApplicationContextFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

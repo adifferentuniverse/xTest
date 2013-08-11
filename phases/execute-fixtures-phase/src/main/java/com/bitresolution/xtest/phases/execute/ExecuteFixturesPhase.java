@@ -41,9 +41,11 @@ public class ExecuteFixturesPhase implements Phase<Fixtures, Report> {
     @NotNull
     @Override
     public Report execute(@NotNull Fixtures input) throws LifecycleExecutorException {
+        log.debug("Executing {} fixtures", input.size());
         publisher.publish(start(this));
         Report report = new Report();
         publisher.publish(complete(this));
+        log.debug("Finished executing {} fixtures", input.size());
         return report;
     }
 

@@ -75,7 +75,7 @@ public class CompileGraphPhaseSpec {
         given(builder.build()).willThrow(new IllegalArgumentException());
 
         //when
-        TestGraph output = phase.execute(input);
+        phase.execute(input);
 
         //then exception thrown
     }

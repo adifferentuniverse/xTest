@@ -41,9 +41,11 @@ public class CompileFixturesPhase implements Phase<TestGraph, Fixtures> {
     @NotNull
     @Override
     public Fixtures execute(@NotNull TestGraph input) throws LifecycleExecutorException {
+        log.debug("Starting compile fixtures phase");
         publisher.publish(start(this));
         Fixtures fixtures = new Fixtures();
         publisher.publish(complete(this));
+        log.debug("Completed compile fixtures phase");
         return fixtures;
     }
 

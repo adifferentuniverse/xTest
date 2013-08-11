@@ -2,8 +2,8 @@ package com.bitresolution.xtest.cli;
 
 import com.beust.jcommander.JCommander;
 import com.bitresolution.xtest.Engine;
-import com.bitresolution.xtest.core.PhaseConfigurationBeanFactory;
-import com.bitresolution.xtest.core.XTestConfiguration;
+import com.bitresolution.xtest.XTestConfiguration;
+import com.bitresolution.xtest.spring.beans.PhaseConfigurationBeanFactory;
 import com.bitresolution.xtest.spring.context.DefaultAnnotationConfigApplicationContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

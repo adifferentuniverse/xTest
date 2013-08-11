@@ -41,8 +41,10 @@ public class ProcessReportPhase implements Phase<Report, Void> {
     @NotNull
     @Override
     public Void execute(@NotNull Report input) throws LifecycleExecutorException {
+        log.debug("Starting reporting phase");
         publisher.publish(start(this));
         publisher.publish(complete(this));
+        log.debug("Finished reporting phase");
         return null;
     }
 

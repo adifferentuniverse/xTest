@@ -58,7 +58,7 @@
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.4</version>
+                <version>2.15</version>
                 <configuration>
                     <groups>com.bitresolution.succor.junit.category.Unit</groups>
                     <includes>
@@ -69,9 +69,9 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.12.4</version>
+                <version>2.15</version>
                 <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
                     <groups>com.bitresolution.succor.junit.category.Integration</groups>
                     <includes>
                         <include>**/*Test.*</include>
@@ -80,8 +80,15 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>integration-test</id>
                         <goals>
                             <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>

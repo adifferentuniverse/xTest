@@ -1,8 +1,6 @@
 package com.bitresolution.xtest.eventbus
 
 import com.bitresolution.succor.junit.category.Unit
-import com.bitresolution.xtest.eventbus.Publisher
-import com.bitresolution.xtest.eventbus.Subscriber
 import org.junit.experimental.categories.Category
 import spock.lang.Shared
 import spock.lang.Specification

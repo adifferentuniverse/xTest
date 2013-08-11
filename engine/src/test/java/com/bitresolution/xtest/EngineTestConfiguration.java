@@ -1,12 +1,18 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.XTestConfiguration;
 import com.bitresolution.xtest.core.lifecycle.Lifecycle;
+import com.bitresolution.xtest.core.lifecycle.LifecycleContext;
 import com.bitresolution.xtest.core.lifecycle.LifecycleExecutorException;
 import com.bitresolution.xtest.phases.sources.SourceConfiguration;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.core.io.ClassPathResource;
 
 
+@Configuration
+@Import({LifecycleContext.class, EventBusContext.class})
 public class EngineTestConfiguration {
 
     private final Lifecycle lifecycle;
@@ -15,6 +21,15 @@ public class EngineTestConfiguration {
     public EngineTestConfiguration() throws LifecycleExecutorException {
         this.lifecycle = buildLifecycle();
         this.configuration = buildConfiguration();
+    }
+
+    @Bean
+    public static PropertyPlaceholderConfigurer properties() {
+        PropertyPlaceholderConfigurer properties = new PropertyPlaceholderConfigurer();
+        ClassPathResource[] resources = new ClassPathResource[] {new ClassPathResource("default.properties")};
+        properties.setLocations(resources);
+        properties.setIgnoreUnresolvablePlaceholders(true);
+        return properties;
     }
 
     @Bean

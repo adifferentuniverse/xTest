@@ -1,7 +1,6 @@
 package com.bitresolution.xtest;
 
-import com.bitresolution.xtest.core.PhaseConfigurationBeanFactory;
-import com.bitresolution.xtest.core.XTestConfiguration;
+import com.bitresolution.xtest.spring.beans.PhaseConfigurationBeanFactory;
 import com.bitresolution.xtest.spring.context.DefaultAnnotationConfigApplicationContextFactory;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

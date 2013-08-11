@@ -45,4 +45,17 @@ public class PromisesBuilder implements Promises {
     public <T> PromisesBuilder expected(T t) {
         return this;
     }
+
+    public boolean isBroken() {
+        boolean broken = false;
+        for(Callable<Boolean> promise : promises) {
+            try {
+                broken = promise.call() & broken;
+            }
+            catch (Exception e) {
+                throw new PromiseInvocationException();
+            }
+        }
+        return broken;
+    }
 }

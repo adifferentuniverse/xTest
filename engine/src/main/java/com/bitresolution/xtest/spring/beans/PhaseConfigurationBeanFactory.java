@@ -1,5 +1,7 @@
-package com.bitresolution.xtest.core;
+package com.bitresolution.xtest.spring.beans;
 
+import com.bitresolution.xtest.XTestConfiguration;
+import com.bitresolution.xtest.core.PhaseConfiguration;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.support.GenericApplicationContext;
